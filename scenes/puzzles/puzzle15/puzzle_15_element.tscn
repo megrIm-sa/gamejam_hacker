@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdicys1mebmvb"]
+
+[ext_resource type="Texture2D" uid="uid://bog3yo3sfte8i" path="res://assets/sprites/ui/button.png" id="1_wfjrl"]
+[ext_resource type="Script" path="res://scenes/puzzles/puzzle15/puzzle_15_element.gd" id="2_mlpev"]
+[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="3_6fd4a"]
+
+[node name="Puzzle15Element" type="TextureButton"]
+self_modulate = Color(0.47451, 1, 1, 1)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("1_wfjrl")
+texture_pressed = ExtResource("1_wfjrl")
+stretch_mode = 0
+script = ExtResource("2_mlpev")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_6fd4a")
+theme_override_font_sizes/font_size = 64
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1

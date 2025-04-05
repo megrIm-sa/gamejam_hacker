@@ -1,0 +1,107 @@
+[gd_scene load_steps=13 format=3 uid="uid://dwceffvysxjua"]
+
+[ext_resource type="PackedScene" uid="uid://b2ufenqtjww57" path="res://scenes/game_2d.tscn" id="1_8qici"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_n7sgo"]
+[ext_resource type="Shader" path="res://assets/shaders/crt_monitor.gdshader" id="2_cafg0"]
+[ext_resource type="PackedScene" uid="uid://hh0cw4r161t4" path="res://scenes/game_hacking.tscn" id="2_slmqj"]
+[ext_resource type="PackedScene" uid="uid://cek23mcj5ip88" path="res://assets/models/Desk.fbx" id="3_ih3x3"]
+[ext_resource type="PackedScene" uid="uid://lvyxtlm242ur" path="res://assets/models/TV A.fbx" id="3_wmjpp"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_yti8e"]
+viewport_path = NodePath("Game3D/Monitor1/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_x7caf"]
+viewport_path = NodePath("Game3D/Monitor2/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_767h8"]
+shader = ExtResource("2_cafg0")
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/scan_line_amount = 0.5
+shader_parameter/warp_amount = 0.05
+shader_parameter/vignette_amount = 0.7
+shader_parameter/vignette_intensity = 0.3
+shader_parameter/grille_amount = 0.05
+shader_parameter/brightness_boost = 1.2
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_5vmc3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i82kc"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Environment" id="Environment_pgeyf"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="Game" type="Node"]
+script = ExtResource("1_n7sgo")
+
+[node name="Game3D" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Monitor1" type="Node3D" parent="Game3D"]
+transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -10, 0, 4.1)
+
+[node name="Sprite3D" type="Sprite3D" parent="Game3D/Monitor1"]
+transform = Transform3D(-2.22928e-08, 0, 0.51, 0, 0.51, 0, -0.51, 0, -2.22928e-08, 3.1, 0, 0)
+texture = SubResource("ViewportTexture_yti8e")
+
+[node name="SubViewport" type="SubViewport" parent="Game3D/Monitor1"]
+size = Vector2i(1024, 1024)
+
+[node name="Game2D" parent="Game3D/Monitor1/SubViewport" instance=ExtResource("1_8qici")]
+unique_name_in_owner = true
+material = null
+
+[node name="TV A" parent="Game3D/Monitor1" instance=ExtResource("3_wmjpp")]
+transform = Transform3D(2.98023e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, 2.98023e-08, 1.4, -0.3, 0)
+
+[node name="Monitor2" type="Node3D" parent="Game3D"]
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, -10, 0, -4.1)
+
+[node name="Sprite3D" type="Sprite3D" parent="Game3D/Monitor2"]
+transform = Transform3D(-2.22928e-08, 0, 0.51, 0, 0.51, 0, -0.51, 0, -2.22928e-08, 3.1, 0, 0)
+texture = SubResource("ViewportTexture_x7caf")
+
+[node name="SubViewport" type="SubViewport" parent="Game3D/Monitor2"]
+size = Vector2i(1024, 1024)
+
+[node name="MonitorEffect" type="TextureRect" parent="Game3D/Monitor2/SubViewport"]
+z_index = 1
+material = SubResource("ShaderMaterial_767h8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_5vmc3")
+
+[node name="GameHacking" parent="Game3D/Monitor2/SubViewport" instance=ExtResource("2_slmqj")]
+unique_name_in_owner = true
+mouse_filter = 1
+
+[node name="TV A" parent="Game3D/Monitor2" instance=ExtResource("3_wmjpp")]
+transform = Transform3D(2.98023e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, 2.98023e-08, 1.4, -0.3, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Game3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Decor" type="Node3D" parent="Game3D"]
+
+[node name="Desk" parent="Game3D/Decor" instance=ExtResource("3_ih3x3")]
+transform = Transform3D(0.0609426, 0, 2.99938, 0, 3, 0, -2.99938, 0, 0.0609426, -5.73859, -8.458, -5)
+
+[node name="Keyboard" type="CSGBox3D" parent="Game3D/Decor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.34662, -4, 1)
+size = Vector3(2.30676, 1, 5)
+
+[node name="Mouse" type="CSGBox3D" parent="Game3D/Decor"]
+transform = Transform3D(0.971504, 0, 0.237025, 0, 1, 0, -0.237025, 0, 0.971504, -5.03516, -3.86811, -4.09014)
+size = Vector3(1.00156, 1, 0.844971)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Game3D/Decor/Mouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14141, 0.547105, 0.0236197)
+size = Vector3(0.416428, 0.126465, 0.108154)
+material = SubResource("StandardMaterial3D_i82kc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pgeyf")

@@ -1,0 +1,206 @@
+[gd_scene load_steps=13 format=3 uid="uid://dxbrqtudlehj8"]
+
+[ext_resource type="Texture2D" uid="uid://crdsvugpsiq3w" path="res://assets/sprites/objects/control_panel_idle.png" id="1_e7lpj"]
+[ext_resource type="Script" path="res://objects/interactive/control_panel.gd" id="1_i1wip"]
+[ext_resource type="Texture2D" uid="uid://bha82klei8ixk" path="res://assets/sprites/objects/control_panel_deactivate.png" id="2_pb8yh"]
+[ext_resource type="Texture2D" uid="uid://bog3yo3sfte8i" path="res://assets/sprites/ui/button.png" id="3_6pfnf"]
+[ext_resource type="Texture2D" uid="uid://ca4qx0shmfi50" path="res://assets/sprites/ui/activate.png" id="4_skwcq"]
+[ext_resource type="Texture2D" uid="uid://cve07tfmoj7jo" path="res://assets/sprites/objects/control_panel.png" id="6_abvj4"]
+[ext_resource type="Texture2D" uid="uid://ccll3wr8idbqr" path="res://assets/sprites/ui/close.png" id="7_4px18"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mpiyn"]
+size = Vector2(80, 32)
+
+[sub_resource type="Animation" id="Animation_6u656"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_e7lpj")]
+}
+
+[sub_resource type="Animation" id="Animation_uyidp"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 19]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_e7lpj")]
+}
+
+[sub_resource type="Animation" id="Animation_kpgr2"]
+resource_name = "idle"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_pb8yh")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fqrw2"]
+_data = {
+"RESET": SubResource("Animation_6u656"),
+"idle_activated": SubResource("Animation_uyidp"),
+"idle_deactivated": SubResource("Animation_kpgr2")
+}
+
+[node name="ControlPanel" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_i1wip")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_e7lpj")
+hframes = 20
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+visible = false
+position = Vector2(-20, -54)
+scale = Vector2(2.5, 2.5)
+texture_normal = ExtResource("3_6pfnf")
+texture_pressed = ExtResource("3_6pfnf")
+
+[node name="Sprite2D" type="Sprite2D" parent="TouchScreenButton"]
+position = Vector2(8, 8)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_skwcq")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_mpiyn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fqrw2")
+}
+autoplay = "idle_activated"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+offset = Vector2(0, 1152)
+transform = Transform2D(1, 0, 0, 1, 0, 1152)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+custom_minimum_size = Vector2(512, 512)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1280.0
+offset_top = -804.0
+offset_right = -736.0
+offset_bottom = -260.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("6_abvj4")
+
+[node name="Minigame" type="Control" parent="CanvasLayer"]
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CloseButton" type="TextureButton" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -224.0
+offset_top = 40.0
+offset_right = -64.0
+offset_bottom = 200.0
+grow_horizontal = 0
+focus_mode = 0
+texture_normal = ExtResource("3_6pfnf")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CloseButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 152.0
+offset_top = 152.0
+offset_right = 136.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+texture = ExtResource("7_4px18")
+
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="pressed" from="CanvasLayer/CloseButton" to="." method="_close_minigame"]

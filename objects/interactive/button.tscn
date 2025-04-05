@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://in0voq6dwn6d"]
+
+[ext_resource type="Texture2D" uid="uid://chusnc1enn320" path="res://assets/sprites/objects/button.png" id="1_i25fv"]
+[ext_resource type="Script" path="res://objects/interactive/button.gd" id="1_krw0h"]
+[ext_resource type="Texture2D" uid="uid://bog3yo3sfte8i" path="res://assets/sprites/ui/button.png" id="3_egqt4"]
+[ext_resource type="Texture2D" uid="uid://ca4qx0shmfi50" path="res://assets/sprites/ui/activate.png" id="4_ma1ls"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vtidl"]
+size = Vector2(24, 24)
+
+[node name="Button" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_krw0h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("1_i25fv")
+hframes = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_vtidl")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+visible = false
+position = Vector2(-20, -65)
+scale = Vector2(2.5, 2.5)
+texture_normal = ExtResource("3_egqt4")
+texture_pressed = ExtResource("3_egqt4")
+
+[node name="Sprite2D" type="Sprite2D" parent="TouchScreenButton"]
+position = Vector2(8, 8)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_ma1ls")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfiuuq0ob8xwv"]
+
+[ext_resource type="Script" path="res://scenes/puzzles/puzzle_15.gd" id="1_na6j8"]
+
+[node name="Puzzle15" type="GridContainer"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+script = ExtResource("1_na6j8")
+table_size = 2

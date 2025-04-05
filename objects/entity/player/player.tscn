@@ -1,0 +1,163 @@
+[gd_scene load_steps=12 format=3 uid="uid://gplt3xtad1dq"]
+
+[ext_resource type="Script" path="res://objects/entity/player/player.gd" id="1_r1dj1"]
+[ext_resource type="Shader" path="res://scenes/pixel_melt.gdshader" id="2_1oipu"]
+[ext_resource type="Texture2D" uid="uid://b0eu0mjn1imw7" path="res://assets/sprites/entities/hacker_idle.png" id="2_7dkxf"]
+[ext_resource type="Texture2D" uid="uid://dy7swdhsba4a7" path="res://assets/sprites/entities/hacker_running.png" id="3_h5pyw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mj0yv"]
+shader = ExtResource("2_1oipu")
+shader_parameter/animated = false
+shader_parameter/progress = 0.0
+shader_parameter/meltiness = 4.0
+shader_parameter/use_color = true
+shader_parameter/color = Color(0, 1, 1, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_skcge"]
+
+[sub_resource type="Animation" id="Animation_qdh4m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_7dkxf")]
+}
+
+[sub_resource type="Animation" id="Animation_our42"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_7dkxf")]
+}
+
+[sub_resource type="Animation" id="Animation_0vgyy"]
+resource_name = "jumping"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_h5pyw")]
+}
+
+[sub_resource type="Animation" id="Animation_ty7sr"]
+resource_name = "walking"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_h5pyw")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4cmuf"]
+_data = {
+"RESET": SubResource("Animation_qdh4m"),
+"idle": SubResource("Animation_our42"),
+"jumping": SubResource("Animation_0vgyy"),
+"walking": SubResource("Animation_ty7sr")
+}
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 1
+texture_filter = 1
+collision_mask = 3
+script = ExtResource("1_r1dj1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_mj0yv")
+position = Vector2(0, -18)
+scale = Vector2(2, 2)
+texture = ExtResource("2_7dkxf")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("CapsuleShape2D_skcge")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4cmuf")
+}
+autoplay = "idle"
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://42alhwug45se"]
+
+[ext_resource type="Texture2D" uid="uid://b2ui12qiikbu6" path="res://assets/sprites/effects/landing_effect.png" id="1_38swl"]
+
+[sub_resource type="Animation" id="Animation_s3rk7"]
+resource_name = "idle"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hide"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_yqvs7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v2yxw"]
+_data = {
+"RESET": SubResource("Animation_yqvs7"),
+"idle": SubResource("Animation_s3rk7")
+}
+
+[node name="LandingEffect" type="Sprite2D"]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_38swl")
+offset = Vector2(0, -16)
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v2yxw")
+}
+autoplay = "idle"

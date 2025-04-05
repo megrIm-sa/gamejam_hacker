@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0ikrstilp1pt"]
+
+[ext_resource type="Script" path="res://scenes/puzzles/simon/simon.gd" id="1_4uy8e"]
+[ext_resource type="Texture2D" uid="uid://d3lccbb65021g" path="res://assets/sprites/ui/button_white.png" id="3_yuls0"]
+[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="4_aq4fh"]
+[ext_resource type="AudioStream" uid="uid://d2phk4dgwdtha" path="res://assets/sounds/simon.ogg" id="4_asqr2"]
+
+[node name="Simon" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4uy8e")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_asqr2")
+
+[node name="Simon" type="GridContainer" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="SimonElement" type="TextureButton" parent="Simon"]
+self_modulate = Color(2.69532e-06, 0.697201, 0.697201, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("3_yuls0")
+texture_pressed = ExtResource("3_yuls0")
+stretch_mode = 0
+
+[node name="SimonElement2" type="TextureButton" parent="Simon"]
+self_modulate = Color(0.750472, 0.747478, 3.85046e-07, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("3_yuls0")
+texture_pressed = ExtResource("3_yuls0")
+stretch_mode = 0
+
+[node name="SimonElement3" type="TextureButton" parent="Simon"]
+self_modulate = Color(0.290196, 0.745098, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("3_yuls0")
+texture_pressed = ExtResource("3_yuls0")
+stretch_mode = 0
+
+[node name="SimonElement4" type="TextureButton" parent="Simon"]
+self_modulate = Color(0.760784, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("3_yuls0")
+texture_pressed = ExtResource("3_yuls0")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -26.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("4_aq4fh")
+theme_override_font_sizes/font_size = 32
+text = "1/3"
