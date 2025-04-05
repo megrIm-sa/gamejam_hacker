@@ -16,6 +16,7 @@ script = ExtResource("1_4uy8e")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_asqr2")
+bus = &"SFX"
 
 [node name="Simon" type="GridContainer" parent="."]
 texture_filter = 1

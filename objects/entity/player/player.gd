@@ -1,19 +1,26 @@
 class_name Player
 extends Entity
 
-
 const JUMP_VELOCITY = -300.0
 
 @onready var coyote_timer: Timer = $CoyoteTimer
 
-
 var time_in_air : float = 0
 var last_velocity : Vector2
 var in_knockback : bool = false
-var knockback : float
+var knockback : float = 0
 var can_move : bool = true
 
 var gravity : float = 1
+
+
+func _ready() -> void:
+	animation_player.play("idle")
+	set_physics_process(false)
+	melt(0, 0.8)
+	await get_tree().create_timer(.8).timeout
+	set_physics_process(true)
+	spawned.emit()
 
 
 func _input(event: InputEvent) -> void:
@@ -65,6 +72,11 @@ func _physics_process(delta: float) -> void:
 		knockback = lerp(knockback, 0.0, 0.15)
 	if on_floor and !is_on_floor():
 		coyote_timer.start()
+
+
+func kill() -> void:
+	$AudioStreamPlayer2D.play()
+	super.kill()
 
 
 func change_gravity() -> void:

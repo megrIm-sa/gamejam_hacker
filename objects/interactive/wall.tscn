@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdr7471cyc6yg"]
+[gd_scene load_steps=5 format=3 uid="uid://bdr7471cyc6yg"]
 
 [ext_resource type="Script" path="res://scripts/wall.gd" id="1_pxaok"]
 [ext_resource type="Texture2D" uid="uid://daq3guq63b0xv" path="res://assets/sprites/objects/wall.png" id="2_wo2sl"]
+[ext_resource type="AudioStream" uid="uid://ctgp4kohy3ml0" path="res://assets/sounds/wall.ogg" id="3_1lno4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwbmn"]
 size = Vector2(8, 32)
@@ -17,3 +18,8 @@ texture = ExtResource("2_wo2sl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dwbmn")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_1lno4")
+volume_db = -20.0
+bus = &"SFX"

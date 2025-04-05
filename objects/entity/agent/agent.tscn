@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://djydnu60jaytr"]
+[gd_scene load_steps=13 format=3 uid="uid://djydnu60jaytr"]
 
 [ext_resource type="Script" path="res://objects/entity/agent/agent.gd" id="1_08tm4"]
 [ext_resource type="Shader" path="res://scenes/pixel_melt.gdshader" id="1_bg3va"]
 [ext_resource type="Texture2D" uid="uid://ckdgkohudrgsl" path="res://assets/sprites/entities/agent_idle.png" id="2_t4e6w"]
 [ext_resource type="Texture2D" uid="uid://650yabcaqw43" path="res://assets/sprites/entities/agent_running.png" id="3_0qmpd"]
+[ext_resource type="AudioStream" uid="uid://c1f4uoeh2bg0l" path="res://assets/sounds/hit.ogg" id="5_lb75t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w1qjn"]
 resource_local_to_scene = true
@@ -144,5 +145,10 @@ autoplay = "idle"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_lb75t")
+volume_db = -20.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

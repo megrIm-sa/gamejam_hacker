@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://btb071s4vorw6"]
+[gd_scene load_steps=10 format=3 uid="uid://btb071s4vorw6"]
 
 [ext_resource type="Texture2D" uid="uid://db1p45y8kijjl" path="res://assets/sprites/objects/barrier_idle.png" id="1_itra7"]
 [ext_resource type="Script" path="res://objects/interactive/barrier.gd" id="1_tj4ig"]
 [ext_resource type="Texture2D" uid="uid://2wilk0lruyhi" path="res://assets/sprites/objects/barrier_deactivate.png" id="2_iepke"]
+[ext_resource type="AudioStream" uid="uid://b03jierfy1fer" path="res://assets/sounds/laser.ogg" id="4_hpd22"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmo8a"]
 size = Vector2(20, 40)
@@ -118,6 +119,11 @@ libraries = {
 "": SubResource("AnimationLibrary_nyqa6")
 }
 autoplay = "idle"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hpd22")
+volume_db = -15.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

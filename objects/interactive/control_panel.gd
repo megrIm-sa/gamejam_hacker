@@ -58,6 +58,7 @@ func _close_minigame() -> void:
 
 
 func activate() -> void:
+	$AudioStreamPlayer2D.play()
 	%CanvasLayer.show()
 	super.activate()
 	_tween_canvas(1152)
@@ -67,13 +68,14 @@ func activate() -> void:
 	$AnimationPlayer.play("idle_deactivated")
 	if activate_interactive:
 		for interactive_object in interactive_objects:
-			interactive_object.activate()
+			interactive_object.deactivate()
 	else:
 		for interactive_object in interactive_objects:
-			interactive_object.deactivate()
+			interactive_object.activate()
 
 
 func deactivate() -> void:
+	$AudioStreamPlayer2D.play()
 	%CanvasLayer.show()
 	super.deactivate()
 	$CanvasLayer.hide()

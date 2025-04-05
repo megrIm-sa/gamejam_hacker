@@ -4,7 +4,7 @@ extends Spikes
 
 @onready var timer : Timer = $Timer
 
-var spikes_active : bool = true
+#var spikes_active : bool = true
 
 
 func _ready() -> void:
@@ -19,11 +19,15 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_timeout() -> void:
-	if spikes_active:
+	if $Area2D.monitoring:
 		$AnimationPlayer.play("deactivate")
 		$Area2D.monitoring = false
-		spikes_active = false
+		#spikes_active = false
 	else:
 		$AnimationPlayer.play("activate")
-		$Area2D.monitoring = true
-		spikes_active = true
+		#spikes_active = true
+
+
+func _on_activate() -> void:
+	$Area2D.monitoring = true
+	$AudioStreamPlayer2D.play()

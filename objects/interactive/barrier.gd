@@ -1,5 +1,8 @@
 extends Interactive
 
+var knockback_sound : AudioStream = preload("res://assets/sounds/barrier_knockback.ogg")
+var activate_sound : AudioStream = preload("res://assets/sounds/laser.ogg")
+
 
 func _ready() -> void:
 	if activated:
@@ -14,6 +17,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		var force = direction.x * 800
 		body.knockback = force
 		body.in_knockback = true
+		$AudioStreamPlayer2D.stream = knockback_sound
+		$AudioStreamPlayer2D.play()
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
@@ -24,7 +29,8 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 func activate() -> void:
 	super.activate()
 	$AnimationPlayer.play("idle")
-	
+	$AudioStreamPlayer2D.stream = activate_sound
+	$AudioStreamPlayer2D.play()
 
 
 func deactivate() -> void:

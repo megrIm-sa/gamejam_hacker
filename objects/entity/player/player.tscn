@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://gplt3xtad1dq"]
+[gd_scene load_steps=13 format=3 uid="uid://gplt3xtad1dq"]
 
 [ext_resource type="Script" path="res://objects/entity/player/player.gd" id="1_r1dj1"]
 [ext_resource type="Shader" path="res://scenes/pixel_melt.gdshader" id="2_1oipu"]
 [ext_resource type="Texture2D" uid="uid://b0eu0mjn1imw7" path="res://assets/sprites/entities/hacker_idle.png" id="2_7dkxf"]
 [ext_resource type="Texture2D" uid="uid://dy7swdhsba4a7" path="res://assets/sprites/entities/hacker_running.png" id="3_h5pyw"]
+[ext_resource type="AudioStream" uid="uid://c1f4uoeh2bg0l" path="res://assets/sounds/hit.ogg" id="5_1nrv8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mj0yv"]
 shader = ExtResource("2_1oipu")
@@ -161,3 +162,8 @@ autoplay = "idle"
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1nrv8")
+volume_db = -15.0
+bus = &"SFX"

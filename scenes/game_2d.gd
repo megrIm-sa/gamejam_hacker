@@ -14,12 +14,13 @@ func _ready() -> void:
 func _spawn_player(pos : Vector2 = Vector2.ZERO) -> void:
 	player = player_scene.instantiate()
 	player.position = pos
-	add_child(player)
+	call_deferred("add_child", player)
 	player.killed.connect(_on_player_killed)
 	player.spawned.connect(func(): $Camera2D.position_smoothing_enabled = false)
 
 
 func _on_player_killed() -> void:
+	player.killed.disconnect(_on_player_killed)
 	$Camera2D.position_smoothing_enabled = true
 	_spawn_player()
 

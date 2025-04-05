@@ -1,12 +1,13 @@
 extends Interactive
 
 @export var time : float = 2
-var laser_active : bool = false
+#var laser_active : bool = false
 
 
 func _ready() -> void:
 	$Timer.wait_time = time
 	$Timer.timeout.connect(_on_timeout)
+	
 	if activated:
 		activate()
 	else:
@@ -14,16 +15,16 @@ func _ready() -> void:
 
 
 func _on_timeout() -> void:
-	if laser_active:
+	if $Area2D.monitoring:
 		$AnimationPlayer.play("deactivate")
 	else:
 		$AnimationPlayer.play("activate")
 		$AnimationPlayer.queue("idle")
-		
+		$AudioStreamPlayer2D.play()
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if laser_active and body is Entity:
+	if body is Entity:
 		body.kill()
 
 
@@ -37,9 +38,9 @@ func deactivate() -> void:
 
 
 func on_activate() -> void:
-	laser_active = true
+	$Area2D.monitoring = true
 
 
 func on_deactivate() -> void:
-	laser_active = false
+	$Area2D.monitoring = false
 	

@@ -1,14 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfiuuq0ob8xwv"]
+[gd_scene load_steps=3 format=3 uid="uid://bfiuuq0ob8xwv"]
 
 [ext_resource type="Script" path="res://scenes/puzzles/puzzle15/puzzle_15.gd" id="1_na6j8"]
+[ext_resource type="AudioStream" uid="uid://bwb23idlsgvv4" path="res://assets/sounds/puzzle15_button.ogg" id="2_3dn33"]
 
-[node name="Puzzle15" type="GridContainer"]
+[node name="Puzzle15" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_na6j8")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_3dn33")
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="Puzzle15" type="GridContainer" parent="."]
 visible = false
 texture_filter = 1
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 2
-script = ExtResource("1_na6j8")

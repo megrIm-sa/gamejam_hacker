@@ -1,4 +1,4 @@
-extends GridContainer
+extends Control
 
 signal game_win
 
@@ -16,35 +16,35 @@ var element_scene = preload("res://scenes/puzzles/puzzle15/puzzle_15_element.tsc
 
 
 func start_new_game() -> void:
-	columns = table_size
+	$Puzzle15.columns = table_size
 	
 	for i in table_size**2:
 		var element : Puzzle15Element = element_scene.instantiate()
 		element.slot_clicked.connect(_on_slot_clicked)
 		element.correct_id = i
-		add_child(element)
+		$Puzzle15.add_child(element)
 		if i == table_size**2-1:
 			element.is_empty = true
 	
 	for i in 150:
-		_on_slot_clicked(get_children()[randi_range(0, table_size**2 - 1)])
+		_on_slot_clicked($Puzzle15.get_children()[randi_range(0, table_size**2 - 1)])
 	
-	for element in get_children():
+	for element in $Puzzle15.get_children():
 		if element.get_index() == element.correct_id:
 			element.self_modulate = correct_slot_color
 		else:
 			element.self_modulate = wrong_slot_color
 	
 	await get_tree().process_frame
-	show()
+	$Puzzle15.show()
 	is_game_started = true
 
 
 func stop_game() -> void:
 	is_game_started = false
-	for child in get_children():
+	for child in $Puzzle15.get_children():
 		child.queue_free()
-	hide()
+	$Puzzle15.hide()
 
 
 func _on_slot_clicked(element : Puzzle15Element) -> void:
@@ -56,7 +56,7 @@ func _on_slot_clicked(element : Puzzle15Element) -> void:
 
 
 func _find_empty_element() -> Puzzle15Element:
-	for element in get_children():
+	for element in $Puzzle15.get_children():
 		if element.is_empty:
 			return element
 	return null
@@ -74,13 +74,14 @@ func _swap_elements(element : Puzzle15Element, empty_element, is_animated : bool
 	var temp = element.get_index()
 	
 	if is_animated:
+		$AudioStreamPlayer.play()
 		var tween : Tween = create_tween()
 		tween.set_trans(Tween.TRANS_SINE)
 		tween.tween_property(element, "position", empty_element.position, 0.1)
 		await tween.finished
 	
-	move_child(element, empty_element.get_index())
-	move_child(empty_element, temp)
+	$Puzzle15.move_child(element, empty_element.get_index())
+	$Puzzle15.move_child(empty_element, temp)
 	
 	if element.get_index() == element.correct_id:
 		element.self_modulate = correct_slot_color
@@ -94,7 +95,7 @@ func _check_game_win():
 	if !is_game_started:
 		return
 	
-	for element in get_children():
+	for element in $Puzzle15.get_children():
 		if element.get_index() != element.correct_id:
 			return
 	

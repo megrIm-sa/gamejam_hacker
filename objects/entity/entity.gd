@@ -16,15 +16,6 @@ var state : States = States.IDLE:
 var melt_tween : Tween
 
 
-func _ready() -> void:
-	animation_player.play("idle")
-	set_physics_process(false)
-	melt(0, 0.8)
-	await get_tree().create_timer(.8).timeout
-	set_physics_process(true)
-	spawned.emit()
-
-
 func kill() -> void:
 	velocity = Vector2.ZERO
 	set_physics_process(false)

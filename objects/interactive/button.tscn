@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://in0voq6dwn6d"]
+[gd_scene load_steps=7 format=3 uid="uid://in0voq6dwn6d"]
 
 [ext_resource type="Texture2D" uid="uid://chusnc1enn320" path="res://assets/sprites/objects/button.png" id="1_i25fv"]
 [ext_resource type="Script" path="res://objects/interactive/button.gd" id="1_krw0h"]
+[ext_resource type="AudioStream" uid="uid://dw4ajmhlybys5" path="res://assets/sounds/button.ogg" id="2_ec7kp"]
 [ext_resource type="Texture2D" uid="uid://bog3yo3sfte8i" path="res://assets/sprites/ui/button.png" id="3_egqt4"]
 [ext_resource type="Texture2D" uid="uid://ca4qx0shmfi50" path="res://assets/sprites/ui/activate.png" id="4_ma1ls"]
 
@@ -11,6 +12,11 @@ size = Vector2(24, 24)
 [node name="Button" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_krw0h")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ec7kp")
+volume_db = -10.0
+bus = &"SFX"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -12)

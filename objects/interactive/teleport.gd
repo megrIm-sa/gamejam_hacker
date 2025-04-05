@@ -12,6 +12,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		return
 	
 	if !just_teleported and body is Player:
+		$AudioStreamPlayer2D.play()
 		body.state = body.States.IDLE
 		await get_tree().physics_frame
 		body.melt(1, 0.3, Color(0,1,1))

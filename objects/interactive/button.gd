@@ -22,6 +22,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 
 
 func _on_touch_screen_button_pressed() -> void:
+	$AudioStreamPlayer2D.play()
 	if !activated:
 		activated = true
 		$Sprite2D.frame = 1

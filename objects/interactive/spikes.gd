@@ -9,8 +9,12 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 func activate() -> void:
 	super.activate()
-	$Area2D.monitoring = false
 	$AnimationPlayer.play("activate")
+
+
+func _on_activate() -> void:
+	$Area2D.monitoring = true
+	$AudioStreamPlayer2D.play()
 
 
 func deactivate() -> void:
