@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bmuy1sumvi6kl"]
+[gd_scene load_steps=19 format=4 uid="uid://bmuy1sumvi6kl"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_gerax"]
 [ext_resource type="Texture2D" uid="uid://mdj15eooh533" path="res://assets/sprites/backgrounds/1.png" id="2_x1kgh"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://7pmq5ivwdv6k" path="res://assets/sprites/props/24.png" id="13_rs4x5"]
 [ext_resource type="Texture2D" uid="uid://du60fw7agxyvy" path="res://assets/sprites/props/boxes.png" id="13_xgfdh"]
 [ext_resource type="Texture2D" uid="uid://cshcggns8jaso" path="res://assets/sprites/props/barrels.png" id="15_0unx7"]
+[ext_resource type="AudioStream" uid="uid://bprrsejyrt3it" path="res://assets/music/cyber2.ogg" id="16_qf6lg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gxec"]
 texture = ExtResource("7_yatop")
@@ -172,6 +173,7 @@ hackable_objects = {
 hackable_objects_methods = {
 "floor_gate1": ["deactivate"]
 }
+music = ExtResource("16_qf6lg")
 
 [node name="Parallax" type="Node2D" parent="."]
 texture_filter = 1

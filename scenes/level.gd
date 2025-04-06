@@ -5,6 +5,8 @@ signal level_finished
 
 @export var hackable_objects : Dictionary
 @export var hackable_objects_methods : Dictionary
+@export var music : AudioStream
+
 
 @onready var distortion_timer : Timer = $DistortionTimer
 var distortion_material : ShaderMaterial

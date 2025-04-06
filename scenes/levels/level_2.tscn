@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=4 uid="uid://b1hy4belj57se"]
+[gd_scene load_steps=10 format=4 uid="uid://b1hy4belj57se"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_opkdr"]
+[ext_resource type="AudioStream" uid="uid://dvjisv0kjsif0" path="res://assets/music/cyber3.ogg" id="2_8nyvo"]
 [ext_resource type="Texture2D" uid="uid://22f71ghhp71p" path="res://assets/sprites/tilesets/level_tileset.png" id="7_7ucvp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gxec"]
@@ -207,12 +208,7 @@ _data = {
 [node name="Level" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_opkdr")
-hackable_objects = {
-"floor_gate1": [NodePath(""), NodePath(""), NodePath("")]
-}
-hackable_objects_methods = {
-"floor_gate1": ["deactivate"]
-}
+music = ExtResource("2_8nyvo")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1

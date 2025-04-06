@@ -35,4 +35,5 @@ func _on_call_pressed(method_name : String) -> void:
 		push_error("Object not selected!")
 		return
 
+	%AudioStreamPlayer.play()
 	get_tree().current_scene.get_node("LevelManager").hack_object(current_object_id, method_name)

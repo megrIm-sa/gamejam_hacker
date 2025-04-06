@@ -10,16 +10,17 @@ var object_button = preload("res://scenes/game_hacking/object_button.tscn")
 
 func _on_play_button_pressed() -> void:
 	play_pressed.emit()
+	%AudioStreamPlayer.play()
 
 
 func _on_restart_button_pressed() -> void:
 	restart_pressed.emit()
+	%AudioStreamPlayer.play()
 
 
 func replace_object_buttons(_hackable_objects_methods : Dictionary) -> void:
 	%Editor.default_editor()
 	hackable_objects_methods = _hackable_objects_methods
-	print(hackable_objects_methods)
 	
 	var container = $HBoxContainer/Objects/VBoxContainer
 	for i in container.get_children():
@@ -35,3 +36,4 @@ func replace_object_buttons(_hackable_objects_methods : Dictionary) -> void:
 
 func _on_object_button_pressed(object_id: String) -> void:
 	%Editor.open_editor_for(object_id)
+	%AudioStreamPlayer.play()

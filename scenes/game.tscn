@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dwceffvysxjua"]
+[gd_scene load_steps=17 format=3 uid="uid://dwceffvysxjua"]
 
 [ext_resource type="PackedScene" uid="uid://b2ufenqtjww57" path="res://scenes/game_2d.tscn" id="1_8qici"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_n7sgo"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cek23mcj5ip88" path="res://assets/models/Desk.fbx" id="3_ih3x3"]
 [ext_resource type="PackedScene" uid="uid://lvyxtlm242ur" path="res://assets/models/TV A.fbx" id="3_wmjpp"]
 [ext_resource type="PackedScene" uid="uid://b1hy4belj57se" path="res://scenes/levels/level_2.tscn" id="4_e84xv"]
-[ext_resource type="AudioStream" uid="uid://bprrsejyrt3it" path="res://assets/music/cyber2.ogg" id="6_jbtdn"]
 [ext_resource type="PackedScene" uid="uid://chm3rn10xqaya" path="res://scenes/levels/end_level.tscn" id="6_xqh02"]
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="7_rq6b2"]
 
@@ -53,9 +52,9 @@ unique_name_in_owner = true
 [node name="Monitor1" type="Node3D" parent="Game3D"]
 transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -10, 0, 4.1)
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Game3D/Monitor1"]
+[node name="MusicPlayer" type="AudioStreamPlayer3D" parent="Game3D/Monitor1"]
+unique_name_in_owner = true
 transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 0, 0, 0)
-stream = ExtResource("6_jbtdn")
 autoplay = true
 max_distance = 20.0
 bus = &"Music"

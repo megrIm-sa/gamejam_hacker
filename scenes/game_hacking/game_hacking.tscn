@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://hh0cw4r161t4"]
+[gd_scene load_steps=11 format=3 uid="uid://hh0cw4r161t4"]
 
 [ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="1_21isl"]
 [ext_resource type="Script" path="res://scenes/game_hacking/game_hacking.gd" id="1_ecdo0"]
 [ext_resource type="Script" path="res://scenes/game_hacking/editor.gd" id="3_qir6j"]
+[ext_resource type="AudioStream" uid="uid://bwb23idlsgvv4" path="res://assets/sounds/puzzle15_button.ogg" id="4_jw12w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_py2yy"]
 bg_color = Color(0.176471, 0.176471, 0.176471, 1)
@@ -241,6 +242,13 @@ offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_jw12w")
+volume_db = -20.0
+pitch_scale = 2.0
+bus = &"SFX"
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Control/ButtonsContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Control/ButtonsContainer/RestartButton" to="." method="_on_restart_button_pressed"]
