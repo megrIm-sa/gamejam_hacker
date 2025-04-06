@@ -78,6 +78,7 @@ _data = {
 
 [node name="Firewall" type="Node2D"]
 z_index = 2
+use_parent_material = true
 script = ExtResource("1_doepi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

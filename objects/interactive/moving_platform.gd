@@ -1,7 +1,5 @@
 extends Interactive
 
-# TODO
-
 @export var speed : float = 50.0
 @export var stop_time : float = 2.0
 @export var position1 : Vector2

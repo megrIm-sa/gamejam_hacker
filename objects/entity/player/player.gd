@@ -36,14 +36,13 @@ func _physics_process(delta: float) -> void:
 	if !on_floor:
 		if velocity.length() <= 1000:
 			velocity += gravity * get_gravity() * delta * (1 + time_in_air)
-			print(velocity)
 		
 		state = States.JUMPING
 		
 		if velocity.y > 0:
 			if time_in_air <= 1:
 				time_in_air += .2 * delta
-	elif last_velocity.length() >= 600:
+	elif last_velocity.length() >= 700:
 		$"..".show_landing_effect(position)
 	
 	if Input.is_action_just_pressed("jump") and (on_floor or !coyote_timer.is_stopped()):

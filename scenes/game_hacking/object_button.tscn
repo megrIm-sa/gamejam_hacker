@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://kvtg87rlafuo"]
+
+[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="1_144o1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uafv"]
+bg_color = Color(0.235294, 0.235294, 0.235294, 1)
+
+[node name="ObjectButton" type="Button"]
+custom_minimum_size = Vector2(0, 96)
+theme_override_styles/normal = SubResource("StyleBoxFlat_0uafv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -11.0
+offset_right = 72.0
+offset_bottom = 12.0
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_144o1")
+theme_override_font_sizes/normal_font_size = 32
+text = "Object"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

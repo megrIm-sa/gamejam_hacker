@@ -5,5 +5,5 @@ extends Camera2D
 
 func _process(delta: float) -> void:
 	if follow_player:
-		if  $"..".player:
+		if is_instance_valid($"..".player):
 			position =  $"..".player.position + Vector2(0, -16) *  $"..".player.gravity

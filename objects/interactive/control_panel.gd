@@ -6,12 +6,14 @@ extends Interactive
 
 var minigame
 var tween : Tween 
+var player_canvas_layer : CanvasLayer
 
 
 func _ready() -> void:
 	if minigame_scene == null:
 		return
 	
+	player_canvas_layer = get_parent().get_parent().get_parent().get_node("CanvasLayer")
 	minigame = load(minigame_scene).instantiate()
 	$CanvasLayer/Minigame.add_child(minigame)
 	minigame.game_win.connect(activate)
@@ -34,7 +36,7 @@ func _on_touch_screen_button_pressed() -> void:
 		return
 	$TouchScreenButton.hide()
 	$CanvasLayer.show()
-	%CanvasLayer.hide()
+	player_canvas_layer.hide()
 	
 	_tween_canvas(0)
 	await tween.finished
@@ -53,13 +55,13 @@ func _close_minigame() -> void:
 	_tween_canvas(1152)
 	await tween.finished
 	
-	%CanvasLayer.show()
+	player_canvas_layer.show()
 	$CanvasLayer.hide()
 
 
 func activate() -> void:
 	$AudioStreamPlayer2D.play()
-	%CanvasLayer.show()
+	player_canvas_layer.show()
 	super.activate()
 	_tween_canvas(1152)
 	await tween.finished
@@ -76,7 +78,7 @@ func activate() -> void:
 
 func deactivate() -> void:
 	$AudioStreamPlayer2D.play()
-	%CanvasLayer.show()
+	player_canvas_layer.show()
 	super.deactivate()
 	$CanvasLayer.hide()
 	$TouchScreenButton.hide()

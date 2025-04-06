@@ -10,6 +10,7 @@ size = Vector2(32, 12)
 script = ExtResource("1_irdcw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
 position = Vector2(0, 2)
 texture = ExtResource("1_yd22p")
 

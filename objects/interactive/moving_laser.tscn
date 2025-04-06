@@ -209,6 +209,7 @@ texture_filter = 1
 script = ExtResource("1_xg6g1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
 position = Vector2(1, 0)
 texture = ExtResource("2_vidcm")
 hframes = 4

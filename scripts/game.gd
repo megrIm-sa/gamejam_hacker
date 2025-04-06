@@ -16,7 +16,6 @@ func _ready() -> void:
 
 
 func _show_game2d() -> void:
-	print("_show_game2d")
 	%Game3D.show()
 	set_pause_subtree(%GameHacking, true)
 	%GameHacking.reparent($Game3D/Monitor2/SubViewport)
@@ -37,7 +36,6 @@ func _show_game2d() -> void:
 
 
 func _show_game_hacking() -> void:
-	print("_show_game_hacking")
 	%Game3D.show()
 	set_pause_subtree(%Game2D, true)
 	%Game2D.reparent($Game3D/Monitor1/SubViewport)
@@ -72,7 +70,6 @@ func set_pause_subtree(root: Node, pause: bool) -> void:
 
 
 func restart() -> void:
-	print("Restart not implemented")
 	%Game3D.show()
 	set_pause_subtree(%GameHacking, true)
 	%GameHacking.reparent($Game3D/Monitor2/SubViewport)
@@ -85,4 +82,5 @@ func restart() -> void:
 	tween.parallel().tween_property($Game3D/Camera3D, "rotation", Vector3(0, deg_to_rad(90), 0), 0.25)
 	
 	await tween.finished
-	get_tree().reload_current_scene()
+	%LevelManager.restart_level()
+	_show_game2d()

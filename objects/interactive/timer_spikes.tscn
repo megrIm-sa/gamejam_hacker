@@ -196,6 +196,7 @@ texture_filter = 1
 script = ExtResource("1_h8erf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
 texture = ExtResource("2_jfbvo")
 hframes = 10
 

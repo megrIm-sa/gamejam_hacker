@@ -1,11 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://dwceffvysxjua"]
+[gd_scene load_steps=17 format=3 uid="uid://dwceffvysxjua"]
 
 [ext_resource type="PackedScene" uid="uid://b2ufenqtjww57" path="res://scenes/game_2d.tscn" id="1_8qici"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_n7sgo"]
 [ext_resource type="Shader" path="res://assets/shaders/crt_monitor.gdshader" id="2_cafg0"]
-[ext_resource type="PackedScene" uid="uid://hh0cw4r161t4" path="res://scenes/game_hacking.tscn" id="2_slmqj"]
+[ext_resource type="PackedScene" uid="uid://hh0cw4r161t4" path="res://scenes/game_hacking/game_hacking.tscn" id="2_slmqj"]
+[ext_resource type="PackedScene" uid="uid://bmuy1sumvi6kl" path="res://scenes/levels/level_1.tscn" id="3_fwxdj"]
 [ext_resource type="PackedScene" uid="uid://cek23mcj5ip88" path="res://assets/models/Desk.fbx" id="3_ih3x3"]
 [ext_resource type="PackedScene" uid="uid://lvyxtlm242ur" path="res://assets/models/TV A.fbx" id="3_wmjpp"]
+[ext_resource type="PackedScene" uid="uid://br8j6pmpgkjhb" path="res://scenes/levels/level_2.tscn" id="4_e84xv"]
+[ext_resource type="PackedScene" uid="uid://bw2edwsl6uj0o" path="res://scenes/levels/level_3.tscn" id="5_a2sih"]
+[ext_resource type="Script" path="res://scripts/level_manager.gd" id="7_rq6b2"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_yti8e"]
 viewport_path = NodePath("Game3D/Monitor1/SubViewport")
@@ -34,6 +38,13 @@ ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_n7sgo")
+
+[node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("game_2d", "game_hacking")]
+unique_name_in_owner = true
+script = ExtResource("7_rq6b2")
+game_2d = NodePath("../Game3D/Monitor1/SubViewport/Game2D")
+game_hacking = NodePath("../Game3D/Monitor2/SubViewport/GameHacking")
+levels = Array[PackedScene]([ExtResource("3_fwxdj"), ExtResource("4_e84xv"), ExtResource("5_a2sih")])
 
 [node name="Game3D" type="Node3D" parent="."]
 unique_name_in_owner = true
