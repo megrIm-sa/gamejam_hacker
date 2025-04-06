@@ -1,6 +1,8 @@
 class_name Level
 extends Node2D
 
+signal level_finished
+
 @export var hackable_objects : Dictionary
 @export var hackable_objects_methods : Dictionary
 
@@ -10,9 +12,10 @@ var distorted : bool = false
 
 
 func _ready() -> void:
-	distortion_material = ShaderMaterial.new()
-	distortion_material.shader = preload("res://objects/interactive/distortion.gdshader")
-	distortion_timer.timeout.connect(_on_distortion_timer)
+	if distortion_timer:
+		distortion_material = ShaderMaterial.new()
+		distortion_material.shader = preload("res://objects/interactive/distortion.gdshader")
+		distortion_timer.timeout.connect(_on_distortion_timer)
 	
 	for i in hackable_objects.values():
 		if typeof(i) == TYPE_ARRAY:

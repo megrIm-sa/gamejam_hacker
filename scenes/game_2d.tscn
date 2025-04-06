@@ -115,11 +115,10 @@ shader_parameter/brightness_boost = 1.2
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_cg5je"]
 size = Vector2(512, 512)
 
-[node name="Game2D" type="Node2D" node_paths=PackedStringArray("level")]
+[node name="Game2D" type="Node2D"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_e1rq4")
 script = ExtResource("2_vxufa")
-level = NodePath("")
 metadata/_edit_horizontal_guides_ = [-5.0]
 
 [node name="LandingEffect" parent="." instance=ExtResource("3_mtmcg")]

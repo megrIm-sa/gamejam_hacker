@@ -17,6 +17,7 @@ func _on_restart_button_pressed() -> void:
 
 
 func replace_object_buttons(_hackable_objects_methods : Dictionary) -> void:
+	%Editor.default_editor()
 	hackable_objects_methods = _hackable_objects_methods
 	print(hackable_objects_methods)
 	

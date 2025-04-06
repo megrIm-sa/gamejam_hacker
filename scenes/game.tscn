@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dwceffvysxjua"]
+[gd_scene load_steps=18 format=3 uid="uid://dwceffvysxjua"]
 
 [ext_resource type="PackedScene" uid="uid://b2ufenqtjww57" path="res://scenes/game_2d.tscn" id="1_8qici"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_n7sgo"]
@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://bmuy1sumvi6kl" path="res://scenes/levels/level_1.tscn" id="3_fwxdj"]
 [ext_resource type="PackedScene" uid="uid://cek23mcj5ip88" path="res://assets/models/Desk.fbx" id="3_ih3x3"]
 [ext_resource type="PackedScene" uid="uid://lvyxtlm242ur" path="res://assets/models/TV A.fbx" id="3_wmjpp"]
-[ext_resource type="PackedScene" uid="uid://br8j6pmpgkjhb" path="res://scenes/levels/level_2.tscn" id="4_e84xv"]
-[ext_resource type="PackedScene" uid="uid://bw2edwsl6uj0o" path="res://scenes/levels/level_3.tscn" id="5_a2sih"]
+[ext_resource type="PackedScene" uid="uid://b1hy4belj57se" path="res://scenes/levels/level_2.tscn" id="4_e84xv"]
+[ext_resource type="AudioStream" uid="uid://bprrsejyrt3it" path="res://assets/music/cyber2.ogg" id="6_jbtdn"]
+[ext_resource type="PackedScene" uid="uid://chm3rn10xqaya" path="res://scenes/levels/end_level.tscn" id="6_xqh02"]
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="7_rq6b2"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_yti8e"]
@@ -44,13 +45,20 @@ unique_name_in_owner = true
 script = ExtResource("7_rq6b2")
 game_2d = NodePath("../Game3D/Monitor1/SubViewport/Game2D")
 game_hacking = NodePath("../Game3D/Monitor2/SubViewport/GameHacking")
-levels = Array[PackedScene]([ExtResource("3_fwxdj"), ExtResource("4_e84xv"), ExtResource("5_a2sih")])
+levels = Array[PackedScene]([ExtResource("3_fwxdj"), ExtResource("4_e84xv"), ExtResource("6_xqh02")])
 
 [node name="Game3D" type="Node3D" parent="."]
 unique_name_in_owner = true
 
 [node name="Monitor1" type="Node3D" parent="Game3D"]
 transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -10, 0, 4.1)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Game3D/Monitor1"]
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 0, 0, 0)
+stream = ExtResource("6_jbtdn")
+autoplay = true
+max_distance = 20.0
+bus = &"Music"
 
 [node name="Sprite3D" type="Sprite3D" parent="Game3D/Monitor1"]
 transform = Transform3D(-2.22928e-08, 0, 0.51, 0, 0.51, 0, -0.51, 0, -2.22928e-08, 3.1, 0, 0)

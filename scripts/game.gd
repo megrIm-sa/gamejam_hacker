@@ -29,6 +29,7 @@ func _show_game2d() -> void:
 	tween.tween_property($Game3D/Camera3D, "fov", 45, 0.3)
 	
 	await tween.finished
+	print("unpause")
 	set_pause_subtree(%Game2D, false)
 	%Game3D.hide()
 	%Game2D.show_crt_effect(false)

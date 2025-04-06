@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://du2d5ltnowyow"]
+
+[ext_resource type="Script" path="res://objects/interactive/end_level_teleport.gd" id="1_r3cgb"]
+[ext_resource type="Texture2D" uid="uid://bjurkglifls1y" path="res://assets/sprites/objects/end_level_teleport.png" id="2_v7e07"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bju0h"]
+size = Vector2(16, 4)
+
+[node name="EndLevelTeleport" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_r3cgb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+texture = ExtResource("2_v7e07")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_bju0h")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

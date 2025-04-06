@@ -24,18 +24,19 @@ func _input(event: InputEvent) -> void:
 
 func load_level(level_index : int) -> void:
 	var level : Level = levels[level_index].instantiate() as Level
+	level.level_finished.connect(next_level)
 	game_2d.new_level(level)
 	game_hacking.replace_object_buttons(level.hackable_objects_methods)
 
 
 func next_level() -> void:
 	if current_level_index >= levels.size()-1:
-		push_error("current_level_index is larger than levels size!")
-		return
-	current_level_index += 1
+		current_level_index = 0
+	else:
+		current_level_index += 1
+	load_level(current_level_index)
 	SaveSystem.set_var("level", current_level_index)
 	SaveSystem.save()
-	load_level(current_level_index)
 
 
 func restart_level() -> void:

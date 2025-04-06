@@ -166,4 +166,5 @@ one_shot = true
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_1nrv8")
 volume_db = -15.0
+max_distance = 320.0
 bus = &"SFX"

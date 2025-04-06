@@ -12,14 +12,16 @@ var knockback : float = 0
 var can_move : bool = true
 
 var gravity : float = 1
+var first_time_spawner = true
 
 
 func _ready() -> void:
 	animation_player.play("idle")
-	set_physics_process(false)
-	melt(0, 0.8)
-	await get_tree().create_timer(.8).timeout
-	set_physics_process(true)
+	if !first_time_spawner:
+		set_physics_process(false)
+		melt(0, 0.8)
+		await get_tree().create_timer(.8).timeout
+		set_physics_process(true)
 	spawned.emit()
 
 

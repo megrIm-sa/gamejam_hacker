@@ -10,10 +10,10 @@ var player_canvas_layer : CanvasLayer
 
 
 func _ready() -> void:
+	player_canvas_layer = get_parent().get_parent().get_parent().get_node("CanvasLayer")
 	if minigame_scene == null:
 		return
 	
-	player_canvas_layer = get_parent().get_parent().get_parent().get_node("CanvasLayer")
 	minigame = load(minigame_scene).instantiate()
 	$CanvasLayer/Minigame.add_child(minigame)
 	minigame.game_win.connect(activate)

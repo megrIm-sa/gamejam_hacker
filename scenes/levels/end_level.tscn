@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://chm3rn10xqaya"]
+
+[ext_resource type="Script" path="res://scenes/level.gd" id="1_bwqqj"]
+[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="2_pyaga"]
+[ext_resource type="Script" path="res://scenes/levels/restart_button.gd" id="3_pwivb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06u7i"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5lw33"]
+bg_color = Color(0.259294, 0.259294, 0.259294, 1)
+
+[node name="EndLevel" type="Node2D"]
+script = ExtResource("1_bwqqj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_06u7i")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -456.0
+offset_top = -172.0
+offset_right = 456.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_pyaga")
+theme_override_font_sizes/normal_font_size = 128
+text = "Thanks for playing!"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -36.0
+offset_right = 128.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_pyaga")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_5lw33")
+text = "Play again"
+script = ExtResource("3_pwivb")

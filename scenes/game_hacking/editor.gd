@@ -3,6 +3,13 @@ extends Control
 var current_object_id: String = ""
 
 
+func default_editor() -> void:
+	$RichTextLabel.text = "Select an object to edit"
+	for i in $HBoxContainer.get_children():
+		i.queue_free()
+	await get_tree().process_frame
+
+
 func open_editor_for(object_id: String) -> void:
 	current_object_id = object_id
 	$RichTextLabel.text = "Editing: " + object_id
