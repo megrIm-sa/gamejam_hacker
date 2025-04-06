@@ -158,6 +158,16 @@ text = "Restart"
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer/VBoxContainer/Control/ButtonsContainer"]
 layout_mode = 2
 
+[node name="MenuButton" type="Button" parent="HBoxContainer/VBoxContainer/Control/ButtonsContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_21isl")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_q16gc")
+text = "Menu"
+
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/Control/ButtonsContainer"]
 visible = false
 layout_mode = 2
@@ -252,3 +262,4 @@ bus = &"SFX"
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Control/ButtonsContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Control/ButtonsContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Control/ButtonsContainer/MenuButton" to="." method="_on_menu_button_pressed"]

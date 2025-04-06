@@ -124,6 +124,7 @@ metadata/_edit_horizontal_guides_ = [-5.0]
 [node name="LandingEffect" parent="." instance=ExtResource("3_mtmcg")]
 unique_name_in_owner = true
 visible = false
+z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -16)

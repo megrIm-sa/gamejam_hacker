@@ -3,6 +3,7 @@ extends Control
 
 signal play_pressed
 signal restart_pressed
+signal menu_pressed
 
 @export var hackable_objects_methods : Dictionary
 var object_button = preload("res://scenes/game_hacking/object_button.tscn")
@@ -15,6 +16,11 @@ func _on_play_button_pressed() -> void:
 
 func _on_restart_button_pressed() -> void:
 	restart_pressed.emit()
+	%AudioStreamPlayer.play()
+
+
+func _on_menu_button_pressed() -> void:
+	menu_pressed.emit()
 	%AudioStreamPlayer.play()
 
 

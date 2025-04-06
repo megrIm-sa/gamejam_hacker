@@ -10,12 +10,14 @@ func _ready() -> void:
 	
 	%GameHacking.play_pressed.connect(_show_game2d)
 	%GameHacking.restart_pressed.connect(restart)
+	%GameHacking.menu_pressed.connect(_show_menu)
 	%Game2D.hack_pressed.connect(_show_game_hacking)
 	
-	_show_game2d()
+	#_show_game2d()
 
 
 func _show_game2d() -> void:
+	$Menu.hide()
 	%Game3D.show()
 	set_pause_subtree(%GameHacking, true)
 	%GameHacking.reparent($Game3D/Monitor2/SubViewport)
@@ -56,6 +58,22 @@ func _show_game_hacking() -> void:
 	%GameHacking.reparent($".")
 
 
+func _show_menu() -> void:
+	%Game3D.show()
+	set_pause_subtree(%GameHacking, true)
+	%GameHacking.reparent($Game3D/Monitor2/SubViewport)
+	
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	tween.tween_property($Game3D/Camera3D, "fov", 75, 0.25)
+	tween.tween_property($Game3D/Camera3D, "position", Vector3(0, 0, 0), 0.25)
+	tween.parallel().tween_property($Game3D/Camera3D, "rotation", Vector3(0, deg_to_rad(90), 0), 0.25)
+	
+	await tween.finished
+	$Menu.show()
+
+
 func set_pause_subtree(root: Node, pause: bool) -> void:
 	var process_setters = [
 		"set_process",
@@ -85,3 +103,15 @@ func restart() -> void:
 	await tween.finished
 	%LevelManager.restart_level()
 	_show_game2d()
+
+
+func _on_credits_button_pressed() -> void:
+	$Menu/Control/Credits.show()
+
+
+func _on_exit_button_pressed() -> void:
+	get_tree().quit()
+
+
+func _on_close_credits_button_pressed() -> void:
+	$Menu/Control/Credits.hide()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dwceffvysxjua"]
+[gd_scene load_steps=21 format=3 uid="uid://dwceffvysxjua"]
 
 [ext_resource type="PackedScene" uid="uid://b2ufenqtjww57" path="res://scenes/game_2d.tscn" id="1_8qici"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_n7sgo"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://b1hy4belj57se" path="res://scenes/levels/level_2.tscn" id="4_e84xv"]
 [ext_resource type="PackedScene" uid="uid://chm3rn10xqaya" path="res://scenes/levels/end_level.tscn" id="6_xqh02"]
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="7_rq6b2"]
+[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="11_tfwat"]
+[ext_resource type="Script" path="res://scripts/text_with_url.gd" id="12_foclg"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_yti8e"]
 viewport_path = NodePath("Game3D/Monitor1/SubViewport")
@@ -35,6 +37,16 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="Environment" id="Environment_pgeyf"]
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6e5ci"]
+bg_color = Color(0.235294, 0.235294, 0.235294, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fp25"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_n7sgo")
@@ -123,3 +135,178 @@ material = SubResource("StandardMaterial3D_i82kc")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pgeyf")
+
+[node name="Menu" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Menu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Menu/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Control"]
+custom_minimum_size = Vector2(256, 12)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="PlayButton" type="Button" parent="Menu/Control/VBoxContainer"]
+custom_minimum_size = Vector2(128, 72)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("11_tfwat")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxFlat_6e5ci")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6e5ci")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6e5ci")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6e5ci")
+text = "Play"
+
+[node name="CreditsButton" type="Button" parent="Menu/Control/VBoxContainer"]
+custom_minimum_size = Vector2(128, 72)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("11_tfwat")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxFlat_6e5ci")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6e5ci")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6e5ci")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6e5ci")
+text = "About"
+
+[node name="ExitButton" type="Button" parent="Menu/Control/VBoxContainer"]
+custom_minimum_size = Vector2(128, 72)
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("11_tfwat")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxFlat_6e5ci")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6e5ci")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6e5ci")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6e5ci")
+text = "Exit"
+
+[node name="Credits" type="Panel" parent="Menu/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4fp25")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/Control/Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/Control/Credits/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "
+
+[center][b]Credits[/b]
+
+Author: Shvetkoy Anton aka megrIm
+
+
+[center][b]Used assets[/b]"
+autowrap_mode = 1
+script = ExtResource("12_foclg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Control/Credits/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/Control/Credits/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center][b]Graphics:[/b]
+• Power Station Free Tileset (Pixel Art) – [url=https://free-game-assets.itch.io/power-station-free-tileset-pixel-art]link[/url]  
+• Sci-Fi Lab Tileset (Decor + Traps) – [url=https://foozlecc.itch.io/sci-fi-lab-tileset-decor-traps]link[/url]  
+• Low Poly Household Item Pack – [url=https://lowpolyassets.itch.io/low-poly-household-item-pack]link[/url]  
+• Sci-Fi Shooter Tileset (Dungeon Crawler) – [url=https://momongaa.itch.io/16x16-sci-fi-shooter-tileset-dungeon-crawler]link[/url]  
+• Fire Column Pixel Art Effect – [url=https://sanctumpixel.itch.io/fire-column-pixel-art-effect]link[/url]  
+
+[b]Shaders:[/b]
+• Lightweight CRT Effect – [url=https://godotshaders.com/shader/lightweight-crt-effect/]link[/url]  
+• Pixel Melt – [url=https://godotshaders.com/shader/pixel-melt/]link[/url]  
+• 2D Sprite Cartridge Tilting Glitch – [url=https://godotshaders.com/shader/2d-sprite-cartridge-tilting-glitch/]link[/url]  
+"
+autowrap_mode = 1
+script = ExtResource("12_foclg")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Menu/Control/Credits/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center][b]Audio:[/b]
+• Interface Bleeps – [url=https://bleeoop.itch.io/interface-bleeps]link[/url]  
+• Halftone Sound Effects Pack (Lite) – [url=https://void1gaming.itch.io/halftone-sound-effects-pack-lite]link[/url]  
+
+[b]Fonts:[/b]
+• Monogram – [url=https://datagoblin.itch.io/monogram]link[/url]  
+
+[b]Code & Tools:[/b]
+• SaveMadeEasy by Adam Kormos – [url=https://github.com/AdamKormos/SaveMadeEasy]link[/url]
+"
+autowrap_mode = 1
+script = ExtResource("12_foclg")
+
+[node name="CloseCreditsButton" type="Button" parent="Menu/Control/Credits"]
+custom_minimum_size = Vector2(128, 72)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -96.0
+offset_right = 72.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("11_tfwat")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxFlat_6e5ci")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6e5ci")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6e5ci")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6e5ci")
+text = "Close"
+
+[connection signal="pressed" from="Menu/Control/VBoxContainer/PlayButton" to="." method="_show_game2d"]
+[connection signal="pressed" from="Menu/Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="Menu/Control/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="meta_clicked" from="Menu/Control/Credits/VBoxContainer/RichTextLabel" to="Menu/Control/Credits/VBoxContainer/RichTextLabel" method="_on_rich_text_label_meta_clicked"]
+[connection signal="meta_clicked" from="Menu/Control/Credits/VBoxContainer/HBoxContainer/RichTextLabel" to="Menu/Control/Credits/VBoxContainer/HBoxContainer/RichTextLabel" method="_on_rich_text_label_meta_clicked"]
+[connection signal="meta_clicked" from="Menu/Control/Credits/VBoxContainer/HBoxContainer/RichTextLabel2" to="Menu/Control/Credits/VBoxContainer/HBoxContainer/RichTextLabel2" method="_on_rich_text_label_meta_clicked"]
+[connection signal="pressed" from="Menu/Control/Credits/CloseCreditsButton" to="." method="_on_close_credits_button_pressed"]
