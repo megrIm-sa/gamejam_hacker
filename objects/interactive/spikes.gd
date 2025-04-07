@@ -19,5 +19,8 @@ func _on_activate() -> void:
 
 func deactivate() -> void:
 	super.deactivate()
-	$Area2D.monitoring = false
 	$AnimationPlayer.play("deactivate")
+
+
+func _on_deactivate() -> void:
+	$Area2D.monitoring = false

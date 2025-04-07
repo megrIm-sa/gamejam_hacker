@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://b2ufenqtjww57"]
+[gd_scene load_steps=14 format=3 uid="uid://b2ufenqtjww57"]
 
 [ext_resource type="Script" path="res://scenes/game_2d.gd" id="2_vxufa"]
 [ext_resource type="PackedScene" uid="uid://42alhwug45se" path="res://assets/sprites/effects/landing_effect.tscn" id="3_mtmcg"]
 [ext_resource type="Shader" path="res://assets/shaders/crt_monitor.gdshader" id="7_wm368"]
+[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="8_0d048"]
 [ext_resource type="Script" path="res://objects/entity/player/camera_2d.gd" id="12_58tok"]
 [ext_resource type="Texture2D" uid="uid://bog3yo3sfte8i" path="res://assets/sprites/ui/button.png" id="14_fntbg"]
 [ext_resource type="Script" path="res://scenes/multitouch_button.gd" id="15_3qold"]
@@ -261,6 +262,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("16_ecw1p")
+
+[node name="GravityButton" type="TextureButton" parent="CanvasLayer/UI/2DControls"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -192.0
+offset_right = -240.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("14_fntbg")
+texture_pressed = ExtResource("14_fntbg")
+stretch_mode = 0
+script = ExtResource("15_3qold")
+action = "inverse_gravity"
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/2DControls/GravityButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -8.0
+offset_right = 4.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("8_0d048")
+theme_override_font_sizes/font_size = 128
+text = "G"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GoToHackingButton" type="TextureButton" parent="CanvasLayer/UI"]
 texture_filter = 1

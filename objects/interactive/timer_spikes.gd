@@ -1,5 +1,6 @@
 extends Spikes
 
+@export var offset_time : float = 0
 @export var time : float = 1.0
 
 @onready var timer : Timer = $Timer
@@ -8,8 +9,10 @@ extends Spikes
 
 
 func _ready() -> void:
-	timer.wait_time = time
-	timer.start()
+	if activated:
+		activate()
+	else:
+		deactivate()
 	timer.timeout.connect(_on_timeout)
 
 
@@ -19,15 +22,25 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_timeout() -> void:
+	timer.wait_time = time
 	if $Area2D.monitoring:
 		$AnimationPlayer.play("deactivate")
-		$Area2D.monitoring = false
+		#$Area2D.monitoring = false
 		#spikes_active = false
 	else:
 		$AnimationPlayer.play("activate")
 		#spikes_active = true
 
 
+func activate() -> void:
+	super.activate()
+	$Timer.start(time + offset_time)
+
+
+func deactivate() -> void:
+	super.deactivate()
+	$Timer.stop()
+
+
 func _on_activate() -> void:
-	$Area2D.monitoring = true
-	$AudioStreamPlayer2D.play()
+	super._on_activate()

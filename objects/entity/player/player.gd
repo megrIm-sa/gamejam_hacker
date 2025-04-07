@@ -27,11 +27,6 @@ func _ready() -> void:
 	spawned.emit()
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_1:
-		change_gravity()
-
-
 func _physics_process(delta: float) -> void:
 	if !can_move:
 		return
@@ -47,7 +42,10 @@ func _physics_process(delta: float) -> void:
 			if time_in_air <= 1:
 				time_in_air += .2 * delta
 	elif last_velocity.length() >= 700:
-		$"..".show_landing_effect(position)
+		$"..".show_landing_effect(position, gravity == -1)
+	
+	if Input.is_action_just_pressed("inverse_gravity"):
+		change_gravity()
 	
 	if Input.is_action_just_pressed("jump") and (on_floor or !coyote_timer.is_stopped()):
 		velocity.y = JUMP_VELOCITY * gravity

@@ -18,8 +18,11 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_0:
-		next_level()
+	if event is InputEventKey and event.is_pressed():
+		if event.keycode in range(KEY_0, KEY_9+1):
+			var index : int = event.keycode - KEY_0
+			if index < levels.size():
+				load_level(index)
 
 
 func load_level(level_index : int) -> void:
@@ -29,6 +32,8 @@ func load_level(level_index : int) -> void:
 	%MusicPlayer.play()
 	game_2d.new_level(level)
 	game_hacking.replace_object_buttons(level.hackable_objects_methods)
+	SaveSystem.set_var("level", level_index)
+	SaveSystem.save()
 
 
 func next_level() -> void:
@@ -37,8 +42,6 @@ func next_level() -> void:
 	else:
 		current_level_index += 1
 	load_level(current_level_index)
-	SaveSystem.set_var("level", current_level_index)
-	SaveSystem.save()
 
 
 func restart_level() -> void:

@@ -7,7 +7,7 @@ signal level_finished
 @export var hackable_objects_methods : Dictionary
 @export var music : AudioStream
 @export  var spawn_pos : Vector2 = Vector2.ZERO
-
+@export var gravity_inverse_used : bool = false
 
 @onready var distortion_timer : Timer = $DistortionTimer
 var distortion_material : ShaderMaterial

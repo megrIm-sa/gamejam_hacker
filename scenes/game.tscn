@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dwceffvysxjua"]
+[gd_scene load_steps=24 format=3 uid="uid://dwceffvysxjua"]
 
 [ext_resource type="PackedScene" uid="uid://b2ufenqtjww57" path="res://scenes/game_2d.tscn" id="1_8qici"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_n7sgo"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://da6igy4v6y6um" path="res://scenes/levels/level_3.tscn" id="5_b30vx"]
 [ext_resource type="PackedScene" uid="uid://detex5e5si0oi" path="res://scenes/levels/level_4.tscn" id="6_itgxq"]
 [ext_resource type="PackedScene" uid="uid://chm3rn10xqaya" path="res://scenes/levels/end_level.tscn" id="6_xqh02"]
+[ext_resource type="PackedScene" uid="uid://wgxgyq71bj74" path="res://scenes/levels/level_5.tscn" id="7_g50gm"]
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="7_rq6b2"]
 [ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="11_tfwat"]
 [ext_resource type="Script" path="res://scripts/text_with_url.gd" id="12_foclg"]
@@ -58,7 +59,7 @@ unique_name_in_owner = true
 script = ExtResource("7_rq6b2")
 game_2d = NodePath("../Game3D/Monitor1/SubViewport/Game2D")
 game_hacking = NodePath("../Game3D/Monitor2/SubViewport/GameHacking")
-levels = Array[PackedScene]([ExtResource("3_fwxdj"), ExtResource("4_e84xv"), ExtResource("5_b30vx"), ExtResource("6_itgxq"), ExtResource("6_xqh02")])
+levels = Array[PackedScene]([ExtResource("3_fwxdj"), ExtResource("4_e84xv"), ExtResource("5_b30vx"), ExtResource("6_itgxq"), ExtResource("7_g50gm"), ExtResource("6_xqh02")])
 
 [node name="Game3D" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -170,7 +171,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 32
 
 [node name="PlayButton" type="Button" parent="Menu/Control/VBoxContainer"]
 custom_minimum_size = Vector2(128, 72)
@@ -209,7 +210,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6e5ci")
 text = "Exit"
 
 [node name="Credits" type="Panel" parent="Menu/Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -244,9 +244,12 @@ script = ExtResource("12_foclg")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Menu/Control/Credits/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
+alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Menu/Control/Credits/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(448, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
@@ -262,10 +265,12 @@ text = "[center][b]Graphics:[/b]
 • Pixel Melt – [url=https://godotshaders.com/shader/pixel-melt/]link[/url]  
 • 2D Sprite Cartridge Tilting Glitch – [url=https://godotshaders.com/shader/2d-sprite-cartridge-tilting-glitch/]link[/url]  
 "
+fit_content = true
 autowrap_mode = 1
 script = ExtResource("12_foclg")
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Menu/Control/Credits/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(448, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true

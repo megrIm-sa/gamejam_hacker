@@ -21,13 +21,14 @@ func spawn_player(pos : Vector2 = Vector2.ZERO, first_time : bool = false) -> vo
 	player.position = pos
 
 
-
 func new_level(new_level : Level) -> void:
 	if level:
 		level.queue_free()
 	delete_player()
 	await get_tree().process_frame
 	level = new_level
+	if !level.gravity_inverse_used:
+		$"CanvasLayer/UI/2DControls/GravityButton".hide()
 	add_child(new_level)
 	spawn_player(Vector2.ZERO, true)
 
@@ -45,12 +46,21 @@ func _on_player_killed() -> void:
 	spawn_player(level.spawn_pos)
 
 
-func show_landing_effect(pos : Vector2) -> void:
+func show_landing_effect(pos : Vector2, reversed : bool = false) -> void:
+	print(reversed)
 	%LandingEffect.get_child(0).play("idle")
-	%LandingEffect.position = pos
+	%LandingEffect.flip_v = reversed
+	if reversed:
+		%LandingEffect.position = pos + Vector2(0, 48)
+	else:
+		%LandingEffect.position = pos
 	%LandingEffect.show()
 
 
 func show_crt_effect(show : bool) -> void:
 	$Camera2D/MonitorEffect.visible = show
 	$CanvasLayer.visible = !show
+
+
+func show_gravity_button() -> void:
+	$"CanvasLayer/UI/2DControls/GravityButton".show()
