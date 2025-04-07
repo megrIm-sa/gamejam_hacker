@@ -3,8 +3,6 @@ extends Entity
 
 const JUMP_VELOCITY = -300.0
 
-@export var immortal : bool = false
-
 @onready var coyote_timer: Timer = $CoyoteTimer
 
 var time_in_air : float = 0
@@ -76,8 +74,6 @@ func _physics_process(delta: float) -> void:
 
 
 func kill() -> void:
-	if immortal:
-		return
 	$AudioStreamPlayer2D.play()
 	super.kill()
 

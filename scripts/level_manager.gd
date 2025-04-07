@@ -11,10 +11,11 @@ var current_level_index : int
 
 
 func _ready() -> void:
-	SaveSystem.set_var("level", 0)
-	SaveSystem.save()
+	#SaveSystem.set_var("level", 0)
+	#SaveSystem.save()
 	current_level_index = SaveSystem.get_var("level", 0)
 	load_level(current_level_index)
+	game_2d.restart_level.connect(restart_level)
 
 
 func _input(event: InputEvent) -> void:
@@ -26,6 +27,7 @@ func _input(event: InputEvent) -> void:
 
 
 func load_level(level_index : int) -> void:
+	print("load level")
 	var level : Level = levels[level_index].instantiate() as Level
 	level.level_finished.connect(next_level)
 	%MusicPlayer.stream = level.music

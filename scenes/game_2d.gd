@@ -1,6 +1,7 @@
 class_name Game2D
 extends Node2D
 
+signal restart_level
 signal hack_pressed
 
 @export var level : Node2D
@@ -14,9 +15,12 @@ func _ready() -> void:
 
 func spawn_player(pos : Vector2 = Vector2.ZERO, first_time : bool = false) -> void:
 	player = player_scene.instantiate()
-	player.killed.connect(_on_player_killed)
-	player.spawned.connect(func(): $Camera2D.position_smoothing_enabled = false)
+	if !level is BossRunnerLevel:
+		player.killed.connect(_on_player_killed)
+	else:
+		first_time = false
 	player.first_time_spawner = first_time
+	player.spawned.connect(func(): $Camera2D.position_smoothing_enabled = false)
 	add_child(player)
 	player.position = pos
 
@@ -27,15 +31,18 @@ func new_level(new_level : Level) -> void:
 	delete_player()
 	await get_tree().process_frame
 	level = new_level
+	level.game_2d = self
 	if !level.gravity_inverse_used:
 		$"CanvasLayer/UI/2DControls/GravityButton".hide()
+	
 	add_child(new_level)
 	spawn_player(Vector2.ZERO, true)
 
 
 func delete_player() -> void:
 	if player:
-		player.killed.disconnect(_on_player_killed)
+		if !level is BossRunnerLevel:
+			player.killed.disconnect(_on_player_killed)
 		#$Camera2D.position_smoothing_enabled = true
 		player.queue_free()
 

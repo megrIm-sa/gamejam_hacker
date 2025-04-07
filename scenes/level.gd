@@ -12,6 +12,7 @@ signal level_finished
 @onready var distortion_timer : Timer = $DistortionTimer
 var distortion_material : ShaderMaterial
 var distorted : bool = false
+var game_2d : Game2D
 
 
 func _ready() -> void:

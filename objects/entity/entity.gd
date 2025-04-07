@@ -1,11 +1,11 @@
 class_name Entity
 extends CharacterBody2D
 
-
 signal spawned
 signal killed
 
 @export var speed = 200.0
+@export var immortal : bool = false
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
@@ -17,6 +17,8 @@ var melt_tween : Tween
 
 
 func kill() -> void:
+	if immortal:
+		return
 	velocity = Vector2.ZERO
 	set_physics_process(false)
 	melt(1, 0.8)

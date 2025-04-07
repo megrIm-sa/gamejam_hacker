@@ -348,18 +348,18 @@ rotation = -3.14159
 [node name="Spikes20" parent="Objects" instance=ExtResource("12_ttm5s")]
 position = Vector2(240, -880)
 
+[node name="Spikes21" parent="Objects" instance=ExtResource("12_ttm5s")]
+position = Vector2(272, -880)
+
+[node name="Spikes22" parent="Objects" instance=ExtResource("12_ttm5s")]
+position = Vector2(304, -880)
+
 [node name="Props" type="Node2D" parent="."]
 modulate = Color(0.627451, 0.627451, 0.627451, 1)
 
 [node name="DistortionTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
-
-[node name="Spikes8" parent="." instance=ExtResource("12_ttm5s")]
-position = Vector2(272, -880)
-
-[node name="Spikes9" parent="." instance=ExtResource("12_ttm5s")]
-position = Vector2(304, -880)
 
 [connection signal="body_entered" from="Objects/HintArea" to="Objects/HintArea" method="_on_body_entered"]
 [connection signal="body_exited" from="Objects/HintArea" to="Objects/HintArea" method="_on_body_exited"]
