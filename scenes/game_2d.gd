@@ -14,11 +14,12 @@ func _ready() -> void:
 
 func spawn_player(pos : Vector2 = Vector2.ZERO, first_time : bool = false) -> void:
 	player = player_scene.instantiate()
-	player.position = pos
-	player.first_time_spawner = first_time
-	call_deferred("add_child", player)
 	player.killed.connect(_on_player_killed)
 	player.spawned.connect(func(): $Camera2D.position_smoothing_enabled = false)
+	player.first_time_spawner = first_time
+	add_child(player)
+	player.position = pos
+
 
 
 func new_level(new_level : Level) -> void:
@@ -41,7 +42,7 @@ func delete_player() -> void:
 func _on_player_killed() -> void:
 	player.killed.disconnect(_on_player_killed)
 	$Camera2D.position_smoothing_enabled = true
-	spawn_player()
+	spawn_player(level.spawn_pos)
 
 
 func show_landing_effect(pos : Vector2) -> void:

@@ -1,12 +1,13 @@
 extends Interactive
 
+@export var offset_time : float = 0
 @export var time : float = 2
-#var laser_active : bool = false
 
 
 func _ready() -> void:
-	$Timer.wait_time = time
-	$Timer.timeout.connect(_on_timeout)
+	if has_node("Timer"):
+		$Timer.start(offset_time + time)
+		$Timer.timeout.connect(_on_timeout)
 	
 	if activated:
 		activate()
@@ -15,6 +16,8 @@ func _ready() -> void:
 
 
 func _on_timeout() -> void:
+	if has_node("Timer"):
+		$Timer.wait_time = time
 	if $Area2D.monitoring:
 		$AnimationPlayer.play("deactivate")
 	else:
@@ -29,12 +32,21 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func activate() -> void:
-	$Timer.start()
+	if has_node("Timer"):
+		$Timer.start()
+	else:
+		_on_timeout()
 
 
 func deactivate() -> void:
-	$Timer.stop()
-	$AnimationPlayer.play("deactivate")
+	if has_node("Timer"):
+		$Timer.stop()
+	if $Area2D.monitoring:
+		$AnimationPlayer.play("deactivate")
+	elif activated:
+		$AnimationPlayer.play("activate")
+		$AnimationPlayer.queue("idle")
+		$AudioStreamPlayer2D.play()
 
 
 func on_activate() -> void:
@@ -43,4 +55,3 @@ func on_activate() -> void:
 
 func on_deactivate() -> void:
 	$Area2D.monitoring = false
-	

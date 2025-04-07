@@ -26,12 +26,12 @@ func _on_touch_screen_button_pressed() -> void:
 	if !activated:
 		activated = true
 		$Sprite2D.frame = 1
-		if activate_interactive:
-			for interactive_object in interactive_objects:
-				interactive_object.activate()
-		else:
+		if !activate_interactive:
 			for interactive_object in interactive_objects:
 				interactive_object.deactivate()
+		else:
+			for interactive_object in interactive_objects:
+				interactive_object.activate()
 	else:
 		activated = false
 		$Sprite2D.frame = 0

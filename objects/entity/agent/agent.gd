@@ -21,14 +21,12 @@ func _physics_process(delta: float) -> void:
 		direction = -1
 	else:
 		direction = 1
-	#print(direction)
 	if direction:
 		if direction >= 0:
 			$Sprite2D.flip_h = false
 		elif direction < 0:
 			$Sprite2D.flip_h = true
 		if $Timer.is_stopped():
-			print($Timer.is_stopped())
 			velocity.x = direction * speed
 			if on_floor:
 				state = States.WALKING

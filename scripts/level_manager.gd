@@ -11,7 +11,7 @@ var current_level_index : int
 
 
 func _ready() -> void:
-	SaveSystem.set_var("level", 0)
+	SaveSystem.set_var("level", 2)
 	SaveSystem.save()
 	current_level_index = SaveSystem.get_var("level", 0)
 	load_level(current_level_index)

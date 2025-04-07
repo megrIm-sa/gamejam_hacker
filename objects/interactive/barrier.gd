@@ -1,5 +1,6 @@
 extends Interactive
 
+
 var knockback_sound : AudioStream = preload("res://assets/sounds/barrier_knockback.ogg")
 var activate_sound : AudioStream = preload("res://assets/sounds/laser.ogg")
 

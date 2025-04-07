@@ -12,7 +12,7 @@ var moving_to_pos1 : bool = true
 
 func _ready() -> void:
 	$MoveTimer.wait_time = move_time
-	$LaserTimer.wait_time = move_time
+	$LaserTimer.wait_time = laser_time
 	$LaserTimer.timeout.connect(_on_timeout)
 	
 	if activated:
@@ -22,7 +22,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	print($LaserTimer.is_stopped())
 	if !$MoveTimer.is_stopped():
 		return
 	
