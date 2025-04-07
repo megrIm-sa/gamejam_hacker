@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bmuy1sumvi6kl"]
+[gd_scene load_steps=22 format=4 uid="uid://bmuy1sumvi6kl"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_gerax"]
 [ext_resource type="Texture2D" uid="uid://mdj15eooh533" path="res://assets/sprites/backgrounds/1.png" id="2_x1kgh"]
@@ -14,7 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://b5khx56dqysol" path="res://objects/interactive/end_level_zone.tscn" id="12_lddr0"]
 [ext_resource type="Texture2D" uid="uid://7pmq5ivwdv6k" path="res://assets/sprites/props/24.png" id="13_rs4x5"]
 [ext_resource type="Texture2D" uid="uid://du60fw7agxyvy" path="res://assets/sprites/props/boxes.png" id="13_xgfdh"]
+[ext_resource type="Script" path="res://scripts/hint_area.gd" id="14_1o62u"]
 [ext_resource type="Texture2D" uid="uid://cshcggns8jaso" path="res://assets/sprites/props/barrels.png" id="15_0unx7"]
+[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="15_2irht"]
 [ext_resource type="AudioStream" uid="uid://bprrsejyrt3it" path="res://assets/music/cyber2.ogg" id="16_qf6lg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gxec"]
@@ -163,6 +165,9 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_3gxec")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkkqr"]
+size = Vector2(192, 66)
 
 [node name="Level" type="Node2D"]
 texture_filter = 1
@@ -336,6 +341,63 @@ position = Vector2(688, 78)
 [node name="Spikes14" parent="Objects" instance=ExtResource("9_sl6g4")]
 position = Vector2(720, 78)
 
+[node name="Hints" type="Node2D" parent="."]
+
+[node name="HintArea2" type="Area2D" parent="Hints"]
+position = Vector2(872, -56)
+script = ExtResource("14_1o62u")
+
+[node name="Label" type="Label" parent="Hints/HintArea2"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 112.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("15_2irht")
+text = "Buttons can activate objects."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hints/HintArea2"]
+position = Vector2(-32, 23)
+shape = SubResource("RectangleShape2D_qkkqr")
+
+[node name="HintArea" type="Area2D" parent="Hints"]
+position = Vector2(1184, -56)
+script = ExtResource("14_1o62u")
+
+[node name="Label" type="Label" parent="Hints/HintArea"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -32.0
+offset_right = 56.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("15_2irht")
+text = "Distorted objects can be edited via the second monitor"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hints/HintArea"]
+visible = false
+position = Vector2(-32, 23)
+shape = SubResource("RectangleShape2D_qkkqr")
+
 [node name="Props" type="Node2D" parent="."]
 
 [node name="24" type="Sprite2D" parent="Props"]
@@ -356,3 +418,8 @@ flip_h = true
 [node name="DistortionTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[connection signal="body_entered" from="Hints/HintArea2" to="Hints/HintArea2" method="_on_body_entered"]
+[connection signal="body_exited" from="Hints/HintArea2" to="Hints/HintArea2" method="_on_body_exited"]
+[connection signal="body_entered" from="Hints/HintArea" to="Hints/HintArea" method="_on_body_entered"]
+[connection signal="body_exited" from="Hints/HintArea" to="Hints/HintArea" method="_on_body_exited"]

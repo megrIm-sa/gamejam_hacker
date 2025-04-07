@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwenlrhudpikm"]
+
+[ext_resource type="Script" path="res://scripts/hint_area.gd" id="1_bl3eu"]
+[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="2_03rtm"]
+
+[node name="HintArea" type="Area2D"]
+script = ExtResource("1_bl3eu")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -20.0
+offset_right = 27.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_03rtm")
+text = "HINT TEXT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -311,18 +311,16 @@ position = Vector2(101, 2272)
 
 [node name="StaticLaser3" parent="Objects" instance=ExtResource("10_ij6rq")]
 position = Vector2(198, 2272)
-time = 1.0
 
 [node name="MovingLaser2" parent="Objects" instance=ExtResource("11_2n4xk")]
 position = Vector2(210, 2272)
 move_time = 0.1
-laser_time = 3.0
+laser_time = 4.0
 position_x1 = 198.0
 position_x2 = 355.0
 
 [node name="StaticLaser4" parent="Objects" instance=ExtResource("10_ij6rq")]
 position = Vector2(355, 2272)
-time = 1.0
 
 [node name="EndLevelTeleport" parent="Objects" instance=ExtResource("12_6un0e")]
 position = Vector2(783, 2298)

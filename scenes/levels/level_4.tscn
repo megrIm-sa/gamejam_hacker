@@ -1,12 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://detex5e5si0oi"]
+[gd_scene load_steps=6 format=4 uid="uid://detex5e5si0oi"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_f18li"]
 [ext_resource type="AudioStream" uid="uid://bp74bbn4qp0ap" path="res://assets/music/cyber1.ogg" id="2_w1isj"]
 [ext_resource type="Texture2D" uid="uid://22f71ghhp71p" path="res://assets/sprites/tilesets/level_tileset.png" id="3_ij4h2"]
-[ext_resource type="Texture2D" uid="uid://cshcggns8jaso" path="res://assets/sprites/props/barrels.png" id="15_8q4vn"]
-[ext_resource type="Texture2D" uid="uid://c854ph25e823u" path="res://assets/sprites/props/barrel_slug.png" id="16_cdndl"]
-[ext_resource type="Texture2D" uid="uid://du60fw7agxyvy" path="res://assets/sprites/props/boxes.png" id="17_s1tfg"]
-[ext_resource type="PackedScene" uid="uid://chd8ausk4wscx" path="res://objects/interactive/moving_laser.tscn" id="18_rrl7j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gxec"]
 texture = ExtResource("3_ij4h2")
@@ -170,26 +166,6 @@ tile_set = SubResource("TileSet_rtqfi")
 [node name="Props" type="Node2D" parent="."]
 modulate = Color(0.627451, 0.627451, 0.627451, 1)
 
-[node name="Barrels" type="Sprite2D" parent="Props"]
-position = Vector2(1160, -24)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("15_8q4vn")
-
-[node name="BarrelSlug" type="Sprite2D" parent="Props"]
-position = Vector2(1104, -32)
-scale = Vector2(2, 2)
-texture = ExtResource("16_cdndl")
-
-[node name="Boxes" type="Sprite2D" parent="Props"]
-position = Vector2(-40, -24)
-scale = Vector2(-1.5, 1.5)
-texture = ExtResource("17_s1tfg")
-
 [node name="DistortionTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
-
-[node name="MovingLaser" parent="." instance=ExtResource("18_rrl7j")]
-position = Vector2(1820, -32)
-position_x1 = 1784.0
-position_x2 = 1864.0

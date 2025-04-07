@@ -1,8 +1,9 @@
 [gd_scene load_steps=21 format=4 uid="uid://da6igy4v6y6um"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_ubwwi"]
-[ext_resource type="AudioStream" uid="uid://dvjisv0kjsif0" path="res://assets/music/cyber3.ogg" id="2_lmglm"]
+[ext_resource type="AudioStream" uid="uid://3l14235hbkrm" path="res://assets/music/cyber3.2.ogg" id="2_d1nag"]
 [ext_resource type="Texture2D" uid="uid://22f71ghhp71p" path="res://assets/sprites/tilesets/level_tileset.png" id="3_v70w6"]
+[ext_resource type="PackedScene" uid="uid://cyqngla65a3b8" path="res://objects/interactive/timer_spikes.tscn" id="4_us4eu"]
 [ext_resource type="PackedScene" uid="uid://in0voq6dwn6d" path="res://objects/interactive/button.tscn" id="6_kl7dw"]
 [ext_resource type="PackedScene" uid="uid://ctwfxa8u6llnj" path="res://objects/interactive/teleport.tscn" id="7_cxh0k"]
 [ext_resource type="PackedScene" uid="uid://djydnu60jaytr" path="res://objects/entity/agent/agent.tscn" id="7_ofsir"]
@@ -10,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://bdr7471cyc6yg" path="res://objects/interactive/wall.tscn" id="9_3dv53"]
 [ext_resource type="PackedScene" uid="uid://nrmvthq45gha" path="res://objects/interactive/firewall.tscn" id="10_hnopf"]
 [ext_resource type="PackedScene" uid="uid://mdcnre6kurjf" path="res://objects/interactive/static_laser.tscn" id="10_pyowt"]
-[ext_resource type="PackedScene" uid="uid://chd8ausk4wscx" path="res://objects/interactive/moving_laser.tscn" id="11_f0wa6"]
 [ext_resource type="PackedScene" uid="uid://du2d5ltnowyow" path="res://objects/interactive/end_level_teleport.tscn" id="12_aq8dn"]
 [ext_resource type="PackedScene" uid="uid://de74nxses27o4" path="res://objects/interactive/spikes.tscn" id="13_3prdf"]
 [ext_resource type="PackedScene" uid="uid://cir7grwiyqx76" path="res://objects/interactive/moving_platform.tscn" id="14_aymnf"]
@@ -177,7 +177,7 @@ hackable_objects_methods = {
 "bridge1": ["activate", "deactivate"],
 "terminal_lasers": ["activate"]
 }
-music = ExtResource("2_lmglm")
+music = ExtResource("2_d1nag")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -370,6 +370,12 @@ activated = false
 [node name="EndLevelTeleport" parent="Objects" instance=ExtResource("12_aq8dn")]
 position = Vector2(1872, -6)
 
+[node name="TimerSpikes" parent="Objects" instance=ExtResource("4_us4eu")]
+position = Vector2(1840, -16)
+
+[node name="TimerSpikes2" parent="Objects" instance=ExtResource("4_us4eu")]
+position = Vector2(1808, -16)
+
 [node name="Props" type="Node2D" parent="."]
 modulate = Color(0.627451, 0.627451, 0.627451, 1)
 
@@ -391,8 +397,3 @@ texture = ExtResource("17_y313c")
 [node name="DistortionTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
-
-[node name="MovingLaser" parent="." instance=ExtResource("11_f0wa6")]
-position = Vector2(1820, -32)
-position_x1 = 1784.0
-position_x2 = 1864.0
