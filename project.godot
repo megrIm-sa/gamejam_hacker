@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="gamejam_hacker"
+config/name="Hack the Hacker"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon512.png"
 
 [autoload]
 
