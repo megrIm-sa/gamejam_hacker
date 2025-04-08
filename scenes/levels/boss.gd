@@ -10,6 +10,12 @@ var attacks : Array[Callable] = [_spawn_agents, _shoot_laser]
 
 
 func _ready() -> void:
+	material.set("shader_parameter/progress", 0)
+	$AnimationPlayer.play("start")
+	$AnimationPlayer.queue("flying")
+	await $AnimationPlayer.animation_changed
+	$AttackTimer.start()
+	$"../HackLaser/ReadyTimer".start()
 	$AttackTimer.timeout.connect(_attack)
 	material.set("shader_parameter/progress", 0.0)
 
@@ -88,7 +94,6 @@ func _shoot_laser() -> void:
 	$AttackTimer.start()
 
 
-
 func _check_laser_hit(from: Vector2, to: Vector2) -> void:
 	var space_state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(from, to)
@@ -105,8 +110,8 @@ func _check_laser_hit(from: Vector2, to: Vector2) -> void:
 func _spawn_agents() -> void:
 	$Sprite2D.frame = 1
 	for i in 2:
-		_spawn_agent()
 		await get_tree().create_timer(1, false).timeout
+		_spawn_agent()
 	await get_tree().create_timer(.5, false).timeout
 	$Sprite2D.frame = 0
 	$AttackTimer.start()

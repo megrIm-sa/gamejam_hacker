@@ -21,6 +21,7 @@ SaveSystem="*res://addons/save_system/save_system.gd"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 

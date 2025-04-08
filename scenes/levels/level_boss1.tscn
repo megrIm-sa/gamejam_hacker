@@ -495,6 +495,7 @@ texture_filter = 1
 script = ExtResource("1_852s1")
 player_speed = 300.0
 boss = NodePath("Boss")
+boss_base_speed = 180.0
 speed_change_rate = 150.0
 music = ExtResource("2_1ke8n")
 camera_offset = Vector2(0, -32)
@@ -803,7 +804,7 @@ autostart = true
 position = Vector2(-192, 0)
 collision_layer = 64
 collision_mask = 0
-speed = 150.0
+speed = 180.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
