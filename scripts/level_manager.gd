@@ -28,14 +28,16 @@ func _input(event: InputEvent) -> void:
 
 func load_level(level_index : int) -> void:
 	print("load level")
+	current_level_index = level_index
+	SaveSystem.set_var("level", level_index)
+	SaveSystem.save()
 	var level : Level = levels[level_index].instantiate() as Level
 	level.level_finished.connect(next_level)
 	%MusicPlayer.stream = level.music
 	%MusicPlayer.play()
 	game_2d.new_level(level)
 	game_hacking.replace_object_buttons(level.hackable_objects_methods)
-	SaveSystem.set_var("level", level_index)
-	SaveSystem.save()
+
 
 
 func next_level() -> void:

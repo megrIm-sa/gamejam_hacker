@@ -2,6 +2,14 @@ class_name Spikes
 extends Interactive
 
 
+func _ready() -> void:
+	if activated:
+		activate()
+	else:
+		$Area2D.monitoring = false
+		deactivate()
+
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Entity:
 		body.kill()

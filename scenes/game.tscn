@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dwceffvysxjua"]
+[gd_scene load_steps=26 format=3 uid="uid://dwceffvysxjua"]
 
 [ext_resource type="PackedScene" uid="uid://b2ufenqtjww57" path="res://scenes/game_2d.tscn" id="1_8qici"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_n7sgo"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://wgxgyq71bj74" path="res://scenes/levels/level_5.tscn" id="7_g50gm"]
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="7_rq6b2"]
 [ext_resource type="PackedScene" uid="uid://dg2jv4kjesk7d" path="res://scenes/levels/level_boss1.tscn" id="8_uph1p"]
+[ext_resource type="PackedScene" uid="uid://bfb2aoxairly6" path="res://scenes/levels/level_boss2.tscn" id="9_ylwo8"]
 [ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="11_tfwat"]
 [ext_resource type="Script" path="res://scripts/text_with_url.gd" id="12_foclg"]
 
@@ -53,6 +54,7 @@ border_width_bottom = 8
 bg_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node"]
+process_mode = 3
 script = ExtResource("1_n7sgo")
 
 [node name="LevelManager" type="Node" parent="." node_paths=PackedStringArray("game_2d", "game_hacking")]
@@ -60,10 +62,11 @@ unique_name_in_owner = true
 script = ExtResource("7_rq6b2")
 game_2d = NodePath("../Game3D/Monitor1/SubViewport/Game2D")
 game_hacking = NodePath("../Game3D/Monitor2/SubViewport/GameHacking")
-levels = Array[PackedScene]([ExtResource("3_fwxdj"), ExtResource("4_e84xv"), ExtResource("5_b30vx"), ExtResource("6_itgxq"), ExtResource("7_g50gm"), ExtResource("8_uph1p"), ExtResource("6_xqh02")])
+levels = Array[PackedScene]([ExtResource("3_fwxdj"), ExtResource("4_e84xv"), ExtResource("5_b30vx"), ExtResource("6_itgxq"), ExtResource("7_g50gm"), ExtResource("8_uph1p"), ExtResource("9_ylwo8"), ExtResource("6_xqh02")])
 
 [node name="Game3D" type="Node3D" parent="."]
 unique_name_in_owner = true
+process_mode = 4
 
 [node name="Monitor1" type="Node3D" parent="Game3D"]
 transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -10, 0, 4.1)

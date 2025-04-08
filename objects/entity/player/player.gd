@@ -13,6 +13,7 @@ var can_move : bool = true
 
 var gravity : float = 1
 var first_time_spawner = true
+var can_be_killed = false
 
 
 func _ready() -> void:
@@ -20,8 +21,9 @@ func _ready() -> void:
 	if !first_time_spawner:
 		set_physics_process(false)
 		melt(0, 0.8)
-		await get_tree().create_timer(.8).timeout
+		await get_tree().create_timer(.8, false).timeout
 		set_physics_process(true)
+	can_be_killed = true
 	spawned.emit()
 
 
@@ -74,6 +76,9 @@ func _physics_process(delta: float) -> void:
 
 
 func kill() -> void:
+	if !can_be_killed:
+		return
+	can_be_killed = false
 	$AudioStreamPlayer2D.play()
 	super.kill()
 

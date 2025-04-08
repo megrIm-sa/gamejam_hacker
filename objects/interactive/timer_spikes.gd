@@ -9,10 +9,7 @@ extends Spikes
 
 
 func _ready() -> void:
-	if activated:
-		activate()
-	else:
-		deactivate()
+	super._ready()
 	timer.timeout.connect(_on_timeout)
 
 

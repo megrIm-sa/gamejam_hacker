@@ -1,3 +1,4 @@
+class_name Agent
 extends Entity
 
 @export var stop_time : float = 2.0
