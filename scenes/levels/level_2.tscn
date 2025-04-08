@@ -302,7 +302,7 @@ position = Vector2(-56, 2272)
 [node name="MovingLaser" parent="Objects" instance=ExtResource("11_2n4xk")]
 position = Vector2(-44, 2272)
 move_time = 0.1
-laser_time = 4.0
+laser_time = 1.0
 position_x1 = -56.0
 position_x2 = 101.0
 
@@ -315,7 +315,7 @@ position = Vector2(198, 2272)
 [node name="MovingLaser2" parent="Objects" instance=ExtResource("11_2n4xk")]
 position = Vector2(210, 2272)
 move_time = 0.1
-laser_time = 4.0
+laser_time = 1.0
 position_x1 = 198.0
 position_x2 = 355.0
 
