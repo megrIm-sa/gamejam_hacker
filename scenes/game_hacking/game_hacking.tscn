@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://hh0cw4r161t4"]
+[gd_scene load_steps=12 format=3 uid="uid://hh0cw4r161t4"]
 
 [ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="1_21isl"]
 [ext_resource type="Script" path="res://scenes/game_hacking/game_hacking.gd" id="1_ecdo0"]
@@ -22,6 +22,13 @@ bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tch6s"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_68d0y"]
+bg_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 
 [node name="GameHacking" type="Control"]
 texture_filter = 1
@@ -252,6 +259,43 @@ offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
+
+[node name="Output" type="Control" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_qir6j")
+
+[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/Output"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_68d0y")
+
+[node name="OutpuScroll" type="ScrollContainer" parent="HBoxContainer/VBoxContainer/Output"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_scroll_mode = 2
+
+[node name="OutputContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/Output/OutpuScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

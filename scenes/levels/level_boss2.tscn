@@ -553,7 +553,7 @@ scale = Vector2(6, 13)
 texture = ExtResource("11_8txf3")
 
 [node name="ReadyTimer" type="Timer" parent="HackLaser"]
-wait_time = 10.0
+wait_time = 15.0
 one_shot = true
 
 [node name="ShootTimer" type="Timer" parent="HackLaser"]

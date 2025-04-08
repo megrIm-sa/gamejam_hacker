@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cassqu7o03qus"]
+
+[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="1_u37i6"]
+
+[node name="RichTextLabel" type="RichTextLabel"]
+custom_minimum_size = Vector2(0, 32)
+theme_override_fonts/normal_font = ExtResource("1_u37i6")
+theme_override_font_sizes/normal_font_size = 32
+text = "Objects1"
+scroll_active = false
+autowrap_mode = 0

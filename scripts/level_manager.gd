@@ -13,6 +13,7 @@ var current_level_index : int
 func _ready() -> void:
 	#SaveSystem.set_var("level", 0)
 	#SaveSystem.save()
+	game_hacking.level_manager = self
 	current_level_index = SaveSystem.get_var("level", 0)
 	load_level(current_level_index)
 	game_2d.restart_level.connect(restart_level)
