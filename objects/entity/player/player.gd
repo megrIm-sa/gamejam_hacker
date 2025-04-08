@@ -23,6 +23,8 @@ func _ready() -> void:
 		melt(0, 0.8)
 		await get_tree().create_timer(.8, false).timeout
 		set_physics_process(true)
+	else:
+		melt(0, 0)
 	can_be_killed = true
 	spawned.emit()
 

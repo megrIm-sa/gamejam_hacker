@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b2ufenqtjww57"]
+[gd_scene load_steps=15 format=3 uid="uid://b2ufenqtjww57"]
 
 [ext_resource type="Script" path="res://scenes/game_2d.gd" id="2_vxufa"]
 [ext_resource type="PackedScene" uid="uid://42alhwug45se" path="res://assets/sprites/effects/landing_effect.tscn" id="3_mtmcg"]
@@ -116,6 +116,9 @@ shader_parameter/brightness_boost = 1.2
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_cg5je"]
 size = Vector2(512, 512)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njihs"]
+bg_color = Color(0, 0, 0, 1)
+
 [node name="Game2D" type="Node2D"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_e1rq4")
@@ -156,6 +159,17 @@ texture = SubResource("PlaceholderTexture2D_cg5je")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_njihs")
 
 [node name="UI" type="Control" parent="CanvasLayer"]
 z_index = 2

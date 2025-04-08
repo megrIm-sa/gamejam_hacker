@@ -73,6 +73,7 @@ transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, 
 
 [node name="MusicPlayer" type="AudioStreamPlayer3D" parent="Game3D/Monitor1"]
 unique_name_in_owner = true
+process_mode = 3
 transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 0.1, 0, 0.1)
 autoplay = true
 max_distance = 20.0

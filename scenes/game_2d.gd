@@ -27,6 +27,7 @@ func spawn_player(pos : Vector2 = Vector2.ZERO, first_time : bool = false) -> vo
 
 func new_level(new_level : Level) -> void:
 	if level:
+		show_new_level_panel()
 		level.queue_free()
 	delete_player()
 	await get_tree().process_frame
@@ -71,3 +72,12 @@ func show_crt_effect(show : bool) -> void:
 
 func show_gravity_button() -> void:
 	$"CanvasLayer/UI/2DControls/GravityButton".show()
+
+
+func show_new_level_panel() -> void:
+	$CanvasLayer/Panel.visible = true
+	var tween : Tween = create_tween()
+	tween.tween_property($CanvasLayer/Panel, "modulate", Color(1,1,1,1), 0)
+	tween.tween_property($CanvasLayer/Panel, "modulate", Color(1,1,1,0), 0.5)
+	await tween.finished
+	$CanvasLayer/Panel.visible = false

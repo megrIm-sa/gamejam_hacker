@@ -15,7 +15,7 @@ func _ready():
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if is_physics_processing() and body is Player:
+	if body is Player:
 		label.visible = true
 		label.visible_characters = 0
 		if tween:
@@ -25,7 +25,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_body_exited(body: Node2D) -> void:
-	if is_physics_processing() and body is Player:
+	if body is Player:
 		if tween:
 			tween.kill()
 		tween = create_tween()

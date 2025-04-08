@@ -12,7 +12,7 @@ var attacks : Array[Callable] = [_spawn_agents, _shoot_laser]
 func _ready() -> void:
 	$AttackTimer.timeout.connect(_attack)
 	material.set("shader_parameter/progress", 0.0)
-	
+
 
 func _process(delta: float) -> void:
 	if !$AttackTimer.is_stopped():
@@ -37,8 +37,9 @@ func _attack() -> void:
 func _shoot_laser() -> void:
 	$Sprite2D.frame = 2
 	$AnimationPlayer.current_animation = "RESET"
-	await get_tree().create_timer(2, false).timeout
 	
+	await get_tree().create_timer(2, false).timeout
+	$LaserAudio.play()
 	var left_laser = $LaserLineLeft
 	var right_laser = $LaserLineRight
 	
@@ -113,6 +114,7 @@ func _spawn_agents() -> void:
 
 func _spawn_agent() -> void:
 	var agent : Agent = agent_scene.instantiate()
+	$SpawnAudio.play()
 	agent.position = position
 	agent.stop_time = randf_range(0, 1)
 	get_parent().add_child(agent)
@@ -126,6 +128,13 @@ func damage() -> void:
 	health -= 1
 	print((4-health)/40.0)
 	material.set("shader_parameter/progress", (4-health)/40.0)
+	await get_tree().create_timer(0.5, false).timeout
+	$HitAudio.play()
 	if health <= 0:
-		await get_tree().create_timer(2, false).timeout
-		get_parent().level_finished.emit()
+		await get_tree().create_timer(1.5, false).timeout
+		$AnimationPlayer.play("end_game")
+
+
+func _end_game():
+	get_parent().level_finished.emit()
+	
