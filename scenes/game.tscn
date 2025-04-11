@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dwceffvysxjua"]
+[gd_scene load_steps=30 format=3 uid="uid://dwceffvysxjua"]
 
 [ext_resource type="PackedScene" uid="uid://b2ufenqtjww57" path="res://scenes/game_2d.tscn" id="1_8qici"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_n7sgo"]
@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://bfb2aoxairly6" path="res://scenes/levels/level_boss2.tscn" id="9_ylwo8"]
 [ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="11_tfwat"]
 [ext_resource type="Script" path="res://scripts/text_with_url.gd" id="12_foclg"]
+[ext_resource type="Texture2D" uid="uid://djkps083v7hav" path="res://assets/unitedkingdom.png" id="18_30mxq"]
+[ext_resource type="Script" path="res://scenes/language_button.gd" id="19_j1ast"]
+[ext_resource type="Script" path="res://scenes/block_canvas_layer.gd" id="20_grfgw"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_yti8e"]
 viewport_path = NodePath("Game3D/Monitor1/SubViewport")
@@ -51,6 +54,9 @@ border_width_right = 8
 border_width_bottom = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4fp25"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_177om"]
 bg_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node"]
@@ -182,20 +188,18 @@ theme_override_constants/separation = 32
 custom_minimum_size = Vector2(128, 72)
 layout_mode = 2
 focus_mode = 0
-theme_override_fonts/font = ExtResource("11_tfwat")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxFlat_6e5ci")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6e5ci")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_6e5ci")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6e5ci")
-text = "Play"
+text = "UI_PLAY"
 
 [node name="CreditsButton" type="Button" parent="Menu/Control/VBoxContainer"]
 custom_minimum_size = Vector2(128, 72)
 layout_mode = 2
 focus_mode = 0
-theme_override_fonts/font = ExtResource("11_tfwat")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxFlat_6e5ci")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6e5ci")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_6e5ci")
@@ -206,8 +210,7 @@ text = "About"
 custom_minimum_size = Vector2(128, 72)
 layout_mode = 2
 focus_mode = 0
-theme_override_fonts/font = ExtResource("11_tfwat")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxFlat_6e5ci")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6e5ci")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_6e5ci")
@@ -316,6 +319,27 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_6e5ci")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6e5ci")
 text = "Close"
 
+[node name="LanguageButton" type="TextureButton" parent="Menu/Control"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 80.0
+texture_normal = ExtResource("18_30mxq")
+stretch_mode = 0
+script = ExtResource("19_j1ast")
+
+[node name="BlockCanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("20_grfgw")
+
+[node name="Panel" type="Panel" parent="BlockCanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_177om")
+
 [connection signal="pressed" from="Menu/Control/VBoxContainer/PlayButton" to="." method="_show_game2d"]
 [connection signal="pressed" from="Menu/Control/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="Menu/Control/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
@@ -323,3 +347,4 @@ text = "Close"
 [connection signal="meta_clicked" from="Menu/Control/Credits/VBoxContainer/HBoxContainer/RichTextLabel" to="Menu/Control/Credits/VBoxContainer/HBoxContainer/RichTextLabel" method="_on_rich_text_label_meta_clicked"]
 [connection signal="meta_clicked" from="Menu/Control/Credits/VBoxContainer/HBoxContainer/RichTextLabel2" to="Menu/Control/Credits/VBoxContainer/HBoxContainer/RichTextLabel2" method="_on_rich_text_label_meta_clicked"]
 [connection signal="pressed" from="Menu/Control/Credits/CloseCreditsButton" to="." method="_on_close_credits_button_pressed"]
+[connection signal="pressed" from="Menu/Control/LanguageButton" to="Menu/Control/LanguageButton" method="_on_pressed"]

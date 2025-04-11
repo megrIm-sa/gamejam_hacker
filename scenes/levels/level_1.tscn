@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://bmuy1sumvi6kl"]
+[gd_scene load_steps=21 format=4 uid="uid://bmuy1sumvi6kl"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_gerax"]
 [ext_resource type="Texture2D" uid="uid://mdj15eooh533" path="res://assets/sprites/backgrounds/1.png" id="2_x1kgh"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://du60fw7agxyvy" path="res://assets/sprites/props/boxes.png" id="13_xgfdh"]
 [ext_resource type="Script" path="res://scripts/hint_area.gd" id="14_1o62u"]
 [ext_resource type="Texture2D" uid="uid://cshcggns8jaso" path="res://assets/sprites/props/barrels.png" id="15_0unx7"]
-[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="15_2irht"]
 [ext_resource type="AudioStream" uid="uid://bprrsejyrt3it" path="res://assets/music/cyber2.ogg" id="16_qf6lg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gxec"]
@@ -360,8 +359,8 @@ offset_right = 112.0
 offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("15_2irht")
-text = "Buttons can activate objects"
+theme_override_font_sizes/font_size = 8
+text = "HINT_LEVEL1_1"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -387,8 +386,8 @@ offset_right = 56.0
 offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("15_2irht")
-text = "Distorted objects can be edited via the second monitor"
+theme_override_font_sizes/font_size = 8
+text = "HINT_LEVEL1_2"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3

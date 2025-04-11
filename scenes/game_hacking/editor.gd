@@ -2,9 +2,14 @@ extends Control
 
 var current_object_id: String = ""
 
+func _ready() -> void:
+	match OS.get_name():
+		"Web":
+			%Output.hide()
+
 
 func default_editor() -> void:
-	$RichTextLabel.text = "[center]Select an object to edit"
+	$RichTextLabel.text = tr("UI_OBJECT_SELECT")
 	for i in $HBoxContainer.get_children():
 		i.queue_free()
 	await get_tree().process_frame
@@ -12,8 +17,8 @@ func default_editor() -> void:
 
 func open_editor_for(object_id: String) -> void:
 	current_object_id = object_id
-	$RichTextLabel.text = "[center]Editing: [color=yellow]" + object_id
-
+	$RichTextLabel.text = tr("UI_OBJECT_SELECTED") + tr(object_id)
+	
 	var container = $HBoxContainer
 	for i in container.get_children():
 		i.queue_free()

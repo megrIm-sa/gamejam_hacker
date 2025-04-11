@@ -7,14 +7,37 @@ func _ready() -> void:
 	#%Game2D.pause_mode = Node.PAUSE_MODE_PROCESS
 	#%GameHacking.pause_mode = Node.PAUSE_MODE_PROCESS
 	#$Menu.pause_mode = Node.PAUSE_MODE_PROCESS
-
+	$Menu/Control/VBoxContainer/CreditsButton.hide()
+	$Menu/Control/VBoxContainer/ExitButton.hide()
+	
 	%Game2D.show_crt_effect(true)
 	get_tree().paused = true
-
+	
 	%GameHacking.play_pressed.connect(_show_game2d)
 	%GameHacking.restart_pressed.connect(restart)
 	%GameHacking.menu_pressed.connect(_show_menu)
 	%Game2D.hack_pressed.connect(_show_game_hacking)
+	
+	await get_tree().process_frame
+	get_window().focus_entered.connect(func() -> void:
+		print("focus in signal 1")
+		AudioServer.set_bus_mute(0, false)
+	)
+	get_window().focus_exited.connect(func() -> void:
+		print("focus out signal 1")
+		AudioServer.set_bus_mute(0, true)
+	)
+	
+
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_WM_WINDOW_FOCUS_IN:
+			print("focus in signal 2")
+			AudioServer.set_bus_mute(0, false)
+		NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+			print("focus out signal 2")
+			AudioServer.set_bus_mute(0, true)
 
 
 func _show_game2d() -> void:

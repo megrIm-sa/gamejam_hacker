@@ -96,9 +96,8 @@ offset_top = 8.0
 offset_right = 42.0
 offset_bottom = 40.0
 grow_horizontal = 2
-theme_override_fonts/normal_font = ExtResource("1_21isl")
-theme_override_font_sizes/normal_font_size = 32
-text = "Objects"
+theme_override_font_sizes/normal_font_size = 16
+text = "UI_OBJECTS"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -137,6 +136,7 @@ grow_vertical = 2
 theme_override_constants/separation = 32
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Control/ButtonsContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_21isl")
 theme_override_font_sizes/font_size = 32
@@ -147,20 +147,18 @@ custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 focus_mode = 0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_fonts/font = ExtResource("1_21isl")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_q16gc")
-text = "Play"
+text = "UI_PLAY"
 
 [node name="RestartButton" type="Button" parent="HBoxContainer/VBoxContainer/Control/ButtonsContainer"]
 custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 focus_mode = 0
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_21isl")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_q16gc")
-text = "Restart"
+text = "UI_RESTART"
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer/VBoxContainer/Control/ButtonsContainer"]
 layout_mode = 2
@@ -170,10 +168,9 @@ custom_minimum_size = Vector2(128, 32)
 layout_mode = 2
 focus_mode = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("1_21isl")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_q16gc")
-text = "Menu"
+text = "UI_MENU"
 
 [node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer/Control/ButtonsContainer"]
 visible = false
@@ -237,10 +234,10 @@ offset_right = 288.0
 offset_bottom = -113.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("1_21isl")
-theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[center]Select an object to edit"
+text = "
+"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -265,7 +262,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource("3_qir6j")
 
 [node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/Output"]
 layout_mode = 1

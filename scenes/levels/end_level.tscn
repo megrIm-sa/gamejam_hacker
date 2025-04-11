@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://chm3rn10xqaya"]
+[gd_scene load_steps=5 format=3 uid="uid://chm3rn10xqaya"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_bwqqj"]
-[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="2_pyaga"]
 [ext_resource type="Script" path="res://scenes/levels/restart_button.gd" id="3_pwivb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06u7i"]
@@ -37,9 +36,9 @@ offset_right = 456.0
 offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("2_pyaga")
-theme_override_font_sizes/normal_font_size = 128
-text = "Thanks for playing!"
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "UI_THANKS"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -57,8 +56,7 @@ offset_right = 128.0
 offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_pyaga")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_5lw33")
-text = "Play again"
+text = "UI_PLAY_AGAIN"
 script = ExtResource("3_pwivb")

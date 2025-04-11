@@ -11,6 +11,20 @@ var player : Player
 
 func _ready() -> void:
 	$CanvasLayer/UI/GoToHackingButton.pressed.connect(hack_pressed.emit)
+	match OS.get_name():
+		"Web":
+			var is_touch = JavaScriptBridge.eval("('ontouchstart' in window) || (navigator.maxTouchPoints > 0)", true)
+			print("Touchscreen доступен (JS): ", is_touch)
+			if is_touch == 0:
+				$"CanvasLayer/UI/2DControls/LeftButton".hide()
+				$"CanvasLayer/UI/2DControls/RightButton".hide()
+				$"CanvasLayer/UI/2DControls/JumpButton".hide()
+				$"CanvasLayer/UI/2DControls/GravityButton".position = $"CanvasLayer/UI/2DControls/JumpButton".position
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.keycode == KEY_TAB:
+		hack_pressed.emit()
 
 
 func spawn_player(pos : Vector2 = Vector2.ZERO, first_time : bool = false) -> void:

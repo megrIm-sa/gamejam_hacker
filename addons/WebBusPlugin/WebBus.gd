@@ -4,10 +4,8 @@ signal _SDK_inited
 signal reward_added
 signal ad_closed
 signal ad_error
-signal ad_started
-signal focused
-signal unfocused
-
+signal ad_started 
+signal on_info_set
 
 var _adCallbacks:JavaScriptObject
 var _adRewardCallbacks:JavaScriptObject
@@ -26,8 +24,7 @@ var CrazySDK:JavaScriptObject
 var GameDistSDK:JavaScriptObject
 var PokiSDK:JavaScriptObject
 
-var system_info := {}
-var user_info := {}
+var info := {}
 
 const LANGUAGE_CODES = {'AF': 'uz', 'AX': 'sv', 'AL': 'en', 'DZ': 'kab',
  'AS': 'en', 'AD': 'en', 'AO': 'pt', 'AI': 'es', 'AG': 'es', 'AR': 'es',
@@ -78,6 +75,8 @@ enum Platform {YANDEX, CRAZY, GAMEDISTRIBUTION, POKI}
 var platform : int
 
 signal _inited
+signal _system_info_recieved
+var system_info
 
 
 #region _ready
@@ -85,7 +84,6 @@ func _ready() -> void:
 	match OS.get_name():
 		"Web":
 			window = JavaScriptBridge.get_interface("window")
-			_set_pause_signal()
 			_adCallbacks = JavaScriptBridge.create_object("Object")
 			_adRewardCallbacks = JavaScriptBridge.create_object("Object")
 			_adStartedCallback = JavaScriptBridge.create_callback(_adStarted)
@@ -96,19 +94,14 @@ func _ready() -> void:
 			match window.platform:
 				"yandex":
 					platform = Platform.YANDEX
-					system_info.platform = "yandex"
 				"crazy":
 					platform = Platform.CRAZY
-					system_info.platform = "crazy"
 				"gamedistribution":
 					platform = Platform.GAMEDISTRIBUTION
-					system_info.platform = "gamedistribution"
 				"poki":
 					platform = Platform.POKI
-					system_info.platform = "poki"
 				_:
 					platform = -1
-					system_info.platform = "unknowm"
 					print("Unknown platform")
 					return
 			match platform:
@@ -179,9 +172,8 @@ func _ready() -> void:
 					_SDK_inited.emit()
 					print('gd init poki')
 			_get_info()
-			_get_user_info()
-				
-				
+
+
 func _get_info() -> void:
 	var lang:String
 	var type:String
@@ -200,60 +192,10 @@ func _get_info() -> void:
 		_:
 			lang = "unknown"
 			type = "unknown"
-	system_info["language"] = lang
-	system_info["device_type"] = type
+	info["language"] = lang
+	info["device_type"] = type
+	on_info_set.emit()
 
-
-signal _getted_player(player:JavaScriptObject)
-
-var _callback_get_player = JavaScriptBridge.create_callback(func(args):
-	_getted_player.emit(args[0])
-	)
-
-func _get_user_info():
-	user_info.player_name = ""
-	user_info.avatar = ""
-	match platform:
-		Platform.YANDEX:
-			YandexSDK.getPlayer().then(_callback_get_player)
-			var player = await _getted_player
-			var name = player.getName()
-			if name:
-				user_info.player_name = name
-				user_info.avatar = player.getPhoto("medium")
-		Platform.CRAZY:
-			if CrazySDK.user.isUserAccountAvailable:
-				CrazySDK.user.getUser().then(_callback_get_player)
-				var player = await _getted_player
-				if player:
-					user_info.player_name = player.username
-					user_info.avatar = player.profilePictureUrl
-	
-	
-var is_focus:bool = true
-var _callback_w_p = JavaScriptBridge.create_callback(func(_args):
-	unfocused.emit()
-	is_focus = false
-	)
-var _callback_w_f = JavaScriptBridge.create_callback(func(_args):
-	focused.emit()
-	is_focus = true
-	)
-	
-var document = JavaScriptBridge.get_interface("document")
-var _listner = JavaScriptBridge.create_callback(func(_args):
-	if document.hidden and is_focus:
-		unfocused.emit()
-	elif !document.hidden and !is_focus:
-		focused.emit()
-	is_focus = !is_focus
-	)
-	
-func _set_pause_signal() -> void:
-	window.addEventListener("focus", _callback_w_f)
-	window.addEventListener("blur", _callback_w_p)
-	
-	document.addEventListener('visibilitychange', _listner)
 
 #endregion
 #region Ads
@@ -410,7 +352,7 @@ func start_gameplay():
 				await _SDK_inited
 			PokiSDK.gameplayStart()
 		Platform.GAMEDISTRIBUTION:
-			pass #TODO
+			pass #TODO0
 		_:
 			push_warning("Platform not supported")
 			return
@@ -431,7 +373,7 @@ func stop_gameplay():
 				await _SDK_inited
 			PokiSDK.gameplayStop()
 		Platform.GAMEDISTRIBUTION:
-			pass #TODO
+			pass #TODO0
 		_:
 			push_warning("Platform not supported")
 			return
@@ -455,9 +397,11 @@ func ready():
 		Platform.GAMEDISTRIBUTION:
 			while not GameDistSDK:
 				await _SDK_inited
-			pass #TODO
+			pass #TODO0
 		_:
 			push_warning("Platform not supported")
+	print("GODOT READY")
+
 
 			
 #endregion
@@ -662,18 +606,18 @@ func get_platform() -> String:
 
 func get_language() -> String:
 	if OS.get_name() == "Web":
-		if system_info:
-			print("language from sdk:", system_info["language"])
-			return system_info["language"]
+		if info:
+			print("language from sdk:", info["language"])
+			return info["language"]
 		return "unknown"
 	return "unknown"
 
 
 func get_type_device() -> String:
 	if OS.get_name() == "Web":
-		if system_info:
-			print("type device from sdk:", system_info["device_type"])
-			return system_info["device_type"]
+		if info:
+			print("type device from sdk:", info["device_type"])
+			return info["device_type"]
 		return "unknown"
 	return "unknown"
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://wgxgyq71bj74"]
+[gd_scene load_steps=16 format=4 uid="uid://wgxgyq71bj74"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_kkr4b"]
 [ext_resource type="AudioStream" uid="uid://bprrsejyrt3it" path="res://assets/music/cyber2.ogg" id="2_yqkvp"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://objects/interactive/gravity_module.gd" id="6_exmkq"]
 [ext_resource type="PackedScene" uid="uid://du2d5ltnowyow" path="res://objects/interactive/end_level_teleport.tscn" id="7_qmg5s"]
 [ext_resource type="PackedScene" uid="uid://djydnu60jaytr" path="res://objects/entity/agent/agent.tscn" id="9_6ysgq"]
-[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="11_uty1a"]
 [ext_resource type="PackedScene" uid="uid://de74nxses27o4" path="res://objects/interactive/spikes.tscn" id="12_ttm5s"]
 [ext_resource type="PackedScene" uid="uid://dxbrqtudlehj8" path="res://objects/interactive/control_panel.tscn" id="13_nr37h"]
 [ext_resource type="PackedScene" uid="uid://in0voq6dwn6d" path="res://objects/interactive/button.tscn" id="14_1wfuc"]
@@ -196,9 +195,9 @@ offset_right = 56.0
 offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("11_uty1a")
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[center][wave]Gravity module detected!"
+text = "HINT_LEVEL5_1"
 fit_content = true
 scroll_active = false
 

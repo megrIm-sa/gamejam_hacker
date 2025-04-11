@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://dg2jv4kjesk7d"]
+[gd_scene load_steps=22 format=4 uid="uid://dg2jv4kjesk7d"]
 
 [ext_resource type="Script" path="res://scenes/levels/boss_level.gd" id="1_852s1"]
 [ext_resource type="AudioStream" uid="uid://deq8ftnwcyvr2" path="res://assets/music/anticheat.ogg" id="2_1ke8n"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://de74nxses27o4" path="res://objects/interactive/spikes.tscn" id="9_hw60i"]
 [ext_resource type="PackedScene" uid="uid://dmpy3ffkjsm5b" path="res://objects/entity/boss/runner_boss.tscn" id="11_4yd1d"]
 [ext_resource type="Texture2D" uid="uid://bjurkglifls1y" path="res://assets/sprites/objects/end_level_teleport.png" id="12_t52wq"]
-[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="15_icftu"]
 [ext_resource type="PackedScene" uid="uid://b5khx56dqysol" path="res://objects/interactive/end_level_zone.tscn" id="16_d4p7i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3dv33"]
@@ -788,10 +787,9 @@ offset_right = 240.0
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("15_icftu")
-theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[center][shake rate=20.0 level=20 -connected=1]RUN!"
+text = "HINT_RUN"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
