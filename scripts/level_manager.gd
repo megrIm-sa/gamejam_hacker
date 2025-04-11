@@ -31,18 +31,19 @@ func _ad_started():
 func _ad_closed():
 	AudioServer.set_bus_mute(0, false)
 	get_tree().paused = false
+	print("Ad closed")
 
 
 func _ad_error():
 	push_warning("ad_error")
 	AudioServer.set_bus_mute(0, false)
 	get_tree().paused = false
+	print("Ad error")
 
 
 func _on_locale_change() -> void:
 	if game_2d.level:
 		game_hacking.replace_object_buttons(game_2d.level.hackable_objects_methods)
-
 
 
 func _input(event: InputEvent) -> void:
@@ -67,7 +68,7 @@ func load_level(level_index : int) -> void:
 
 
 func next_level() -> void:
-	WebBus.show_ad()
+	#WebBus.show_ad()
 	if current_level_index >= levels.size()-1:
 		current_level_index = 0
 	else:

@@ -7,6 +7,7 @@ UI_OBJECT_SELECT;[center]Select an object to edit;[center]Выбери объе�
 UI_OBJECT_SELECTED;[center]Editing: [color=yellow];[center]Редактируется: [color=yellow]
 UI_PLAY_AGAIN;Play again;Играть заново
 UI_THANKS;[center]Thanks for playing!;[center]Спасибо за игру!
+AD_ALERT;Ad in: ;Реклама через:
 floor_gate1;;люк
 moving_platform;;движущаяся_платформа
 bridge1;;мост1

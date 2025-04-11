@@ -1,6 +1,7 @@
 extends Node
 
 var tween : Tween
+@onready var alert_timer = $AdAlertTimer
 
 
 func _ready() -> void:
@@ -18,6 +19,7 @@ func _ready() -> void:
 	%GameHacking.menu_pressed.connect(_show_menu)
 	%Game2D.hack_pressed.connect(_show_game_hacking)
 	
+	$ShowAdTimer.timeout.connect(show_ad)
 	await get_tree().process_frame
 	get_window().focus_entered.connect(func() -> void:
 		print("focus in signal 1")
@@ -27,7 +29,6 @@ func _ready() -> void:
 		print("focus out signal 1")
 		AudioServer.set_bus_mute(0, true)
 	)
-	
 
 
 func _notification(what: int) -> void:
@@ -40,12 +41,29 @@ func _notification(what: int) -> void:
 			AudioServer.set_bus_mute(0, true)
 
 
+func show_ad() -> void:
+	print("show add")
+	get_tree().paused = true
+	$BlockCanvasLayer/AdAlertPanel.show()
+	$BlockCanvasLayer.show()
+	alert_timer.start()
+	await alert_timer.timeout
+	WebBus.show_ad()
+	$BlockCanvasLayer/AdAlertPanel.hide()
+	$BlockCanvasLayer.hide()
+
+
+func _process(delta: float) -> void:
+	if !alert_timer.is_stopped():
+		$BlockCanvasLayer/AdAlertPanel/RichTextLabel.text = tr("AD_ALERT") + ": " + str(int(alert_timer.time_left))
+
+
 func _show_game2d() -> void:
 	$Menu.hide()
 	%Game3D.show()
 	get_tree().paused = true
 	%GameHacking.reparent($Game3D/Monitor2/SubViewport)
-
+	
 	if tween:
 		tween.kill()
 	tween = create_tween()
@@ -53,7 +71,7 @@ func _show_game2d() -> void:
 	tween.tween_property($Game3D/Camera3D, "position", Vector3(-3.5, 0, 3), 0.25)
 	tween.parallel().tween_property($Game3D/Camera3D, "rotation", Vector3(0, deg_to_rad(100), 0), 0.25)
 	tween.tween_property($Game3D/Camera3D, "fov", 45, 0.3)
-
+	
 	await tween.finished
 	print("unpause")
 	get_tree().paused = false
