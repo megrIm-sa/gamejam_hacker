@@ -31,6 +31,7 @@ func _ad_started():
 func _ad_closed():
 	AudioServer.set_bus_mute(0, false)
 	get_tree().paused = false
+	get_window().grab_focus()
 	print("Ad closed")
 
 
@@ -38,6 +39,7 @@ func _ad_error():
 	push_warning("ad_error")
 	AudioServer.set_bus_mute(0, false)
 	get_tree().paused = false
+	get_window().grab_focus()
 	print("Ad error")
 
 

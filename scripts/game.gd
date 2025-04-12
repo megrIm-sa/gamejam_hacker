@@ -55,7 +55,7 @@ func show_ad() -> void:
 
 func _process(delta: float) -> void:
 	if !alert_timer.is_stopped():
-		$BlockCanvasLayer/AdAlertPanel/RichTextLabel.text = tr("AD_ALERT") + ": " + str(int(alert_timer.time_left))
+		$BlockCanvasLayer/AdAlertPanel/RichTextLabel.text = tr("AD_ALERT") + " " + str(int(alert_timer.time_left))
 
 
 func _show_game2d() -> void:
