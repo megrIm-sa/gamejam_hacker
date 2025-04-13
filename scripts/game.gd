@@ -1,13 +1,9 @@
 extends Node
 
 var tween : Tween
-@onready var alert_timer = $AdAlertTimer
 
 
 func _ready() -> void:
-	#%Game2D.pause_mode = Node.PAUSE_MODE_PROCESS
-	#%GameHacking.pause_mode = Node.PAUSE_MODE_PROCESS
-	#$Menu.pause_mode = Node.PAUSE_MODE_PROCESS
 	$Menu/Control/VBoxContainer/CreditsButton.hide()
 	$Menu/Control/VBoxContainer/ExitButton.hide()
 	
@@ -17,9 +13,12 @@ func _ready() -> void:
 	%GameHacking.play_pressed.connect(_show_game2d)
 	%GameHacking.restart_pressed.connect(restart)
 	%GameHacking.menu_pressed.connect(_show_menu)
-	%Game2D.hack_pressed.connect(_show_game_hacking)
+	%Game2D.hack_pressed.connect(show_ad)
 	
-	$ShowAdTimer.timeout.connect(show_ad)
+	WebBus.ad_closed.connect(_ad_closed)
+	WebBus.ad_error.connect(_ad_error)
+	WebBus.ad_started.connect(_ad_started)
+	
 	await get_tree().process_frame
 	get_window().focus_entered.connect(func() -> void:
 		print("focus in signal 1")
@@ -43,19 +42,34 @@ func _notification(what: int) -> void:
 
 func show_ad() -> void:
 	print("show add")
-	get_tree().paused = true
-	$BlockCanvasLayer/AdAlertPanel.show()
-	$BlockCanvasLayer.show()
-	alert_timer.start()
-	await alert_timer.timeout
-	WebBus.show_ad()
-	$BlockCanvasLayer/AdAlertPanel.hide()
-	$BlockCanvasLayer.hide()
+	if $AdIntervalTimer.is_stopped():
+		get_tree().paused = true
+		WebBus.show_ad()
+	else:
+		_show_game_hacking()
 
 
-func _process(delta: float) -> void:
-	if !alert_timer.is_stopped():
-		$BlockCanvasLayer/AdAlertPanel/RichTextLabel.text = tr("AD_ALERT") + " " + str(int(alert_timer.time_left))
+func _ad_started():
+	AudioServer.set_bus_mute(0, true)
+
+
+func _ad_closed():
+	AudioServer.set_bus_mute(0, false)
+	get_tree().paused = false
+	get_window().grab_focus()
+	_show_game_hacking()
+	$AdIntervalTimer.start()
+	print("Ad closed")
+
+
+func _ad_error():
+	push_warning("ad_error")
+	AudioServer.set_bus_mute(0, false)
+	get_tree().paused = false
+	get_window().grab_focus()
+	_show_game_hacking()
+	$AdIntervalTimer.start()
+	print("Ad error")
 
 
 func _show_game2d() -> void:
@@ -85,7 +99,7 @@ func _show_game_hacking() -> void:
 	get_tree().paused = true
 	%Game2D.reparent($Game3D/Monitor1/SubViewport)
 	%Game2D.show_crt_effect(true)
-
+	
 	if tween:
 		tween.kill()
 	tween = create_tween()
@@ -93,7 +107,7 @@ func _show_game_hacking() -> void:
 	tween.tween_property($Game3D/Camera3D, "position", Vector3(-3.5, 0, -3), 0.25)
 	tween.parallel().tween_property($Game3D/Camera3D, "rotation", Vector3(0, deg_to_rad(80), 0), 0.25)
 	tween.tween_property($Game3D/Camera3D, "fov", 45, 0.3)
-
+	
 	await tween.finished
 	get_tree().paused = false
 	%Game3D.hide()
@@ -104,14 +118,14 @@ func _show_menu() -> void:
 	%Game3D.show()
 	get_tree().paused = true
 	%GameHacking.reparent($Game3D/Monitor2/SubViewport)
-
+	
 	if tween:
 		tween.kill()
 	tween = create_tween()
 	tween.tween_property($Game3D/Camera3D, "fov", 75, 0.25)
 	tween.tween_property($Game3D/Camera3D, "position", Vector3(0, 0, 0), 0.25)
 	tween.parallel().tween_property($Game3D/Camera3D, "rotation", Vector3(0, deg_to_rad(90), 0), 0.25)
-
+	
 	await tween.finished
 	$Menu.show()
 
@@ -120,14 +134,14 @@ func restart() -> void:
 	%Game3D.show()
 	get_tree().paused = true
 	%GameHacking.reparent($Game3D/Monitor2/SubViewport)
-
+	
 	if tween:
 		tween.kill()
 	tween = create_tween()
 	tween.tween_property($Game3D/Camera3D, "fov", 75, 0.25)
 	tween.tween_property($Game3D/Camera3D, "position", Vector3(0, 0, 0), 0.25)
 	tween.parallel().tween_property($Game3D/Camera3D, "rotation", Vector3(0, deg_to_rad(90), 0), 0.25)
-
+	
 	await tween.finished
 	%LevelManager.restart_level()
 	_show_game2d()
