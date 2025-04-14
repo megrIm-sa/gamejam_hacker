@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://bmuy1sumvi6kl"]
+[gd_scene load_steps=26 format=4 uid="uid://bmuy1sumvi6kl"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_gerax"]
 [ext_resource type="Script" path="res://resources/hackable_object.gd" id="2_jvxy5"]
@@ -20,10 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://cshcggns8jaso" path="res://assets/sprites/props/barrels.png" id="15_0unx7"]
 [ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="15_2irht"]
 [ext_resource type="AudioStream" uid="uid://bprrsejyrt3it" path="res://assets/music/cyber2.ogg" id="16_qf6lg"]
+[ext_resource type="PackedScene" uid="uid://cuccwco1at3f1" path="res://objects/dialog_area.tscn" id="21_imrdb"]
 
 [sub_resource type="Resource" id="Resource_urf1n"]
 script = ExtResource("2_jvxy5")
 id = "gate"
+unlocked = true
 node_paths = Array[NodePath]([NodePath("Objects/Wall7"), NodePath("Objects/Wall8"), NodePath("Objects/Wall9")])
 method_names = Array[String](["deactivate"])
 icon = ExtResource("3_ep60j")
@@ -423,6 +425,9 @@ flip_h = true
 [node name="DistortionTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="DialogArea" parent="." instance=ExtResource("21_imrdb")]
+text = "[wave][color=#00ffaa]Connection established.[/color][/wave] Beginning infiltration."
 
 [connection signal="body_entered" from="Hints/HintArea2" to="Hints/HintArea2" method="_on_body_entered"]
 [connection signal="body_exited" from="Hints/HintArea2" to="Hints/HintArea2" method="_on_body_exited"]

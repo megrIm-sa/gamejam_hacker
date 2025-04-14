@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://wgxgyq71bj74"]
+[gd_scene load_steps=23 format=4 uid="uid://wgxgyq71bj74"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_kkr4b"]
 [ext_resource type="Script" path="res://resources/hackable_object.gd" id="2_q67uk"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bdr7471cyc6yg" path="res://objects/interactive/wall.tscn" id="15_mtakq"]
 [ext_resource type="PackedScene" uid="uid://nrmvthq45gha" path="res://objects/interactive/firewall.tscn" id="16_0akyp"]
 [ext_resource type="PackedScene" uid="uid://dxqbpx56gavij" path="res://objects/hack_unlock_area.tscn" id="17_i11gn"]
+[ext_resource type="PackedScene" uid="uid://cuccwco1at3f1" path="res://objects/dialog_area.tscn" id="18_vmg54"]
 
 [sub_resource type="Resource" id="Resource_fowkn"]
 script = ExtResource("2_q67uk")
@@ -415,3 +416,11 @@ autostart = true
 [node name="HackUnlockArea" parent="." instance=ExtResource("17_i11gn")]
 position = Vector2(0, -416)
 unlock_id = "bridge"
+
+[node name="DialogArea" parent="." instance=ExtResource("18_vmg54")]
+position = Vector2(0, -896)
+text = "The [color=orange]firewall[/color] is blocking my path. [pulse color=dark_gray]I need to reach the upper level to shut it down.[/pulse]"
+
+[node name="DialogArea2" parent="." instance=ExtResource("18_vmg54")]
+position = Vector2(64, -1152)
+text = "I have to jump [wave]upside down[/wave]."

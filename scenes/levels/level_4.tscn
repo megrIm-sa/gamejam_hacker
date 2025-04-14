@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://detex5e5si0oi"]
+[gd_scene load_steps=32 format=4 uid="uid://detex5e5si0oi"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_f18li"]
 [ext_resource type="Script" path="res://resources/hackable_object.gd" id="2_2ymdn"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://du60fw7agxyvy" path="res://assets/sprites/props/boxes.png" id="17_s1tfg"]
 [ext_resource type="PackedScene" uid="uid://chd8ausk4wscx" path="res://objects/interactive/moving_laser.tscn" id="18_rrl7j"]
 [ext_resource type="PackedScene" uid="uid://dxqbpx56gavij" path="res://objects/hack_unlock_area.tscn" id="23_kp4b6"]
+[ext_resource type="PackedScene" uid="uid://cuccwco1at3f1" path="res://objects/dialog_area.tscn" id="24_7kn3j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h0u0h"]
 atlas = ExtResource("3_8fdyw")
@@ -629,3 +630,15 @@ position = Vector2(1112, -288)
 [node name="HackUnlockArea2" parent="." instance=ExtResource("23_kp4b6")]
 position = Vector2(1096, 80)
 unlock_id = "barrier"
+
+[node name="DialogArea" parent="." instance=ExtResource("24_7kn3j")]
+position = Vector2(0, -32)
+text = "Large presence of [color=yellow][shake rate=15.0]traps[/shake][/color] in this area. Better move carefully."
+
+[node name="DialogArea2" parent="." instance=ExtResource("24_7kn3j")]
+position = Vector2(1200, -256)
+text = "[color=light_blue]Another barrier.[/color] I have to disable it."
+
+[node name="DialogArea3" parent="." instance=ExtResource("24_7kn3j")]
+position = Vector2(1152, -392)
+text = "This [color=red]terminal[/color] will open the [color=light_blue]barrier.[/color]"

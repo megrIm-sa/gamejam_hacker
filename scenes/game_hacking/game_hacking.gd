@@ -36,8 +36,6 @@ func _on_menu_button_pressed() -> void:
 func replace_object_buttons(_hackable_objects : Array[HackableObject]) -> void:
 	%Editor.default_editor()
 	
-	for i in %OutputContainer.get_children():
-		i.queue_free()
 	
 	hackable_objects = _hackable_objects
 	
@@ -65,6 +63,8 @@ func _add_to_output(object_id: String, method_name: String) -> void:
 	output.text = "Method \"" + method_name + "\" executed on object \"" + object_id + "\""
 	if %OutputContainer.get_child_count() > 0:
 		%OutputContainer.get_child(%OutputContainer.get_child_count()-1).modulate = Color.WEB_GRAY
+		if %OutputContainer.get_child_count() >= 10:
+			%OutputContainer.get_child(0).queue_free()
 	%OutputContainer.add_child(output)
 	await get_tree().process_frame
 	%OutpuScroll.scroll_vertical = %OutpuScroll.get_v_scroll_bar().max_value

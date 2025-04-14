@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuccwco1at3f1"]
+
+[ext_resource type="Script" path="res://objects/dialog_area.gd" id="1_mfxvc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ce6rj"]
+size = Vector2(128, 128)
+
+[node name="DialogArea" type="Area2D"]
+position = Vector2(0, -64)
+script = ExtResource("1_mfxvc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ce6rj")
+debug_color = Color(0.68419, 0.486732, 0.339119, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

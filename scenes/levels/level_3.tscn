@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://da6igy4v6y6um"]
+[gd_scene load_steps=28 format=4 uid="uid://da6igy4v6y6um"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_ubwwi"]
 [ext_resource type="Script" path="res://resources/hackable_object.gd" id="2_55030"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://c854ph25e823u" path="res://assets/sprites/props/barrel_slug.png" id="16_65aqo"]
 [ext_resource type="Texture2D" uid="uid://du60fw7agxyvy" path="res://assets/sprites/props/boxes.png" id="17_y313c"]
 [ext_resource type="PackedScene" uid="uid://dxqbpx56gavij" path="res://objects/hack_unlock_area.tscn" id="22_2jfvr"]
+[ext_resource type="PackedScene" uid="uid://cuccwco1at3f1" path="res://objects/dialog_area.tscn" id="23_pcvlf"]
 
 [sub_resource type="Resource" id="Resource_i6qci"]
 script = ExtResource("2_55030")
@@ -416,3 +417,11 @@ autostart = true
 [node name="HackUnlockArea" parent="." instance=ExtResource("22_2jfvr")]
 position = Vector2(1378, -132)
 unlock_id = "terminal_lasers"
+
+[node name="DialogArea" parent="." instance=ExtResource("23_pcvlf")]
+position = Vector2(0, -39)
+text = "[shake rate=10.0 level=1][color=red]Protective programs spotted.[/color][/shake] I must avoid these agents."
+
+[node name="DialogArea2" parent="." instance=ExtResource("23_pcvlf")]
+position = Vector2(1216, -42)
+text = "I need to disable this [color=orange]firewall[/color]."

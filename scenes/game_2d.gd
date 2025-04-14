@@ -4,7 +4,9 @@ extends Node2D
 signal restart_level
 signal hack_pressed
 
+@export var dialog_window : Control
 @export var level : Node2D
+
 var player_scene = preload("res://objects/entity/player/player.tscn")
 var player : Player
 
