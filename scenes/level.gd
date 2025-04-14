@@ -3,8 +3,7 @@ extends Node2D
 
 signal level_finished
 
-@export var hackable_objects : Dictionary
-@export var hackable_objects_methods : Dictionary
+@export var hackable_objects : Array[HackableObject]
 @export var music : AudioStream
 @export  var spawn_pos : Vector2 = Vector2.ZERO
 @export var gravity_inverse_used : bool = false
@@ -27,15 +26,11 @@ func _ready() -> void:
 		distortion_material.shader = preload("res://objects/interactive/distortion.gdshader")
 		distortion_timer.timeout.connect(_on_distortion_timer)
 	
-	for i in hackable_objects.values():
-		if typeof(i) == TYPE_ARRAY:
-			for path in i:
-				if typeof(path) == TYPE_NODE_PATH and has_node(path):
-					var obj = get_node(path)
-					obj.material = distortion_material
-		else:
-			var obj = get_node(i)
-			obj.material = distortion_material
+	for hackable_object in hackable_objects:
+		for path in hackable_object.node_paths:
+			if typeof(path) == TYPE_NODE_PATH and has_node(path):
+				var obj = get_node(path)
+				obj.material = distortion_material
 
 
 func _on_distortion_timer() -> void:

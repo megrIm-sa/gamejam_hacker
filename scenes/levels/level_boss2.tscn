@@ -1,8 +1,10 @@
-[gd_scene load_steps=31 format=4 uid="uid://bfb2aoxairly6"]
+[gd_scene load_steps=35 format=4 uid="uid://bfb2aoxairly6"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_boss_2.gd" id="1_jrci2"]
 [ext_resource type="AudioStream" uid="uid://dm58iriq5mtm1" path="res://assets/music/anticheat2.ogg" id="2_qutyh"]
+[ext_resource type="Script" path="res://resources/hackable_object.gd" id="2_yt8eq"]
 [ext_resource type="Texture2D" uid="uid://22f71ghhp71p" path="res://assets/sprites/tilesets/level_tileset.png" id="3_qfjal"]
+[ext_resource type="Texture2D" uid="uid://daq3guq63b0xv" path="res://assets/sprites/objects/wall.png" id="3_vx7r2"]
 [ext_resource type="PackedScene" uid="uid://de74nxses27o4" path="res://objects/interactive/spikes.tscn" id="4_wieh8"]
 [ext_resource type="PackedScene" uid="uid://bdr7471cyc6yg" path="res://objects/interactive/wall.tscn" id="5_7gkl8"]
 [ext_resource type="Texture2D" uid="uid://c2vvbg5xtd8yl" path="res://assets/sprites/objects/barrier_stuff.png" id="5_vs68u"]
@@ -17,6 +19,22 @@
 [ext_resource type="Texture2D" uid="uid://bn706bxwb3gpk" path="res://assets/sprites/objects/hack_laser.png" id="11_8txf3"]
 [ext_resource type="AudioStream" uid="uid://dw4ajmhlybys5" path="res://assets/sounds/button.ogg" id="11_ywffc"]
 [ext_resource type="AudioStream" uid="uid://bhuydjf4mobsh" path="res://assets/music/anticheat_emergence.ogg" id="12_3d76k"]
+
+[sub_resource type="Resource" id="Resource_mvcq3"]
+script = ExtResource("2_yt8eq")
+id = "bridges"
+node_paths = Array[NodePath]([NodePath("Objects/Wall"), NodePath("Objects/Wall8"), NodePath("Objects/Wall2"), NodePath("Objects/Wall3"), NodePath("Objects/Wall4"), NodePath("Objects/Wall5"), NodePath("Objects/Wall6"), NodePath("Objects/Wall7")])
+method_names = Array[String](["activate", "deactivate"])
+icon = ExtResource("3_vx7r2")
+icon_rotation = 90.0
+
+[sub_resource type="Resource" id="Resource_2etgl"]
+script = ExtResource("2_yt8eq")
+id = "megahack_laser"
+node_paths = Array[NodePath]([NodePath("HackLaser")])
+method_names = Array[String](["activate"])
+icon = ExtResource("5_vs68u")
+icon_rotation = 180.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gxec"]
 texture = ExtResource("3_qfjal")
@@ -381,14 +399,7 @@ shader_parameter/threshold = 1.0
 modulate = Color(0.882353, 1, 0.882353, 1)
 texture_filter = 1
 script = ExtResource("1_jrci2")
-hackable_objects = {
-"bridge": [NodePath("Objects/Wall"), NodePath("Objects/Wall2"), NodePath("Objects/Wall3"), NodePath("Objects/Wall4"), NodePath("Objects/Wall5"), NodePath("Objects/Wall6"), NodePath("Objects/Wall8"), NodePath("Objects/Wall7")],
-"megahack_laser": NodePath("HackLaser")
-}
-hackable_objects_methods = {
-"bridge": ["activate", "deactivate"],
-"megahack_laser": ["activate"]
-}
+hackable_objects = Array[ExtResource("2_yt8eq")]([SubResource("Resource_mvcq3"), SubResource("Resource_2etgl")])
 music = ExtResource("2_qutyh")
 camera_offset = Vector2(0, -96)
 

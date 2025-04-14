@@ -150,6 +150,7 @@ bus = &"SFX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
+visible = false
 offset = Vector2(0, 1152)
 transform = Transform2D(1, 0, 0, 1, 0, 1152)
 

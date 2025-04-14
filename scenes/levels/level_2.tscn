@@ -1,7 +1,9 @@
-[gd_scene load_steps=22 format=4 uid="uid://b1hy4belj57se"]
+[gd_scene load_steps=25 format=4 uid="uid://b1hy4belj57se"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_opkdr"]
+[ext_resource type="Script" path="res://resources/hackable_object.gd" id="2_7ek5l"]
 [ext_resource type="AudioStream" uid="uid://dvjisv0kjsif0" path="res://assets/music/cyber3.ogg" id="2_8nyvo"]
+[ext_resource type="Texture2D" uid="uid://dvmn5dahmlewl" path="res://assets/sprites/objects/platform.png" id="3_acgfy"]
 [ext_resource type="PackedScene" uid="uid://cyqngla65a3b8" path="res://objects/interactive/timer_spikes.tscn" id="4_nj5w1"]
 [ext_resource type="PackedScene" uid="uid://btb071s4vorw6" path="res://objects/interactive/barrier.tscn" id="5_8ugbh"]
 [ext_resource type="PackedScene" uid="uid://in0voq6dwn6d" path="res://objects/interactive/button.tscn" id="6_sk2iy"]
@@ -15,6 +17,14 @@
 [ext_resource type="PackedScene" uid="uid://de74nxses27o4" path="res://objects/interactive/spikes.tscn" id="13_iw83f"]
 [ext_resource type="PackedScene" uid="uid://cir7grwiyqx76" path="res://objects/interactive/moving_platform.tscn" id="14_7xuvn"]
 [ext_resource type="Texture2D" uid="uid://cwcmagv5nl8i2" path="res://assets/sprites/props/computer2.png" id="15_8te73"]
+
+[sub_resource type="Resource" id="Resource_bs5g8"]
+script = ExtResource("2_7ek5l")
+id = "moving_platform"
+node_paths = Array[NodePath]([NodePath("Objects/MovingPlatform")])
+method_names = Array[String](["activate", "deactivate"])
+icon = ExtResource("3_acgfy")
+icon_rotation = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gxec"]
 texture = ExtResource("7_7ucvp")
@@ -220,12 +230,7 @@ _data = {
 [node name="Level" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_opkdr")
-hackable_objects = {
-"moving_platform": NodePath("Objects/MovingPlatform")
-}
-hackable_objects_methods = {
-"moving_platform": ["activate", "deactivate"]
-}
+hackable_objects = Array[ExtResource("2_7ek5l")]([SubResource("Resource_bs5g8")])
 music = ExtResource("2_8nyvo")
 spawn_pos = Vector2(16, 1920)
 

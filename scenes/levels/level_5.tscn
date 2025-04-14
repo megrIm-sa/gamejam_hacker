@@ -1,8 +1,10 @@
-[gd_scene load_steps=17 format=4 uid="uid://wgxgyq71bj74"]
+[gd_scene load_steps=20 format=4 uid="uid://wgxgyq71bj74"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_kkr4b"]
+[ext_resource type="Script" path="res://resources/hackable_object.gd" id="2_q67uk"]
 [ext_resource type="AudioStream" uid="uid://bprrsejyrt3it" path="res://assets/music/cyber2.ogg" id="2_yqkvp"]
 [ext_resource type="Texture2D" uid="uid://22f71ghhp71p" path="res://assets/sprites/tilesets/level_tileset.png" id="3_iy53f"]
+[ext_resource type="Texture2D" uid="uid://daq3guq63b0xv" path="res://assets/sprites/objects/wall.png" id="3_oj56d"]
 [ext_resource type="PackedScene" uid="uid://cyqngla65a3b8" path="res://objects/interactive/timer_spikes.tscn" id="4_7cm76"]
 [ext_resource type="PackedScene" uid="uid://bn767mpx42h4k" path="res://objects/interactive/constant_laser.tscn" id="5_a8bw7"]
 [ext_resource type="Script" path="res://objects/interactive/gravity_module.gd" id="6_exmkq"]
@@ -14,6 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://in0voq6dwn6d" path="res://objects/interactive/button.tscn" id="14_1wfuc"]
 [ext_resource type="PackedScene" uid="uid://bdr7471cyc6yg" path="res://objects/interactive/wall.tscn" id="15_mtakq"]
 [ext_resource type="PackedScene" uid="uid://nrmvthq45gha" path="res://objects/interactive/firewall.tscn" id="16_0akyp"]
+
+[sub_resource type="Resource" id="Resource_qfghq"]
+script = ExtResource("2_q67uk")
+id = "bridge"
+node_paths = Array[NodePath]([NodePath("Objects/Wall"), NodePath("Objects/Wall2")])
+method_names = Array[String](["activate", "deactivate"])
+icon = ExtResource("3_oj56d")
+icon_rotation = 90.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gxec"]
 texture = ExtResource("3_iy53f")
@@ -165,14 +175,7 @@ sources/0 = SubResource("TileSetAtlasSource_3gxec")
 [node name="Level" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_kkr4b")
-hackable_objects = {
-"bridge1": [NodePath("Objects/Wall"), NodePath("Objects/Wall2")],
-"gravity_module": NodePath("Objects/GravityModule")
-}
-hackable_objects_methods = {
-"bridge1": ["activate", "deactivate"],
-"gravity_module": ["unlock_gravity_inverse"]
-}
+hackable_objects = Array[ExtResource("2_q67uk")]([SubResource("Resource_qfghq")])
 music = ExtResource("2_yqkvp")
 gravity_inverse_used = true
 

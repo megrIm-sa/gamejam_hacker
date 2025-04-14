@@ -1,8 +1,11 @@
-[gd_scene load_steps=21 format=4 uid="uid://da6igy4v6y6um"]
+[gd_scene load_steps=26 format=4 uid="uid://da6igy4v6y6um"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_ubwwi"]
+[ext_resource type="Script" path="res://resources/hackable_object.gd" id="2_55030"]
 [ext_resource type="AudioStream" uid="uid://3l14235hbkrm" path="res://assets/music/cyber3.2.ogg" id="2_d1nag"]
+[ext_resource type="Texture2D" uid="uid://daq3guq63b0xv" path="res://assets/sprites/objects/wall.png" id="3_f2m4o"]
 [ext_resource type="Texture2D" uid="uid://22f71ghhp71p" path="res://assets/sprites/tilesets/level_tileset.png" id="3_v70w6"]
+[ext_resource type="Texture2D" uid="uid://cve07tfmoj7jo" path="res://assets/sprites/objects/control_panel.png" id="4_bld6b"]
 [ext_resource type="PackedScene" uid="uid://cyqngla65a3b8" path="res://objects/interactive/timer_spikes.tscn" id="4_us4eu"]
 [ext_resource type="PackedScene" uid="uid://in0voq6dwn6d" path="res://objects/interactive/button.tscn" id="6_kl7dw"]
 [ext_resource type="PackedScene" uid="uid://ctwfxa8u6llnj" path="res://objects/interactive/teleport.tscn" id="7_cxh0k"]
@@ -18,6 +21,22 @@
 [ext_resource type="PackedScene" uid="uid://bn767mpx42h4k" path="res://objects/interactive/constant_laser.tscn" id="14_tuww1"]
 [ext_resource type="Texture2D" uid="uid://c854ph25e823u" path="res://assets/sprites/props/barrel_slug.png" id="16_65aqo"]
 [ext_resource type="Texture2D" uid="uid://du60fw7agxyvy" path="res://assets/sprites/props/boxes.png" id="17_y313c"]
+
+[sub_resource type="Resource" id="Resource_i6qci"]
+script = ExtResource("2_55030")
+id = "bridge"
+node_paths = Array[NodePath]([NodePath("Objects/Wall"), NodePath("Objects/Wall2"), NodePath("Objects/Wall3"), NodePath("Objects/Wall4"), NodePath("Objects/Wall5")])
+method_names = Array[String](["activate", "deactivate"])
+icon = ExtResource("3_f2m4o")
+icon_rotation = 90.0
+
+[sub_resource type="Resource" id="Resource_v588f"]
+script = ExtResource("2_55030")
+id = "terminal_lasers"
+node_paths = Array[NodePath]([NodePath("Objects/ConstantLaser"), NodePath("Objects/ConstantLaser2"), NodePath("Objects/ConstantLaser3"), NodePath("Objects/ConstantLaser4"), NodePath("Objects/ConstantLaser5"), NodePath("Objects/ConstantLaser6"), NodePath("Objects/ConstantLaser7")])
+method_names = Array[String](["activate"])
+icon = ExtResource("4_bld6b")
+icon_rotation = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3gxec"]
 texture = ExtResource("3_v70w6")
@@ -169,14 +188,7 @@ sources/0 = SubResource("TileSetAtlasSource_3gxec")
 [node name="Level" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_ubwwi")
-hackable_objects = {
-"bridge1": [NodePath("Objects/Wall"), NodePath("Objects/Wall2"), NodePath("Objects/Wall3"), NodePath("Objects/Wall4"), NodePath("Objects/Wall5")],
-"terminal_lasers": [NodePath("Objects/ConstantLaser"), NodePath("Objects/ConstantLaser2"), NodePath("Objects/ConstantLaser3"), NodePath("Objects/ConstantLaser4"), NodePath("Objects/ConstantLaser5"), NodePath("Objects/ConstantLaser6"), NodePath("Objects/ConstantLaser7")]
-}
-hackable_objects_methods = {
-"bridge1": ["activate", "deactivate"],
-"terminal_lasers": ["activate"]
-}
+hackable_objects = Array[ExtResource("2_55030")]([SubResource("Resource_i6qci"), SubResource("Resource_v588f")])
 music = ExtResource("2_d1nag")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
