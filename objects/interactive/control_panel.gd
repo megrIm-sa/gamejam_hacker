@@ -108,8 +108,10 @@ func _on_instruction_button_pressed() -> void:
 
 
 func _on_replay_button_pressed() -> void:
-	$CanvasLayer/Instruction.hide()
 	minigame.stop_game()
+	$CanvasLayer/Instruction.hide()
+	
+	await get_tree().process_frame
 	await get_tree().process_frame
 	minigame.start_new_game()
 
