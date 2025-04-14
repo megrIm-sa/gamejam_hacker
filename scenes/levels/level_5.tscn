@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://wgxgyq71bj74"]
+[gd_scene load_steps=22 format=4 uid="uid://wgxgyq71bj74"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_kkr4b"]
 [ext_resource type="Script" path="res://resources/hackable_object.gd" id="2_q67uk"]
@@ -16,11 +16,20 @@
 [ext_resource type="PackedScene" uid="uid://in0voq6dwn6d" path="res://objects/interactive/button.tscn" id="14_1wfuc"]
 [ext_resource type="PackedScene" uid="uid://bdr7471cyc6yg" path="res://objects/interactive/wall.tscn" id="15_mtakq"]
 [ext_resource type="PackedScene" uid="uid://nrmvthq45gha" path="res://objects/interactive/firewall.tscn" id="16_0akyp"]
+[ext_resource type="PackedScene" uid="uid://dxqbpx56gavij" path="res://objects/hack_unlock_area.tscn" id="17_i11gn"]
+
+[sub_resource type="Resource" id="Resource_fowkn"]
+script = ExtResource("2_q67uk")
+id = "gravity_module"
+unlocked = true
+node_paths = Array[NodePath]([NodePath("Objects/GravityModule")])
+method_names = Array[String](["unlock_gravity_inverse"])
+icon_rotation = 0.0
 
 [sub_resource type="Resource" id="Resource_qfghq"]
 script = ExtResource("2_q67uk")
 id = "bridge"
-unlocked = true
+unlocked = false
 node_paths = Array[NodePath]([NodePath("Objects/Wall"), NodePath("Objects/Wall2")])
 method_names = Array[String](["activate", "deactivate"])
 icon = ExtResource("3_oj56d")
@@ -176,7 +185,7 @@ sources/0 = SubResource("TileSetAtlasSource_3gxec")
 [node name="Level" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_kkr4b")
-hackable_objects = Array[ExtResource("2_q67uk")]([SubResource("Resource_qfghq")])
+hackable_objects = Array[ExtResource("2_q67uk")]([SubResource("Resource_fowkn"), SubResource("Resource_qfghq")])
 music = ExtResource("2_yqkvp")
 gravity_inverse_used = true
 
@@ -402,3 +411,7 @@ modulate = Color(0.627451, 0.627451, 0.627451, 1)
 [node name="DistortionTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="HackUnlockArea" parent="." instance=ExtResource("17_i11gn")]
+position = Vector2(0, -416)
+unlock_id = "bridge"

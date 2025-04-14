@@ -586,7 +586,7 @@ position = Vector2(-192, -18)
 flip_h = true
 
 [node name="EndLevelTeleport" type="Sprite2D" parent="Props"]
-position = Vector2(5616, -16)
+position = Vector2(5552, -16)
 texture = ExtResource("12_t52wq")
 
 [node name="Objects" type="Node2D" parent="."]
