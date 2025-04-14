@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://detex5e5si0oi"]
+[gd_scene load_steps=31 format=4 uid="uid://detex5e5si0oi"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_f18li"]
 [ext_resource type="Script" path="res://resources/hackable_object.gd" id="2_2ymdn"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://du2d5ltnowyow" path="res://objects/interactive/end_level_teleport.tscn" id="14_htbiw"]
 [ext_resource type="Texture2D" uid="uid://du60fw7agxyvy" path="res://assets/sprites/props/boxes.png" id="17_s1tfg"]
 [ext_resource type="PackedScene" uid="uid://chd8ausk4wscx" path="res://objects/interactive/moving_laser.tscn" id="18_rrl7j"]
+[ext_resource type="PackedScene" uid="uid://dxqbpx56gavij" path="res://objects/hack_unlock_area.tscn" id="23_kp4b6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h0u0h"]
 atlas = ExtResource("3_8fdyw")
@@ -31,6 +32,7 @@ margin = Rect2(0, -8, 0, 0)
 [sub_resource type="Resource" id="Resource_lpoet"]
 script = ExtResource("2_2ymdn")
 id = "spikes"
+unlocked = true
 node_paths = Array[NodePath]([NodePath("Objects/Spikes5"), NodePath("Objects/Spikes6"), NodePath("Objects/Spikes8")])
 method_names = Array[String](["activate", "deactivate"])
 icon = SubResource("AtlasTexture_h0u0h")
@@ -39,6 +41,7 @@ icon_rotation = 0.0
 [sub_resource type="Resource" id="Resource_jehmm"]
 script = ExtResource("2_2ymdn")
 id = "moving_platform"
+unlocked = false
 node_paths = Array[NodePath]([NodePath("Objects/MovingPlatform5")])
 method_names = Array[String](["activate", "deactivate"])
 icon = ExtResource("4_pph08")
@@ -51,6 +54,7 @@ region = Rect2(448, 0, 32, 64)
 [sub_resource type="Resource" id="Resource_qgkbu"]
 script = ExtResource("2_2ymdn")
 id = "barrier"
+unlocked = false
 node_paths = Array[NodePath]([NodePath("Objects/Barrier")])
 method_names = Array[String](["deactivate"])
 icon = SubResource("AtlasTexture_1g3bi")
@@ -618,3 +622,10 @@ position = Vector2(880, 144)
 [node name="DistortionTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="HackUnlockArea" parent="." instance=ExtResource("23_kp4b6")]
+position = Vector2(1112, -288)
+
+[node name="HackUnlockArea2" parent="." instance=ExtResource("23_kp4b6")]
+position = Vector2(1096, 80)
+unlock_id = "barrier"

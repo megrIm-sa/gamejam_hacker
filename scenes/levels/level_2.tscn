@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://b1hy4belj57se"]
+[gd_scene load_steps=26 format=4 uid="uid://b1hy4belj57se"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_opkdr"]
 [ext_resource type="Script" path="res://resources/hackable_object.gd" id="2_7ek5l"]
@@ -17,10 +17,12 @@
 [ext_resource type="PackedScene" uid="uid://de74nxses27o4" path="res://objects/interactive/spikes.tscn" id="13_iw83f"]
 [ext_resource type="PackedScene" uid="uid://cir7grwiyqx76" path="res://objects/interactive/moving_platform.tscn" id="14_7xuvn"]
 [ext_resource type="Texture2D" uid="uid://cwcmagv5nl8i2" path="res://assets/sprites/props/computer2.png" id="15_8te73"]
+[ext_resource type="PackedScene" uid="uid://dxqbpx56gavij" path="res://objects/hack_unlock_area.tscn" id="18_qrnex"]
 
 [sub_resource type="Resource" id="Resource_bs5g8"]
 script = ExtResource("2_7ek5l")
 id = "moving_platform"
+unlocked = false
 node_paths = Array[NodePath]([NodePath("Objects/MovingPlatform")])
 method_names = Array[String](["activate", "deactivate"])
 icon = ExtResource("3_acgfy")
@@ -393,3 +395,6 @@ libraries = {
 "": SubResource("AnimationLibrary_qixmd")
 }
 autoplay = "start"
+
+[node name="HackUnlockArea" parent="." instance=ExtResource("18_qrnex")]
+position = Vector2(1, 2266)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://da6igy4v6y6um"]
+[gd_scene load_steps=27 format=4 uid="uid://da6igy4v6y6um"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_ubwwi"]
 [ext_resource type="Script" path="res://resources/hackable_object.gd" id="2_55030"]
@@ -21,10 +21,12 @@
 [ext_resource type="PackedScene" uid="uid://bn767mpx42h4k" path="res://objects/interactive/constant_laser.tscn" id="14_tuww1"]
 [ext_resource type="Texture2D" uid="uid://c854ph25e823u" path="res://assets/sprites/props/barrel_slug.png" id="16_65aqo"]
 [ext_resource type="Texture2D" uid="uid://du60fw7agxyvy" path="res://assets/sprites/props/boxes.png" id="17_y313c"]
+[ext_resource type="PackedScene" uid="uid://dxqbpx56gavij" path="res://objects/hack_unlock_area.tscn" id="22_2jfvr"]
 
 [sub_resource type="Resource" id="Resource_i6qci"]
 script = ExtResource("2_55030")
 id = "bridge"
+unlocked = true
 node_paths = Array[NodePath]([NodePath("Objects/Wall"), NodePath("Objects/Wall2"), NodePath("Objects/Wall3"), NodePath("Objects/Wall4"), NodePath("Objects/Wall5")])
 method_names = Array[String](["activate", "deactivate"])
 icon = ExtResource("3_f2m4o")
@@ -33,6 +35,7 @@ icon_rotation = 90.0
 [sub_resource type="Resource" id="Resource_v588f"]
 script = ExtResource("2_55030")
 id = "terminal_lasers"
+unlocked = false
 node_paths = Array[NodePath]([NodePath("Objects/ConstantLaser"), NodePath("Objects/ConstantLaser2"), NodePath("Objects/ConstantLaser3"), NodePath("Objects/ConstantLaser4"), NodePath("Objects/ConstantLaser5"), NodePath("Objects/ConstantLaser6"), NodePath("Objects/ConstantLaser7")])
 method_names = Array[String](["activate"])
 icon = ExtResource("4_bld6b")
@@ -409,3 +412,7 @@ texture = ExtResource("17_y313c")
 [node name="DistortionTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="HackUnlockArea" parent="." instance=ExtResource("22_2jfvr")]
+position = Vector2(1378, -132)
+unlock_id = "terminal_lasers"

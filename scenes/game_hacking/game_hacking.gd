@@ -47,6 +47,8 @@ func replace_object_buttons(_hackable_objects : Array[HackableObject]) -> void:
 	await get_tree().process_frame
 	
 	for hackable_object in _hackable_objects:
+		if !hackable_object.unlocked:
+			continue
 		var button = object_button.instantiate()
 		button.get_node("RichTextLabel").text = hackable_object.id
 		button.pressed.connect(func(): _on_object_button_pressed(hackable_object))

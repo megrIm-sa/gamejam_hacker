@@ -23,6 +23,7 @@
 [sub_resource type="Resource" id="Resource_mvcq3"]
 script = ExtResource("2_yt8eq")
 id = "bridges"
+unlocked = true
 node_paths = Array[NodePath]([NodePath("Objects/Wall"), NodePath("Objects/Wall8"), NodePath("Objects/Wall2"), NodePath("Objects/Wall3"), NodePath("Objects/Wall4"), NodePath("Objects/Wall5"), NodePath("Objects/Wall6"), NodePath("Objects/Wall7")])
 method_names = Array[String](["activate", "deactivate"])
 icon = ExtResource("3_vx7r2")
@@ -31,6 +32,7 @@ icon_rotation = 90.0
 [sub_resource type="Resource" id="Resource_2etgl"]
 script = ExtResource("2_yt8eq")
 id = "megahack_laser"
+unlocked = false
 node_paths = Array[NodePath]([NodePath("HackLaser")])
 method_names = Array[String](["activate"])
 icon = ExtResource("5_vs68u")

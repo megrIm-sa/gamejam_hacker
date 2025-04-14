@@ -20,6 +20,8 @@ func _ready() -> void:
 	game_2d.get_node("Camera2D").zoom = Vector2(camera_zoom, camera_zoom)
 	game_2d.get_node("Camera2D").camera_offset = camera_offset
 	
+	for i in hackable_objects:
+		print("Unlocked: " + str(i.unlocked))
 	
 	if distortion_timer:
 		distortion_material = ShaderMaterial.new()
