@@ -327,7 +327,7 @@ position1 = Vector2(976, -32)
 position2 = Vector2(976, -160)
 
 [node name="MovingPlatform2" parent="Objects" instance=ExtResource("8_avc3e")]
-position = Vector2(1040, -88)
+position = Vector2(1040, -96)
 speed = 75.0
 stop_time = 0.1
 position1 = Vector2(1040, -32)
