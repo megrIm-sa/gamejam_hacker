@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dxbrqtudlehj8"]
+[gd_scene load_steps=17 format=3 uid="uid://dxbrqtudlehj8"]
 
 [ext_resource type="Texture2D" uid="uid://crdsvugpsiq3w" path="res://assets/sprites/objects/control_panel_idle.png" id="1_e7lpj"]
 [ext_resource type="Script" path="res://objects/interactive/control_panel.gd" id="1_i1wip"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cve07tfmoj7jo" path="res://assets/sprites/objects/control_panel.png" id="6_abvj4"]
 [ext_resource type="AudioStream" uid="uid://bttl40tm7w2lb" path="res://assets/sounds/control_panel_success.ogg" id="6_qv76w"]
 [ext_resource type="Texture2D" uid="uid://ccll3wr8idbqr" path="res://assets/sprites/ui/close.png" id="7_4px18"]
+[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="9_pweij"]
+[ext_resource type="Texture2D" uid="uid://cnstsmfir1eg7" path="res://assets/sprites/ui/replay_icon.png" id="9_r76s5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mpiyn"]
 size = Vector2(80, 32)
@@ -104,6 +106,9 @@ _data = {
 "idle_deactivated": SubResource("Animation_kpgr2")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_al4o0"]
+bg_color = Color(0, 0, 0, 1)
+
 [node name="ControlPanel" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_i1wip")
@@ -145,7 +150,6 @@ bus = &"SFX"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
-visible = false
 offset = Vector2(0, 1152)
 transform = Transform2D(1, 0, 0, 1, 0, 1152)
 
@@ -181,21 +185,62 @@ offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CloseButton" type="TextureButton" parent="CanvasLayer"]
-texture_filter = 1
+[node name="Instruction" type="Button" parent="CanvasLayer"]
+visible = false
+custom_minimum_size = Vector2(512, 512)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Instruction"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_al4o0")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Instruction"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("9_pweij")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -224.0
+offset_left = -104.0
 offset_top = 40.0
 offset_right = -64.0
-offset_bottom = 200.0
+offset_bottom = 80.0
 grow_horizontal = 0
+
+[node name="CloseButton" type="TextureButton" parent="CanvasLayer/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
 focus_mode = 0
 texture_normal = ExtResource("3_6pfnf")
 stretch_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CloseButton"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/CloseButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -209,7 +254,73 @@ grow_vertical = 2
 rotation = 3.14159
 texture = ExtResource("7_4px18")
 
+[node name="ReplayButton" type="TextureButton" parent="CanvasLayer/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+focus_mode = 0
+texture_normal = ExtResource("3_6pfnf")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/ReplayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 130.0
+offset_top = 130.0
+offset_right = 70.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+texture = ExtResource("9_r76s5")
+
+[node name="InstructionButton" type="TextureButton" parent="CanvasLayer/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+focus_mode = 0
+texture_normal = ExtResource("3_6pfnf")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/InstructionButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 152.0
+offset_top = 152.0
+offset_right = 136.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+texture = ExtResource("7_4px18")
+
+[node name="TextureRect2" type="Label" parent="CanvasLayer/VBoxContainer/InstructionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -16.0
+offset_right = -8.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+theme_override_fonts/font = ExtResource("9_pweij")
+theme_override_font_sizes/font_size = 192
+text = "?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
-[connection signal="pressed" from="CanvasLayer/CloseButton" to="." method="_close_minigame"]
+[connection signal="pressed" from="CanvasLayer/Instruction" to="." method="_on_instruction_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CloseButton" to="." method="_close_minigame"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/ReplayButton" to="." method="_on_replay_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/InstructionButton" to="." method="_on_instruction_button_pressed"]
