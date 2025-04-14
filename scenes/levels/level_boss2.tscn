@@ -574,4 +574,4 @@ one_shot = true
 one_shot = true
 
 [node name="DialogArea" parent="." instance=ExtResource("20_6qq6d")]
-text = "[color=light_blue][pulse color=turquoise]MegaHack Laser is charging.[/pulse][/color] It's my only chance to destroy [color=crimson]Anti-Cheat[/color]... I have to buy time."
+text = "[color=light_blue][pulse color=turquoise]MegaHack Laser is charging.[/pulse][/color] Only it can destroy [shake rate=15.0][color=crimson]Anti-Cheat[/color][/shake]."

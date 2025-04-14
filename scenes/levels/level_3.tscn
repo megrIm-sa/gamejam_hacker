@@ -420,7 +420,7 @@ unlock_id = "terminal_lasers"
 
 [node name="DialogArea" parent="." instance=ExtResource("23_pcvlf")]
 position = Vector2(0, -39)
-text = "[shake rate=10.0 level=1][color=red]Protective programs spotted.[/color][/shake] I must avoid these agents."
+text = "[shake rate=10.0 level=1][color=red]Security programs spotted.[/color][/shake] I must avoid these agents."
 
 [node name="DialogArea2" parent="." instance=ExtResource("23_pcvlf")]
 position = Vector2(1216, -42)
