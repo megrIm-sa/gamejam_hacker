@@ -26,12 +26,12 @@ func _on_locale_change() -> void:
 		game_hacking.replace_object_buttons(game_2d.level.hackable_objects_methods)
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed():
-		if event.keycode in range(KEY_0, KEY_9+1):
-			var index : int = event.keycode - KEY_0
-			if index < levels.size():
-				load_level(index)
+#func _input(event: InputEvent) -> void:
+	#if event is InputEventKey and event.is_pressed():
+		#if event.keycode in range(KEY_0, KEY_9+1):
+			#var index : int = event.keycode - KEY_0
+			#if index < levels.size():
+				#load_level(index)
 
 
 func load_level(level_index : int) -> void:
