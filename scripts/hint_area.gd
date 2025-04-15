@@ -21,7 +21,7 @@ func _on_body_entered(body: Node2D) -> void:
 		if tween:
 			tween.kill()
 		tween = create_tween()
-		tween.tween_property(label, "visible_characters", label.text.length(), typing_duration)
+		tween.tween_property(label, "visible_characters", tr(label.text).length(), typing_duration)
 
 
 func _on_body_exited(body: Node2D) -> void:

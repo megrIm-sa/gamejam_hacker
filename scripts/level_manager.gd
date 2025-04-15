@@ -13,10 +13,17 @@ var current_level_index : int
 func _ready() -> void:
 	#SaveSystem.set_var("level", 0)
 	#SaveSystem.save()
+	$"../Menu/Control/LanguageButton".locale_changeed.connect(_on_locale_change)
+	
 	game_hacking.level_manager = self
 	current_level_index = SaveSystem.get_var("level", 0)
 	load_level(current_level_index)
 	game_2d.restart_level.connect(restart_level)
+
+
+func _on_locale_change() -> void:
+	if game_2d.level:
+		game_hacking.replace_object_buttons(game_2d.level.hackable_objects_methods)
 
 
 func _input(event: InputEvent) -> void:
@@ -40,8 +47,8 @@ func load_level(level_index : int) -> void:
 	game_hacking.replace_object_buttons(level.hackable_objects)
 
 
-
 func next_level() -> void:
+	#WebBus.show_ad()
 	if current_level_index >= levels.size()-1:
 		current_level_index = 0
 	else:

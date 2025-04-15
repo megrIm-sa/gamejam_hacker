@@ -2,6 +2,11 @@ extends Control
 
 var current_hackable_object : HackableObject
 
+func _ready() -> void:
+	match OS.get_name():
+		"Web":
+			%Output.hide()
+
 
 func default_editor() -> void:
 	%DisplayedText.text = "Select an object to edit"

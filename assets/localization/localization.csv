@@ -1,0 +1,26 @@
+﻿key;en;ru
+UI_PLAY;Play;Играть
+UI_RESTART;Restart;Рестарт
+UI_MENU;Menu;Меню
+UI_OBJECTS;Objects;Объекты
+UI_OBJECT_SELECT;[center]Select an object to edit;[center]Выбери объект для редактирования
+UI_OBJECT_SELECTED;[center]Editing: [color=yellow];[center]Редактируется: [color=yellow]
+UI_PLAY_AGAIN;Play again;Играть заново
+UI_THANKS;[center]Thanks for playing!;[center]Спасибо за игру!
+AD_ALERT;Ad in: ;Реклама через:
+floor_gate1;;люк
+moving_platform;;движущаяся_платформа
+bridge1;;мост1
+terminal_lasers;;лазеры
+barrier1;;барьер1
+spikes;;шипы
+gravity_module;;модуль_гравитации
+bridge;;мост
+megahack_laser;;лазер_мегахак
+unlock_gravity_inverse;;разблокировать_гравитацию
+activate;;активировать
+deactivate;;деактивировать
+HINT_LEVEL1_1;Buttons can activate objects;Кнопки активируют объекты
+HINT_LEVEL1_2;Distorted objects can be edited via the second monitor;Искаженные объекты можно редактировать через второй монитор
+HINT_LEVEL5_1;[center][wave]Gravity module detected!;[center][wave]Обнаружен гравитационный модуль!
+HINT_RUN;[center][shake rate=20.0 level=20 -connected=1]RUN!;[center][shake rate=20.0 level=20 -connected=1]БЕГИ!

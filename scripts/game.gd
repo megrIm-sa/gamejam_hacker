@@ -4,17 +4,72 @@ var tween : Tween
 
 
 func _ready() -> void:
-	#%Game2D.pause_mode = Node.PAUSE_MODE_PROCESS
-	#%GameHacking.pause_mode = Node.PAUSE_MODE_PROCESS
-	#$Menu.pause_mode = Node.PAUSE_MODE_PROCESS
-
+	$Menu/Control/VBoxContainer/CreditsButton.hide()
+	$Menu/Control/VBoxContainer/ExitButton.hide()
+	
 	%Game2D.show_crt_effect(true)
 	get_tree().paused = true
-
+	
 	%GameHacking.play_pressed.connect(_show_game2d)
 	%GameHacking.restart_pressed.connect(restart)
 	%GameHacking.menu_pressed.connect(_show_menu)
-	%Game2D.hack_pressed.connect(_show_game_hacking)
+	%Game2D.hack_pressed.connect(show_ad)
+	
+	WebBus.ad_closed.connect(_ad_closed)
+	WebBus.ad_error.connect(_ad_error)
+	WebBus.ad_started.connect(_ad_started)
+	
+	await get_tree().process_frame
+	get_window().focus_entered.connect(func() -> void:
+		print("focus in signal 1")
+		AudioServer.set_bus_mute(0, false)
+	)
+	get_window().focus_exited.connect(func() -> void:
+		print("focus out signal 1")
+		AudioServer.set_bus_mute(0, true)
+	)
+
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_WM_WINDOW_FOCUS_IN:
+			print("focus in signal 2")
+			AudioServer.set_bus_mute(0, false)
+		NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+			print("focus out signal 2")
+			AudioServer.set_bus_mute(0, true)
+
+
+func show_ad() -> void:
+	print("show add")
+	if $AdIntervalTimer.is_stopped():
+		get_tree().paused = true
+		WebBus.show_ad()
+	else:
+		_show_game_hacking()
+
+
+func _ad_started():
+	AudioServer.set_bus_mute(0, true)
+
+
+func _ad_closed():
+	AudioServer.set_bus_mute(0, false)
+	get_tree().paused = false
+	get_window().grab_focus()
+	_show_game_hacking()
+	$AdIntervalTimer.start()
+	print("Ad closed")
+
+
+func _ad_error():
+	push_warning("ad_error")
+	AudioServer.set_bus_mute(0, false)
+	get_tree().paused = false
+	get_window().grab_focus()
+	_show_game_hacking()
+	$AdIntervalTimer.start()
+	print("Ad error")
 
 
 func _show_game2d() -> void:
@@ -22,7 +77,7 @@ func _show_game2d() -> void:
 	%Game3D.show()
 	get_tree().paused = true
 	%GameHacking.reparent($Game3D/Monitor2/SubViewport)
-
+	
 	if tween:
 		tween.kill()
 	tween = create_tween()
@@ -30,7 +85,7 @@ func _show_game2d() -> void:
 	tween.tween_property($Game3D/Camera3D, "position", Vector3(-3.5, 0, 3), 0.25)
 	tween.parallel().tween_property($Game3D/Camera3D, "rotation", Vector3(0, deg_to_rad(100), 0), 0.25)
 	tween.tween_property($Game3D/Camera3D, "fov", 45, 0.3)
-
+	
 	await tween.finished
 	print("unpause")
 	get_tree().paused = false
