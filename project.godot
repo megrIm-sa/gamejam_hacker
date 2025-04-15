@@ -31,7 +31,7 @@ enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/
 
 [gui]
 
-theme/custom_font="res://assets/fonts/PixeloidMono.ttf"
+theme/custom_font="res://assets/fonts/monogram.ttf"
 
 [input]
 

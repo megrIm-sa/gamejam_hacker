@@ -2,11 +2,6 @@ extends Control
 
 var current_hackable_object : HackableObject
 
-func _ready() -> void:
-	match OS.get_name():
-		"Web":
-			%Output.hide()
-
 
 func default_editor() -> void:
 	%DisplayedText.text = "Select an object to edit"
@@ -41,7 +36,7 @@ func open_editor_for(hackable_object : HackableObject) -> void:
 		button.size_flags_horizontal = SIZE_EXPAND_FILL
 		button.text = method
 		button.pressed.connect(_on_call_pressed.bind(method))
-		
+		button.add_theme_font_size_override("font_size", 32)
 		container.add_child(button)
 
 

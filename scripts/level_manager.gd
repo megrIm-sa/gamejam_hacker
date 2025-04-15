@@ -13,7 +13,11 @@ var current_level_index : int
 func _ready() -> void:
 	#SaveSystem.set_var("level", 0)
 	#SaveSystem.save()
-	$"../Menu/Control/LanguageButton".locale_changeed.connect(_on_locale_change)
+	#$"../Menu/Control/LanguageButton".locale_changeed.connect(_on_locale_change)
+	
+	WebBus.ad_closed.connect(_ad_closed)
+	WebBus.ad_error.connect(_ad_error)
+	WebBus.ad_started.connect(_ad_started)
 	
 	game_hacking.level_manager = self
 	current_level_index = SaveSystem.get_var("level", 0)
@@ -26,15 +30,39 @@ func _on_locale_change() -> void:
 		game_hacking.replace_object_buttons(game_2d.level.hackable_objects_methods)
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_pressed():
-		if event.keycode in range(KEY_0, KEY_9+1):
-			var index : int = event.keycode - KEY_0
-			if index < levels.size():
-				load_level(index)
+#func _input(event: InputEvent) -> void:
+	#if event is InputEventKey and event.is_pressed():
+		#if event.keycode in range(KEY_0, KEY_9+1):
+			#var index : int = event.keycode - KEY_0
+			#if index < levels.size():
+				#load_level(index)
+
+
+func _ad_started():
+	print("Ad started")
+	get_tree().paused = true
+	AudioServer.set_bus_mute(0, true)
+
+
+func _ad_closed():
+	AudioServer.set_bus_mute(0, false)
+	get_tree().paused = false
+	get_window().grab_focus()
+	#$AdIntervalTimer.start()
+	print("Ad closed")
+
+
+func _ad_error():
+	push_warning("ad_error")
+	AudioServer.set_bus_mute(0, false)
+	get_tree().paused = false
+	get_window().grab_focus()
+	#$AdIntervalTimer.start()
+	print("Ad error")
 
 
 func load_level(level_index : int) -> void:
+	WebBus.show_ad()
 	print("load level")
 	current_level_index = level_index
 	SaveSystem.set_var("level", level_index)
@@ -48,7 +76,6 @@ func load_level(level_index : int) -> void:
 
 
 func next_level() -> void:
-	#WebBus.show_ad()
 	if current_level_index >= levels.size()-1:
 		current_level_index = 0
 	else:

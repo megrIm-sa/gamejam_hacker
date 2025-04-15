@@ -188,7 +188,7 @@ theme_override_constants/separation = 32
 custom_minimum_size = Vector2(128, 72)
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 theme_override_styles/focus = SubResource("StyleBoxFlat_6e5ci")
 theme_override_styles/hover = SubResource("StyleBoxFlat_6e5ci")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_6e5ci")
@@ -320,6 +320,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_6e5ci")
 text = "Close"
 
 [node name="LanguageButton" type="TextureButton" parent="Menu/Control"]
+visible = false
 texture_filter = 1
 layout_mode = 0
 offset_right = 128.0

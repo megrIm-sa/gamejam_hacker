@@ -36,7 +36,6 @@ func _on_menu_button_pressed() -> void:
 func replace_object_buttons(_hackable_objects : Array[HackableObject]) -> void:
 	%Editor.default_editor()
 	
-	
 	hackable_objects = _hackable_objects
 	
 	var container = $HBoxContainer/Objects/VBoxContainer

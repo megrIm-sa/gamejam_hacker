@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dg2jv4kjesk7d"]
+[gd_scene load_steps=23 format=4 uid="uid://dg2jv4kjesk7d"]
 
 [ext_resource type="Script" path="res://scenes/levels/boss_level.gd" id="1_852s1"]
 [ext_resource type="AudioStream" uid="uid://deq8ftnwcyvr2" path="res://assets/music/anticheat.ogg" id="2_1ke8n"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://dmpy3ffkjsm5b" path="res://objects/entity/boss/runner_boss.tscn" id="11_4yd1d"]
 [ext_resource type="Texture2D" uid="uid://bjurkglifls1y" path="res://assets/sprites/objects/end_level_teleport.png" id="12_t52wq"]
 [ext_resource type="PackedScene" uid="uid://cuccwco1at3f1" path="res://objects/dialog_area.tscn" id="13_dv6kr"]
-[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="15_icftu"]
 [ext_resource type="PackedScene" uid="uid://b5khx56dqysol" path="res://objects/interactive/end_level_zone.tscn" id="16_d4p7i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3dv33"]

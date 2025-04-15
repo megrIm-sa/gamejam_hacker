@@ -13,11 +13,7 @@ func _ready() -> void:
 	%GameHacking.play_pressed.connect(_show_game2d)
 	%GameHacking.restart_pressed.connect(restart)
 	%GameHacking.menu_pressed.connect(_show_menu)
-	%Game2D.hack_pressed.connect(show_ad)
-	
-	WebBus.ad_closed.connect(_ad_closed)
-	WebBus.ad_error.connect(_ad_error)
-	WebBus.ad_started.connect(_ad_started)
+	%Game2D.hack_pressed.connect(_show_game_hacking)
 	
 	await get_tree().process_frame
 	get_window().focus_entered.connect(func() -> void:
@@ -40,38 +36,6 @@ func _notification(what: int) -> void:
 			AudioServer.set_bus_mute(0, true)
 
 
-func show_ad() -> void:
-	print("show add")
-	if $AdIntervalTimer.is_stopped():
-		get_tree().paused = true
-		WebBus.show_ad()
-	else:
-		_show_game_hacking()
-
-
-func _ad_started():
-	AudioServer.set_bus_mute(0, true)
-
-
-func _ad_closed():
-	AudioServer.set_bus_mute(0, false)
-	get_tree().paused = false
-	get_window().grab_focus()
-	_show_game_hacking()
-	$AdIntervalTimer.start()
-	print("Ad closed")
-
-
-func _ad_error():
-	push_warning("ad_error")
-	AudioServer.set_bus_mute(0, false)
-	get_tree().paused = false
-	get_window().grab_focus()
-	_show_game_hacking()
-	$AdIntervalTimer.start()
-	print("Ad error")
-
-
 func _show_game2d() -> void:
 	$Menu.hide()
 	%Game3D.show()
@@ -92,6 +56,7 @@ func _show_game2d() -> void:
 	%Game3D.hide()
 	%Game2D.show_crt_effect(false)
 	%Game2D.reparent(self)
+	WebBus.start_gameplay()
 
 
 func _show_game_hacking() -> void:
@@ -114,6 +79,7 @@ func _show_game_hacking() -> void:
 	get_tree().paused = false
 	%Game3D.hide()
 	%GameHacking.reparent(self)
+	WebBus.stop_gameplay()
 
 
 func _show_menu() -> void:
