@@ -15,12 +15,19 @@ func _process(delta: float) -> void:
 func _laser_ready() -> void:
 	laser_ready = true
 	$BarrierStuff.material.set("shader_parameter/animated", true)
+	
+	for i in $"..".hackable_objects as Array[HackableObject]:
+		if i.id == "megahack_laser":
+			i.unlocked = true
 
 
 func activate() -> void:
 	if !laser_ready:
 		return
-		
+	
+	for i in $"..".hackable_objects as Array[HackableObject]:
+		if i.id == "megahack_laser":
+			i.unlocked = false
 	laser_ready = false
 	
 	$BarrierStuff.material.set("shader_parameter/animated", false)
@@ -40,8 +47,7 @@ func activate() -> void:
 	tween = create_tween()
 	tween.tween_property($Laser, "modulate", Color(1, 1, 1, 0), 0.3)
 	await tween.finished
-
+	
 	$Laser.visible = false
 	$CanvasModulate.color = Color(1, 1, 1)
 	$ReadyTimer.start()
-	

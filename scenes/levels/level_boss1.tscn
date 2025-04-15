@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://dg2jv4kjesk7d"]
+[gd_scene load_steps=24 format=4 uid="uid://dg2jv4kjesk7d"]
 
 [ext_resource type="Script" path="res://scenes/levels/boss_level.gd" id="1_852s1"]
 [ext_resource type="AudioStream" uid="uid://deq8ftnwcyvr2" path="res://assets/music/anticheat.ogg" id="2_1ke8n"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://de74nxses27o4" path="res://objects/interactive/spikes.tscn" id="9_hw60i"]
 [ext_resource type="PackedScene" uid="uid://dmpy3ffkjsm5b" path="res://objects/entity/boss/runner_boss.tscn" id="11_4yd1d"]
 [ext_resource type="Texture2D" uid="uid://bjurkglifls1y" path="res://assets/sprites/objects/end_level_teleport.png" id="12_t52wq"]
+[ext_resource type="PackedScene" uid="uid://cuccwco1at3f1" path="res://objects/dialog_area.tscn" id="13_dv6kr"]
+[ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="15_icftu"]
 [ext_resource type="PackedScene" uid="uid://b5khx56dqysol" path="res://objects/interactive/end_level_zone.tscn" id="16_d4p7i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3dv33"]
@@ -274,7 +276,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_o4hab"]
 resource_name = "start"
-length = 5.0
+length = 6.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -282,7 +284,7 @@ tracks/0/path = NodePath("Boss:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1, 5),
+"times": PackedFloat32Array(2, 6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(5, 5)]
@@ -294,7 +296,7 @@ tracks/1/path = NodePath("Props/AgentDummy:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.391667, 0.991667, 1.2, 1.6, 2.2, 2.4, 2.8, 3.4),
+"times": PackedFloat32Array(1, 1.39167, 1.99167, 2.2, 2.6, 3.2, 3.4, 3.8, 4.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-288, -220), Vector2(-288, -18), Vector2(-192, -18), Vector2(-288, -220), Vector2(-288, -18), Vector2(-192, -18), Vector2(-288, -220), Vector2(-288, -18), Vector2(-192, -18)]
@@ -306,7 +308,7 @@ tracks/2/path = NodePath("Props/AgentDummy:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.991667, 1.2, 2.2, 2.4, 3.4),
+"times": PackedFloat32Array(1, 1.99167, 2.2, 3.2, 3.4, 4.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, false, true, false, true, false]
@@ -318,7 +320,7 @@ tracks/3/path = NodePath("Props/AgentDummy2:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.4, 0.8, 1.4, 1.60833, 2.00833, 2.60833, 2.80833, 3.20833, 3.80833),
+"times": PackedFloat32Array(1.4, 1.8, 2.4, 2.60833, 3.00833, 3.60833, 3.80833, 4.20833, 4.80833),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-288, -220), Vector2(-288, -18), Vector2(-192, -18), Vector2(-288, -220), Vector2(-288, -18), Vector2(-192, -18), Vector2(-288, -220), Vector2(-288, -18), Vector2(-192, -18)]
@@ -330,7 +332,7 @@ tracks/4/path = NodePath("Props/AgentDummy2:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.4, 1.4, 1.60833, 2.60833, 2.80833, 3.80833),
+"times": PackedFloat32Array(1.4, 2.4, 2.60833, 3.60833, 3.80833, 4.80833),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, false, true, false, true, false]
@@ -342,7 +344,7 @@ tracks/5/path = NodePath("Props/AgentDummy3:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.8, 1.2, 1.8, 2.00833, 2.40833, 3.00833, 3.20833, 3.60833, 4.20833),
+"times": PackedFloat32Array(1.8, 2.2, 2.8, 3.00833, 3.40833, 4.00833, 4.20833, 4.60833, 5.20833),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-288, -220), Vector2(-288, -18), Vector2(-192, -18), Vector2(-288, -220), Vector2(-288, -18), Vector2(-192, -18), Vector2(-288, -220), Vector2(-288, -18), Vector2(-192, -18)]
@@ -354,7 +356,7 @@ tracks/6/path = NodePath("Props/AgentDummy3:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.8, 1.8, 2.00833, 3.00833, 3.20833, 4.20833),
+"times": PackedFloat32Array(1.8, 2.8, 3.00833, 4.00833, 4.20833, 5.20833),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, false, true, false, true, false]
@@ -366,7 +368,7 @@ tracks/7/path = NodePath("Props/AgentDummy4:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.4, 1, 1.2, 1.6, 2.2, 2.4, 2.8, 3.4),
+"times": PackedFloat32Array(1, 1.4, 2, 2.2, 2.6, 3.2, 3.4, 3.8, 4.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-96, -216), Vector2(-96, -18), Vector2(-192, -18), Vector2(-96, -216), Vector2(-96, -18), Vector2(-192, -18), Vector2(-96, -216), Vector2(-96, -18), Vector2(-192, -18)]
@@ -378,7 +380,7 @@ tracks/8/path = NodePath("Props/AgentDummy4:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 1, 1.20833, 2.20833, 2.40833, 3.40833),
+"times": PackedFloat32Array(1, 2, 2.20833, 3.20833, 3.40833, 4.40833),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, false, true, false, true, false]
@@ -390,7 +392,7 @@ tracks/9/path = NodePath("Props/AgentDummy5:position")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0.4, 0.8, 1.4, 1.6, 2, 2.6, 2.8, 3.2, 3.8),
+"times": PackedFloat32Array(1.4, 1.8, 2.4, 2.6, 3, 3.6, 3.8, 4.2, 4.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-96, -216), Vector2(-96, -18), Vector2(-192, -18), Vector2(-96, -216), Vector2(-96, -18), Vector2(-192, -18), Vector2(-96, -216), Vector2(-96, -18), Vector2(-192, -18)]
@@ -402,7 +404,7 @@ tracks/10/path = NodePath("Props/AgentDummy5:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0.4, 1.4, 1.60833, 2.60833, 2.80833, 3.80833),
+"times": PackedFloat32Array(1.4, 2.4, 2.60833, 3.60833, 3.80833, 4.80833),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, false, true, false, true, false]
@@ -414,7 +416,7 @@ tracks/11/path = NodePath("Props/AgentDummy6:position")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0.8, 1.2, 1.8, 2, 2.4, 3, 3.2, 3.6, 4.2),
+"times": PackedFloat32Array(1.8, 2.2, 2.8, 3, 3.4, 4, 4.2, 4.6, 5.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-96, -216), Vector2(-96, -18), Vector2(-192, -18), Vector2(-96, -216), Vector2(-96, -18), Vector2(-192, -18), Vector2(-96, -216), Vector2(-96, -18), Vector2(-192, -18)]
@@ -426,7 +428,7 @@ tracks/12/path = NodePath("Props/AgentDummy6:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
-"times": PackedFloat32Array(0.8, 1.8, 2.00833, 3.00833, 3.20833, 4.20833),
+"times": PackedFloat32Array(1.8, 2.8, 3.00833, 4.00833, 4.20833, 5.20833),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, false, true, false, true, false]
@@ -438,7 +440,7 @@ tracks/13/path = NodePath("Boss:direction")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(1, 6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0.0, 1.0]
@@ -450,7 +452,7 @@ tracks/14/path = NodePath("RunText:visible")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(1, 6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -462,7 +464,7 @@ tracks/15/path = NodePath(".")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(5),
+"times": PackedFloat32Array(6),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -476,7 +478,7 @@ tracks/16/path = NodePath(".:modulate")
 tracks/16/interp = 2
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(1, 6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0.882353, 1, 0.882353, 1)]
@@ -585,7 +587,7 @@ position = Vector2(-192, -18)
 flip_h = true
 
 [node name="EndLevelTeleport" type="Sprite2D" parent="Props"]
-position = Vector2(5616, -16)
+position = Vector2(5552, -16)
 texture = ExtResource("12_t52wq")
 
 [node name="Objects" type="Node2D" parent="."]
@@ -803,6 +805,10 @@ position = Vector2(-192, 0)
 collision_layer = 64
 collision_mask = 0
 speed = 180.0
+
+[node name="DialogArea" parent="." instance=ExtResource("13_dv6kr")]
+position = Vector2(2, -65)
+text = "[shake][color=crimson]Anti-Cheat detected my presence.[/color][/shake] I have to find a way to stop it."
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

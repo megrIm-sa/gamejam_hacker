@@ -1,6 +1,4 @@
-extends Control
-
-signal game_win
+extends Puzzle
 
 var colors : Dictionary = { 
 	0: [ Color(0, 0.55, 0.55), Color(0, 0.88, 0.88) ], 

@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://b2ufenqtjww57"]
+[gd_scene load_steps=19 format=3 uid="uid://b2ufenqtjww57"]
 
 [ext_resource type="Script" path="res://scenes/game_2d.gd" id="2_vxufa"]
 [ext_resource type="PackedScene" uid="uid://42alhwug45se" path="res://assets/sprites/effects/landing_effect.tscn" id="3_mtmcg"]
 [ext_resource type="Shader" path="res://assets/shaders/crt_monitor.gdshader" id="7_wm368"]
 [ext_resource type="FontFile" uid="uid://b0hwhovhyt8ah" path="res://assets/fonts/monogram.ttf" id="8_0d048"]
+[ext_resource type="Texture2D" uid="uid://b0eu0mjn1imw7" path="res://assets/sprites/entities/hacker_idle.png" id="10_024oj"]
+[ext_resource type="Script" path="res://scenes/dialog_window.gd" id="10_bk41l"]
 [ext_resource type="Script" path="res://objects/entity/player/camera_2d.gd" id="12_58tok"]
 [ext_resource type="Texture2D" uid="uid://bog3yo3sfte8i" path="res://assets/sprites/ui/button.png" id="14_fntbg"]
 [ext_resource type="Script" path="res://scenes/multitouch_button.gd" id="15_3qold"]
@@ -119,10 +121,21 @@ size = Vector2(512, 512)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njihs"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="Game2D" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aojpp"]
+bg_color = Color(0, 0, 0, 0.690196)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kv6b"]
+atlas = ExtResource("10_024oj")
+region = Rect2(12, 1, 9, 11)
+
+[node name="Game2D" type="Node2D" node_paths=PackedStringArray("dialog_window")]
 texture_filter = 1
 material = SubResource("ShaderMaterial_e1rq4")
 script = ExtResource("2_vxufa")
+dialog_window = NodePath("CanvasLayer/DialogWindow")
 metadata/_edit_horizontal_guides_ = [-5.0]
 
 [node name="LandingEffect" parent="." instance=ExtResource("3_mtmcg")]
@@ -342,3 +355,82 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("19_qh8al")
+
+[node name="DialogWindow" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+z_index = 10
+custom_minimum_size = Vector2(320, 128)
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_right = 192.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("10_bk41l")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/DialogWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_aojpp")
+
+[node name="DialogText" type="RichTextLabel" parent="CanvasLayer/DialogWindow"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -32.0
+offset_right = 176.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.873298, 0.873298, 0.873298, 1)
+theme_override_fonts/normal_font = ExtResource("8_0d048")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+scroll_active = false
+scroll_following = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="DialogName" type="RichTextLabel" parent="CanvasLayer/DialogWindow"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.0
+offset_top = 4.0
+offset_right = 72.0
+offset_bottom = 30.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("8_0d048")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "[center]Hacker"
+fit_content = true
+scroll_active = false
+autowrap_mode = 1
+
+[node name="DialogIcon" type="TextureRect" parent="CanvasLayer/DialogWindow"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -44.0
+offset_right = 88.0
+offset_bottom = 52.0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_5kv6b")

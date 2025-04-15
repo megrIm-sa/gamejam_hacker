@@ -11,6 +11,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_na6j8")
+instruction = "[center]Instruction[/center]
+
+Objective: Arrange all tiles in the correct order by sliding them into the empty space.
+
+How to play:
+[ol]Click on a tile adjacent to the empty space.
+The tile will move into the empty spot.
+Arrange the tiles in ascending order: 1 → 2 → 3 → ... → 8, with the empty space in the bottom-right corner.
+[/ol]
+
+Win condition: All tiles are in the correct order."
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_3dn33")

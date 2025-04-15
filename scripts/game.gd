@@ -95,6 +95,8 @@ func _show_game2d() -> void:
 
 
 func _show_game_hacking() -> void:
+	%GameHacking.replace_object_buttons(%Game2D.level.hackable_objects)
+	
 	%Game3D.show()
 	get_tree().paused = true
 	%Game2D.reparent($Game3D/Monitor1/SubViewport)

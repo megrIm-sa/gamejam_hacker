@@ -44,7 +44,7 @@ func load_level(level_index : int) -> void:
 	%MusicPlayer.stream = level.music
 	%MusicPlayer.play()
 	game_2d.new_level(level)
-	game_hacking.replace_object_buttons(level.hackable_objects_methods)
+	game_hacking.replace_object_buttons(level.hackable_objects)
 
 
 func next_level() -> void:
@@ -60,39 +60,21 @@ func restart_level() -> void:
 	load_level(current_level_index)
 
 
-func hack_object(object_id: String, method_name: String, args: Array = []) -> void:
+func hack_object(hackable_object : HackableObject, method_name : String, args : Array = []) -> void:
 	if not game_2d:
 		push_error("Game2D is not initialized.")
 		return
 	
 	var level_2d = game_2d.level
 	
-	var objects: Dictionary = level_2d.hackable_objects
-	
-	if not objects.has(object_id):
-		push_error("Object '%s' not found in hackable_objects." % object_id)
-		return
-	
-	var entry = objects[object_id]
-	
-	if typeof(entry) == TYPE_ARRAY:
-		for path in entry:
-			if typeof(path) == TYPE_NODE_PATH and level_2d.has_node(path):
-				var obj = level_2d.get_node(path)
-				if obj.has_method(method_name):
-					obj.callv(method_name, args)
-				else:
-					push_error("Object at path '%s' does not have method '%s'" % [path, method_name])
+	for path in hackable_object.node_paths:
+		if typeof(path) == TYPE_NODE_PATH and level_2d.has_node(path):
+			var obj = level_2d.get_node(path)
+			if obj.has_method(method_name):
+				obj.callv(method_name, args)
 			else:
-				push_error("Invalid NodePath in array for object '%s'" % object_id)
-	else:
-		if typeof(entry) != TYPE_NODE_PATH or not level_2d.has_node(entry):
-			push_error("Invalid NodePath for object '%s'" % object_id)
-			return
-		var obj = level_2d.get_node(entry)
-		if not obj.has_method(method_name):
-			push_error("Method '%s' not found on object '%s'" % [method_name, object_id])
-			return
-		obj.callv(method_name, args)
+				push_error("Object at path '%s' does not have method '%s'" % [path, method_name])
+		else:
+			push_error("Invalid NodePath in array for object '%s'" % hackable_object.id)
 
-	emit_signal("object_hacked", object_id, method_name)
+	emit_signal("object_hacked", hackable_object.id, method_name)

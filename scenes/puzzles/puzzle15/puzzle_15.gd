@@ -1,6 +1,4 @@
-extends Control
-
-signal game_win
+extends Puzzle
 
 @export var table_size : int = 3
 

@@ -6,7 +6,7 @@ signal restart_pressed
 signal menu_pressed
 
 
-@export var hackable_objects_methods : Dictionary
+@export var hackable_objects : Array[HackableObject]
 
 var object_button = preload("res://scenes/game_hacking/object_button.tscn")
 var level_manager : LevelManager
@@ -33,28 +33,28 @@ func _on_menu_button_pressed() -> void:
 	%AudioStreamPlayer.play()
 
 
-func replace_object_buttons(_hackable_objects_methods : Dictionary) -> void:
+func replace_object_buttons(_hackable_objects : Array[HackableObject]) -> void:
 	%Editor.default_editor()
 	
-	for i in %OutputContainer.get_children():
-		i.queue_free()
 	
-	hackable_objects_methods = _hackable_objects_methods
+	hackable_objects = _hackable_objects
 	
 	var container = $HBoxContainer/Objects/VBoxContainer
 	for i in container.get_children():
 		i.queue_free()
 	await get_tree().process_frame
 	
-	for object_id in hackable_objects_methods.keys():
+	for hackable_object in _hackable_objects:
+		if !hackable_object.unlocked:
+			continue
 		var button = object_button.instantiate()
-		button.get_node("RichTextLabel").text = object_id
-		button.pressed.connect(func(): _on_object_button_pressed(object_id))
+		button.get_node("RichTextLabel").text = hackable_object.id
+		button.pressed.connect(func(): _on_object_button_pressed(hackable_object))
 		container.add_child(button)
 
 
-func _on_object_button_pressed(object_id: String) -> void:
-	%Editor.open_editor_for(object_id)
+func _on_object_button_pressed(hackable_object : HackableObject) -> void:
+	%Editor.open_editor_for(hackable_object)
 	%AudioStreamPlayer.play()
 
 
@@ -63,6 +63,8 @@ func _add_to_output(object_id: String, method_name: String) -> void:
 	output.text = "Method \"" + method_name + "\" executed on object \"" + object_id + "\""
 	if %OutputContainer.get_child_count() > 0:
 		%OutputContainer.get_child(%OutputContainer.get_child_count()-1).modulate = Color.WEB_GRAY
+		if %OutputContainer.get_child_count() >= 10:
+			%OutputContainer.get_child(0).queue_free()
 	%OutputContainer.add_child(output)
 	await get_tree().process_frame
 	%OutpuScroll.scroll_vertical = %OutpuScroll.get_v_scroll_bar().max_value
