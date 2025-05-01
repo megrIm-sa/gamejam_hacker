@@ -1,19 +1,18 @@
 extends Control
 
 @onready var dialog_text : RichTextLabel = $DialogText
-@export var char_speed := 0.04
-@export var pause_dot := 0.3
-@export var pause_comma := 0.15
-@export var pause_exclaim := 0.25
-@export var pause_question := 0.25
-@export var read_delay := 2.0
+@export var char_speed : float = 0.04
+@export var pause_dot : float = 0.3
+@export var pause_comma : float = 0.15
+@export var pause_exclaim : float = 0.25
+@export var pause_question : float = 0.25
+@export var read_delay : float = 2.0
 
-var full_text := ""
+var full_text : String = ""
 var tween: Tween
-var is_animating := false
-var display_ratio := 0.0
+var is_animating : bool = false
+var display_ratio :float = 0.0
 
-# Для анимации окна
 var show_height : float = 520
 var hide_height : float = 648
 
@@ -25,7 +24,6 @@ func _ready() -> void:
 
 
 func show_dialog(text: String) -> void:
-	print(text)
 	full_text = text
 	dialog_text.bbcode_text = full_text
 	dialog_text.visible_ratio = 0.0

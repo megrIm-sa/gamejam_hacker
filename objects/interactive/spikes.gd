@@ -20,14 +20,14 @@ func activate() -> void:
 	$AnimationPlayer.play("activate")
 
 
-func _on_activate() -> void:
-	$Area2D.monitoring = true
-	$AudioStreamPlayer2D.play()
-
-
 func deactivate() -> void:
 	super.deactivate()
 	$AnimationPlayer.play("deactivate")
+
+
+func _on_activate() -> void:
+	$Area2D.monitoring = true
+	$AudioStreamPlayer2D.play()
 
 
 func _on_deactivate() -> void:

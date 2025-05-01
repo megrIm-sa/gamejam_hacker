@@ -5,6 +5,7 @@ extends Resource
 @export var unlocked : bool = true
 @export var node_paths : Array[NodePath]
 @export var method_names : Array[String]
+
 @export_group("Icon")
 @export var icon : Texture2D
 @export var icon_rotation : float

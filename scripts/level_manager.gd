@@ -69,5 +69,5 @@ func hack_object(hackable_object : HackableObject, method_name : String, args : 
 				push_error("Object at path '%s' does not have method '%s'" % [path, method_name])
 		else:
 			push_error("Invalid NodePath in array for object '%s'" % hackable_object.id)
-
+	
 	emit_signal("object_hacked", hackable_object.id, method_name)

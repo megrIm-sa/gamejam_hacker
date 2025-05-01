@@ -5,8 +5,6 @@ extends Spikes
 
 @onready var timer : Timer = $Timer
 
-#var spikes_active : bool = true
-
 
 func _ready() -> void:
 	super._ready()
@@ -22,11 +20,8 @@ func _on_timeout() -> void:
 	timer.wait_time = time
 	if $Area2D.monitoring:
 		$AnimationPlayer.play("deactivate")
-		#$Area2D.monitoring = false
-		#spikes_active = false
 	else:
 		$AnimationPlayer.play("activate")
-		#spikes_active = true
 
 
 func activate() -> void:
